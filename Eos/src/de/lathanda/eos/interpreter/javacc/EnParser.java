@@ -355,7 +355,7 @@ parameters.addName(name);
     }
     jj_consume_token(COLON);
     type = Type();
-parameters.setType(type);
+parameters.setType(type, new Marker(token.beginColumn, token.beginLine, token.endColumn, token.endLine));
   }
 
   final public void Import() throws ParseException {File file;

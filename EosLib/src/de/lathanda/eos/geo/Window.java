@@ -10,6 +10,8 @@ import de.lathanda.eos.gui.event.FigureListener;
 import de.lathanda.eos.util.ConcurrentLinkedList;
 
 import java.awt.Color;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.LinkedList;
 
 /**
@@ -17,7 +19,7 @@ import java.util.LinkedList;
  *
  * @author Peter (Lathanda) Schneider
  */
-public class Window implements FigureGroup, CleanupListener, Readout, CursorListener {
+public class Window implements FigureGroup, CleanupListener, Readout, CursorListener, ComponentListener  {
     ViewFrame vf;
     ChangeMultiCaster cmc;
     protected ConcurrentLinkedList<Figure> members;
@@ -30,6 +32,7 @@ public class Window implements FigureGroup, CleanupListener, Readout, CursorList
         cmc = new ChangeMultiCaster();
         vf = new ViewFrame(this);
         vf.addCursorListener(this);
+        vf.addComponentListener(this);
         vf.setVisible(true);
     }                          
 
@@ -233,4 +236,21 @@ public class Window implements FigureGroup, CleanupListener, Readout, CursorList
 		cursorClick = true;
 		cursor = p;
 	}
+
+	@Override
+	public void componentHidden(ComponentEvent ce) {}
+
+	@Override
+	public void componentMoved(ComponentEvent ce) {
+		cmc.fireDataChanged();		
+	}
+
+	@Override
+	public void componentResized(ComponentEvent ce) {
+		cmc.fireDataChanged();		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent ce) {}
+
 }

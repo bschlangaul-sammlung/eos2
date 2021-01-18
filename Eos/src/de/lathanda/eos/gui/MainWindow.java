@@ -37,6 +37,8 @@ import javax.swing.Scrollable;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
 import de.lathanda.eos.base.ResourceLoader;
 import de.lathanda.eos.common.gui.BackgroundCompiler;
 import de.lathanda.eos.common.gui.CodeColoring;
@@ -98,7 +100,7 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 		data.setSpeed(10);
 		filechooser = new JFileChooser();
 		filechooser.setFileFilter(new FileNameExtensionFilter(Messages.getString("File.EOS"), "eos"));
-		filechooser.setCurrentDirectory(new File("."));
+		filechooser.setCurrentDirectory(new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath()));
 		exportfilechooser = new JFileChooser();
 		exportfilechooser.addChoosableFileFilter(new FileNameExtensionFilter(Messages.getString("File.Html"), "html"));
 		exportfilechooser.setCurrentDirectory(new File("."));

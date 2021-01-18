@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import de.lathanda.eos.common.interpreter.ErrorInformation;
 import de.lathanda.eos.common.interpreter.Marker;
+import de.lathanda.eos.interpreter.exceptions.WrongPlaceForDeclarationException;
 
 /**
  * Umgebung für die semantische Übersetzung.
@@ -40,7 +41,10 @@ public class Environment {
      * flag indicates if the program contains at least one figure
      */
     private boolean hasFigure = false;
-    
+    /*
+     * variable declaration is only allow on level 0 or within procedures.
+     */
+    private int variableLock = 0;
     /*
      * next unique id, for creating artifical unique variables, eg counting variable for counting loop
      */
@@ -71,7 +75,11 @@ public class Environment {
         return variables.getOrDefault(name, Type.getUnknown());
     }
     public void setVariableType(String name, Type type) {
-        variables.put(name, type);
+    	if (variableLock == 0) {
+    		variables.put(name, type);
+    	} else {
+    		throw new WrongPlaceForDeclarationException(name, type.getName());
+    	}
     }
     public boolean isVariableDefined(String name) {
     	return variables.containsKey(name);
@@ -112,7 +120,12 @@ public class Environment {
     public boolean getAutoWindow() {
         return !hasWindow && hasFigure;
     }
-
+    public void prohibitVariableDeclaration() {
+    	variableLock++;
+    }
+    public void allowVariableDeclaration() {
+    	variableLock--;
+    }
     public void storeVariables() {
         storedVariables.putAll(variables);
     }
@@ -128,6 +141,7 @@ public class Environment {
         res.append("environment\n");
         res.append("hasWindow = ").append(hasWindow).append("\n");
         res.append("hasFigure = ").append(hasFigure).append("\n");
+        res.append("variableLock = ").append(variableLock).append("\n");
         res.append("local variable:\n");
         for(Entry<String,Type> v : variables.entrySet()) {
             res.append(v.getKey()).append(":").append(v.getValue()).append("\n");

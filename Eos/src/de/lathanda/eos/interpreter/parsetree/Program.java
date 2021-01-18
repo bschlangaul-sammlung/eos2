@@ -160,6 +160,7 @@ public class Program implements AbstractProgram {
             }
             s.resolveNamesAndTypes(null, env);
         }
+        env.restoreVariables();
         
         //second scan produce commands
         for(UserClass uc : userclass.values()) { //compile user types

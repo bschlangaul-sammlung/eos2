@@ -3,6 +3,8 @@ package de.lathanda.eos.interpreter.parsetree;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.lathanda.eos.common.interpreter.Marker;
+
 /**
  * Speichert und behandelt eine Parameterliste.
  * 
@@ -43,8 +45,8 @@ public class Parameters {
         nameBuffer.add(name);
     }
 
-    public void setType(Type type) {
-        nameBuffer.stream().forEachOrdered(name -> append(new Parameter(name, type)));
+    public void setType(Type type, Marker marker) {
+        nameBuffer.stream().forEachOrdered(name -> append(new Parameter(name, type, marker)));
         nameBuffer.clear();
     }
 

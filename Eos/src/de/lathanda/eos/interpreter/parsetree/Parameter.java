@@ -1,17 +1,21 @@
 package de.lathanda.eos.interpreter.parsetree;
 
+import de.lathanda.eos.common.interpreter.Marker;
+
 /**
  * Parameter.
  * 
  * @author Peter (Lathanda) Schneider
- * @since 0.4
+ * 
  */
 public class Parameter {
     private final String name;
     private final Type type;
-    public Parameter(String name, Type parameterType) {
+    private final Marker marker;
+    public Parameter(String name, Type parameterType, Marker marker) {
         this.name = name;
         this.type = parameterType;
+        this.marker = marker;
     }
 
     public String getName() {
@@ -19,7 +23,11 @@ public class Parameter {
     }
 
     public void registerParameter(Environment env) {
-        env.setVariableType(name.toLowerCase(), type);
+    	if (env.isVariableDefined(name)) {
+    		env.addError(marker, "DoubleVariableDefinition", name);
+    	} else {
+    		env.setVariableType(name.toLowerCase(), type);
+    	}            
     }
 
     public Type getType() {
