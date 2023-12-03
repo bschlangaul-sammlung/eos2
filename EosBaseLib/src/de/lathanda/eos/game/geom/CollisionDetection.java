@@ -2,6 +2,8 @@ package de.lathanda.eos.game.geom;
 
 import de.lathanda.eos.game.Game;
 import de.lathanda.eos.game.Sprite;
+
+import java.util.LinkedList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -81,7 +83,7 @@ public class CollisionDetection {
 
 		SortedSet<ShapeOrder> xList = new TreeSet<>();
 		SortedSet<Shape> open = new TreeSet<>();
-		Collision col;
+		LinkedList<Collision> collisions new new LinkedList<>();		
 
 		// phase 1: sort objects
 		Shape shape;
@@ -110,19 +112,22 @@ public class CollisionDetection {
 				// every id that is open collides with this id
 				for (Shape id : open) {
 					if (id.getBottom() < shapeOrder.shape.getTop() && shapeOrder.shape.getBottom() < id.getTop()) {
-						col = new Collision(shapeOrder.shape, id);
+						Collision col = new Collision(shapeOrder.shape, id);
 						// the rectangle bounds intersect, now we check if they
 						// really collide
 						// this avoids testing every pair with the really slow
 						// exact calculations
 						if (col.verifyCollision()) {
-							if (!col.a.getSprite().processCollision(col.b.getSprite(), game)) {
-								col.b.getSprite().processCollision(col.a.getSprite(), game);
-							}
+							collisions.add(col);
 						}
 					}
 				}
 				break;
+			}
+		}
+		for (Collision col:collisions) {
+			if (!col.a.getSprite().processCollision(col.b.getSprite(), game)) {
+				col.b.getSprite().processCollision(col.a.getSprite(), game);
 			}
 		}
 	}

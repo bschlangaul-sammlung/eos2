@@ -1,0 +1,22 @@
+f:Fenster
+x1:kx
+x2:kx
+x1.neu(-50,50,50,f)
+x2.neu(50,0,20,f)
+f.zeichne(x1.k)
+f.zeichne(x2.k)
+wiederhole 50 mal
+    x1.v()
+    x2.v()
+*wiederhole
+Klasse kx
+    k:kreis
+    methode neu(x,y,r:Integer,f:Fenster)
+        k.mittelpunktSetzen(x,y)
+        k.radiusSetzen(r)
+        f.zeichne(k)
+    *methode
+    methode v()
+        k.mitteYSetzen(k.mitteYLesen()-1)
+    *methode
+*klasse
