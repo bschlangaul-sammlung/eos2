@@ -10,8 +10,12 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import de.lathanda.eos.gui.diagram.Unit;
+import de.lathanda.eos.vm.MemoryEntry;
+import de.lathanda.eos.baseparser.AbstractProgram;
+import de.lathanda.eos.baseparser.SystemType;
+import de.lathanda.eos.baseparser.Type;
+import de.lathanda.eos.config.Language;
 import de.lathanda.eos.gui.diagram.Drawing;
-import de.lathanda.eos.gui.diagram.MemoryEntry;
 
 /**
  * Diese Komponente zeigt eine Liste von Objekten und Variablen an.
@@ -24,8 +28,6 @@ public class ObjectDiagram extends JPanel {
 	private LinkedList<Unit> units;
 	private final Drawing d;
 	private static final float SPACE = 5;
-	private LinkedList<MemoryEntry> data;
-
 	public ObjectDiagram() {
 		super();
 		setBackground(Color.WHITE);
@@ -40,22 +42,26 @@ public class ObjectDiagram extends JPanel {
 	}
 
 	public BufferedImage export(float dpi) {
-		if (data == null) return new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
-        Drawing drawing = new Drawing(dpi);
-        Dimension dim = layout(drawing);
+		if (units.isEmpty()) {
+			return new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+		}
+		Drawing drawing = new Drawing(dpi);
+		Dimension dim = layout(drawing);
 		BufferedImage image = new BufferedImage(dim.width, dim.height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		g.setBackground(Color.WHITE);
 		g.clearRect(0, 0, dim.width, dim.height);
-        drawing.init(g);
-        render(drawing);
-        layout(d);
+		drawing.init(g);
+		render(drawing);
+		layout(d);
 		return image;
 	}
-    public void render(Graphics2D g) {
-        d.init(g);
-        render(d);
-    }
+
+	public void render(Graphics2D g) {
+		d.init(g);
+		render(d);
+	}
+
 	private Dimension layout(Drawing d) {
 		units.forEach(p -> p.layout(d));
 		float h = 0;
@@ -80,11 +86,16 @@ public class ObjectDiagram extends JPanel {
 		d.popTransform();
 	}
 
-	public void setData(LinkedList<MemoryEntry> data) {
-		this.data = data;
+	public void setData(LinkedList<MemoryEntry> data, AbstractProgram program) {
 		units.clear();
 		for (MemoryEntry v : data) {
-			units.add(Toolkit.create(v));
+			Type type = SystemType.getInstanceByID(v.type);
+			if (type != null) {
+				units.add(Toolkit.create(v.name, Language.def.getClassLabel(type), v.data, type));				
+			} else {
+				type = program.getTypeByName(v.type);
+				units.add(Toolkit.create(v.name, v.type, v.data, type));
+			}
 		}
 		setPreferredSize(layout(d));
 		revalidate();

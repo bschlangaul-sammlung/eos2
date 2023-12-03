@@ -1,6 +1,5 @@
 package de.lathanda.eos.base.math;
 
-import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.Picture;
 
 import java.text.MessageFormat;

@@ -165,13 +165,4 @@ public class Polygon extends FilledFigure {
 	public String toString() {
 		return "Polygon{" + points + '}';
 	}
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);    	
-    	StringBuilder coords = new StringBuilder();
-    	for (Point p : points) {
-    		coords.append(p.toString());
-    	}
-    	attributes.add(new Attribut("points", coords));
-	}  
 }

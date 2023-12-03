@@ -1,7 +1,6 @@
 package billard;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Vector;
 import de.lathanda.eos.game.Game;
@@ -10,10 +9,10 @@ import de.lathanda.eos.game.geom.Circle;
 
 public class Ball extends Sprite {
 	Vector v;
-	Color c;
+	MutableColor c;
 	static boolean moving;
 
-	public Ball(int x, int y, Color c) {
+	public Ball(int x, int y, MutableColor c) {
 		this.c = c;
 		v = new Vector(0, 0);
 		shape = new Circle(5, x, y);

@@ -1,0 +1,3 @@
+text:Textfeld
+text.ausrichtungHorizontalSetzen(zentriert)
+text.ausrichtungVertikalSetzen(linksbündig)        

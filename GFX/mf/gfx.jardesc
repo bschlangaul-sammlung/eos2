@@ -11,6 +11,6 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-        <javaElement handleIdentifier="=GFX/gfx"/>
+        <javaElement handleIdentifier="=GFX/src=/optional=/true=/=/maven.pomderived=/true=/"/>
     </selectedElements>
 </jardesc>

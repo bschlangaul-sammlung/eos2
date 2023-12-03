@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="Distribution/RobotExt/EosRobotLib.jar"/>
+    <jar path="Distribution/EosRobotLib.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/EosRobotLib/mf/EosRobotLib.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -11,7 +11,6 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-        <javaElement handleIdentifier="=EosRobotLib/src"/>
-        <javaElement handleIdentifier="=EosRobotLib/resources"/>
+        <javaElement handleIdentifier="=EosRobotLib/src=/optional=/true=/=/maven.pomderived=/true=/"/>
     </selectedElements>
 </jardesc>

@@ -1,2 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: ../EosBaseLib.jar jogamp-fat.jar
+Class-Path: EosLib.jar EosBaseLib.jar jogamp-fat.jar
+Add-Exports: java.base/java.lang java.desktop/sun.awt java.desktop/sun.java2d
+Main-Class: de.lathanda.eos.robot.Start

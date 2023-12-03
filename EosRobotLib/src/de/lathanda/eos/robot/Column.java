@@ -1,20 +1,23 @@
 package de.lathanda.eos.robot;
 
-import java.awt.Color;
 import java.util.ArrayList;
+
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.robot.exceptions.CubeImmutableException;
 import de.lathanda.eos.robot.exceptions.CubeMissingException;
+import de.lathanda.eos.robot.exceptions.CubeNoSpaceException;
+import de.lathanda.eos.robot.exceptions.RobotException;
 
 /**
  * Eine Säule innerhalb der Welt.
  *
  * @author Peter (Lathanda) Schneider
- * @since 0.8
+ *
  */
 public class Column {
 	private CubeArray cubes = new CubeArray();
-	private Color mark = null;
-	private static final Color MARK = Color.YELLOW;
+	private MutableColor mark = null;
+	private static final MutableColor MARK = MutableColor.YELLOW;
 
     /** 
      * Lässt einen Würfel ausgehend vom Level her "fallen".
@@ -22,8 +25,9 @@ public class Column {
      * Ist das Level bereits belegt wird der Würfel auf die erste frei stelle darüber platziert.
      * @param level Setzhöhe
      * @param cube Würfel
+     * @throws CubeNoSpaceException 
      */
-    public void dropCube(int level, Cube cube) {
+    public void dropCube(int level, Cube cube) throws RobotException {
         if(cubes.get(level).isFree()) {
         	int n = level;
         	while (cubes.get(n-1).isFree()) { n--; }
@@ -40,8 +44,9 @@ public class Column {
      * Lässt einen Würfel von ganz oben fallen.
      * Er bleibt liegen sobald er auf ein belegtes Feld oder den Boden stösst.
      * @param cube Würfel
+     * @throws CubeNoSpaceException 
      */
-    public void dropCube(Cube cube) {
+    public void dropCube(Cube cube) throws RobotException {
     	//drop from above
     	dropCube(cubes.size(), cube);
     }
@@ -49,8 +54,9 @@ public class Column {
      * Liefert die Farbe des Steins auf den dropStone einen neuen Stein legen würde.
      * @param level Farbe des Steins, Bodenfarbe falls es diesen nicht gibt.
      * @return
+     * @throws CubeMissingException 
      */
-    public Color stoneColor(int level) {
+    public MutableColor stoneColor(int level) throws RobotException {
         if(cubes.get(level).isFree()) {
         	int n = level;
         	while (cubes.get(n-1).isFree()) { n--; }
@@ -67,7 +73,7 @@ public class Column {
      * Setzt eine Markierung.
      * @param mark markieren oder nicht
      */
-    public void setMark(boolean mark) {
+    public void setMark(boolean mark) throws RobotException {
     	this.mark = (mark)?MARK:null;      
     }
 
@@ -82,9 +88,9 @@ public class Column {
      * @param size Höhe der Figur
      * @param climb maximaler erlaubter Höhenunterschied
      * @param fall maximal erlaubte Fallhöhe
-     * @return
+     * @return neue Position des Roboter. -1 falls nicht möglich
      */
-    public int isReachable(int level, int size, int climb, int fall) {
+    public int isReachable(int level, int size, int climb, int fall) throws RobotException {
     	int maxDifference = Math.min(fall,  climb);
     	int difference = 0;
     	while (difference <= maxDifference) {
@@ -121,7 +127,7 @@ public class Column {
      * @param size
      * @return
      */
-    private boolean isWalkable(int level, int size) {
+    private boolean isWalkable(int level, int size) throws RobotException {
         if (cubes.get(level - 1).isFree()) {
             return false; //check solid ground
         }
@@ -141,7 +147,7 @@ public class Column {
      * @param size
      * @return
      */
-    public boolean isFree(int level, int size) {
+    public boolean isFree(int level, int size) throws RobotException {
         for (int i = size; i-- > 0;) {
             if (!cubes.get(level + i).isFree()) {
                 return false; //check free space
@@ -153,7 +159,7 @@ public class Column {
     /**
      * Hebt den obersten Würfel auf.
      */
-    public void pickup() throws CubeMissingException , CubeImmutableException {
+    public void pickup() throws RobotException {
         pickup(cubes.size());
     }
     /**
@@ -162,7 +168,7 @@ public class Column {
      * Ist die Position frei wird der erste Würfel genommen der unterhalb ist.
      * @param level
      */
-    void pickup(int level) throws CubeMissingException , CubeImmutableException {
+    void pickup(int level) throws RobotException {
     	if (cubes.get(level).isFree()) {
     		for(int n = level; n --> 0;) {
     			if(!cubes.get(n).isEmpty()) {
@@ -179,33 +185,33 @@ public class Column {
      * Prüft ob die Position markiert ist.
      * @return
      */
-    public boolean isMarked() {
+    public boolean isMarked() throws RobotException {
         return mark != null;
     }
     /**
      * Prüft ob die Position mit der Farbe markiert ist.
      * @return
      */
-    public boolean isMarked(Color c) {
+    public boolean isMarked(MutableColor c) throws RobotException {
         return (mark == null)?false:mark.equals(c);
     }    
-    public Color getMark() {
+    public MutableColor getMark() throws RobotException {
     	return mark;
     }
-    public void setMark() {
+    public void setMark() throws RobotException {
     	mark = MARK;
     }
-    public void setMark(Color c) {
+    public void setMark(MutableColor c) throws RobotException {
     	mark = c;
     }
-    public void toggleMark() {
+    public void toggleMark() throws RobotException {
     	if (mark == null) {
     		mark = MARK;
     	} else {
     		mark = null;
     	}
     }
-    public void toggleMark(Color c) {
+    public void toggleMark(MutableColor c) throws RobotException {
     	if (mark == null) {
     		mark = c;
     	} else {
@@ -217,14 +223,14 @@ public class Column {
      * @param level
      * @throws CubeImmutableException 
      */
-	public void removeCube(int level) throws CubeImmutableException {
+	public void removeCube(int level) throws RobotException {
 		cubes.get(level).setEmpty();
 	}
 	/**
 	 * Prüft ob der Stapel leer ist.
 	 * @return
 	 */
-	public boolean hasCube() {
+	public boolean hasCube() throws RobotException {
 		for (int i = 0; i < cubes.size(); i++) {
 			if (!cubes.get(i).isFree()) {
 				return true;
@@ -237,7 +243,7 @@ public class Column {
 	 * @param n
 	 * @return
 	 */
-	public boolean hasCube(int n) {
+	public boolean hasCube(int n) throws RobotException {
 		int numberOfCubes = 0;
 		for (int i = 0; i < cubes.size(); i++) {
 			if (!cubes.get(i).isFree()) {
@@ -247,17 +253,17 @@ public class Column {
 		return numberOfCubes == n;
 	}
 
-	public void setCube(int level, Cube cube) {
+	public void setCube(int level, Cube cube) throws RobotException {
 		cubes.set(level, cube);
 	}
-	public Cube[] getCubes() {
+	public Cube[] getCubes() throws RobotException {
 		return cubes.getAll();
 	}
 	/**
 	 * Entfernt einen Würfel vollständig inklusive Markierung
 	 * @param level
 	 */
-	public void remove(int level) {
+	public void remove(int level) throws RobotException {
 		cubes.set(level, Cube.createEmpty());
 	}
 	private static class CubeArray {
@@ -270,7 +276,7 @@ public class Column {
 	     * @param index
 	     * @return
 	     */
-	    private synchronized Cube get(int level) {
+	    private synchronized Cube get(int level) throws RobotException {
 	        if (level < 0) {
 	            return Cube.createGround();
 	        }
@@ -285,7 +291,7 @@ public class Column {
 	     * @param level
 	     * @param cube
 	     */
-	    public synchronized void set(int level, Cube cube) {
+	    public synchronized void set(int level, Cube cube) throws RobotException {
 	    	//fill up
 	        for (int n = level - cubes.size() + 1; n --> 0;) {
 	        	cubes.add(Cube.createEmpty());
@@ -305,7 +311,7 @@ public class Column {
 		 * 
 		 * @return
 		 */
-		public synchronized Cube[] getAll() {
+		public synchronized Cube[] getAll() throws RobotException {
 			Cube[] cubeArray = new Cube[cubes.size()];
 			return cubes.toArray(cubeArray);
 		}	

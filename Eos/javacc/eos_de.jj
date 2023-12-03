@@ -432,7 +432,7 @@ void Parameter(Parameters parameters ) :
   name = Name() {parameters.addName(name);} 
   (
     "," name = Name() {parameters.addName(name);}
-  )* ":" type = Type() {parameters.setType(type, new Marker(token.beginColumn, token.beginLine, token.endColumn, token.endLine));}
+  )* ":" type = Type() {parameters.setType(type);}
 }
 
 void Import( ) :

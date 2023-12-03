@@ -1,7 +1,5 @@
 package de.lathanda.eos.geo;
 
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BalancePoint;
 import de.lathanda.eos.base.layout.BoundingBox;
@@ -60,11 +58,4 @@ public class Circle extends FilledFigure {
         double r = t.transform(radius);
         return new BoundingBox(t.getdx() - r, t.getdx() + r, t.getdy() - r, t.getdy() + r);
     }
-    @Override
- 	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	attributes.add(new Attribut("centerx", getCenterX()));
-        attributes.add(new Attribut("centery", getCenterY()));         
-        attributes.add(new Attribut("radius", radius));
-	}   
 }

@@ -1,0 +1,12 @@
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\bin\Release\netcoreapp3.1\EOS2.exe
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\bin\Release\netcoreapp3.1\EOS2.deps.json
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\bin\Release\netcoreapp3.1\EOS2.runtimeconfig.json
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\bin\Release\netcoreapp3.1\EOS2.runtimeconfig.dev.json
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\bin\Release\netcoreapp3.1\EOS2.dll
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\bin\Release\netcoreapp3.1\EOS2.pdb
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\obj\Release\netcoreapp3.1\EOS2.csproj.CoreCompileInputs.cache
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\obj\Release\netcoreapp3.1\EOS2.AssemblyInfoInputs.cache
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\obj\Release\netcoreapp3.1\EOS2.AssemblyInfo.cs
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\obj\Release\netcoreapp3.1\EOS2.dll
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\obj\Release\netcoreapp3.1\EOS2.pdb
+D:\Eos2_1.1.x\Workfiles\c#\EOS2\obj\Release\netcoreapp3.1\EOS2.genruntimeconfig.cache

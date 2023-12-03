@@ -1,0 +1,5 @@
+k:Kreis //Das ist ein Kreis
+{Dies ist ein mehrzeiliger Kommentar.
+zweite Zeile.
+dritte Zeile.}
+k.verschieben(-1/*nach links*/,1/*nach oben*/)

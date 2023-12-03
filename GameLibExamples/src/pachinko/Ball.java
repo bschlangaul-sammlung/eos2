@@ -1,7 +1,6 @@
 package pachinko;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Vector;
 import de.lathanda.eos.game.Game;
@@ -22,7 +21,7 @@ public class Ball extends Sprite {
 
 	@Override
 	public void render(Picture p) {
-		p.setFillColor(Color.BLACK);
+		p.setFillColor(MutableColor.BLACK);
 		p.drawShape(shape);
 	}
 
@@ -63,7 +62,8 @@ public class Ball extends Sprite {
 			ball.dx = v2.getdx(); //dx ist zwar privat, aber wir befinden und ja auch in der Klasse Ball, dass es ein anderes Objekt ist spielt für den Zugriff keine Rolle
 			ball.dy = v2.getdy();
 			return true; //beide Bälle sind versorgt daher darf der andere auf keinen Fall mehr aufgerufen werden
-		} else if (b instanceof Rand) {
+		}
+		if (b instanceof Rand) {
 			Rand rand = (Rand)b;
 			Vector v = new Vector(this.dx, this.dy);
 			Vector abstandsRichtung = rand.getLot();
@@ -77,7 +77,8 @@ public class Ball extends Sprite {
 			dx = v.getdx();
 			dy = v.getdy();
 			return false;
-		} else if (b instanceof Pin) {
+		}
+		if (b instanceof Pin) {
 			Pin pin = (Pin)b;
 			Vector v = new Vector(this.dx, this.dy);
 			Vector abstandsRichtung = new Vector(pin.getX()-shape.getX(), pin.getY()- shape.getY());

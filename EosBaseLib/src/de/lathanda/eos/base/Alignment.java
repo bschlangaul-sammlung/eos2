@@ -25,7 +25,7 @@ public enum Alignment {
 			return "^";
 		case BOTTOM:
 			return "_";
-		};
+		}
 		return "";
 	}
 	

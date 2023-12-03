@@ -1,11 +1,11 @@
 package de.lathanda.eos.game;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture2D;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.game.geom.CollisionDetection;
@@ -39,7 +39,7 @@ public class Game implements Runnable {
 		PAUSE, // / Die Simulation ist vorübergehend angehalten
 		SHUTDOWN
 		// / Die Simulation ist gerade dabei alle Resourcen freizugeben
-	};
+	}
 
 	/**
 	 * \brief aktueller Zustand
@@ -117,7 +117,7 @@ public class Game implements Runnable {
 	 * arbeitet.
 	 */
 	public Game() {
-		this(200, 200, Color.WHITE, 30, "");
+		this(200, 200, MutableColor.WHITE, 30, "");
 	}
 
 	/**
@@ -133,22 +133,22 @@ public class Game implements Runnable {
 	 *            Mittel erzwungen. Die einzelnen Intervalle können abweichen.
 	 */
 	public Game(int fps) {
-		this(200, 200, Color.WHITE, fps, "");
+		this(200, 200, MutableColor.WHITE, fps, "");
 	}
 
 	public Game(double width, double height) {
-		this(width, height, Color.WHITE, 30, "");
+		this(width, height, MutableColor.WHITE, 30, "");
 	}
 
 	public Game(double width, double height, String title) {
-		this(width, height, Color.WHITE, 30, title);
+		this(width, height, MutableColor.WHITE, 30, title);
 	}
 
-	public Game(double width, double height, Color back, String title) {
+	public Game(double width, double height, MutableColor back, String title) {
 		this(width, height, back, 30, title);
 	}
 
-	public Game(double width, double height, Color back, int fps, String title) {
+	public Game(double width, double height, MutableColor back, int fps, String title) {
 		gameFrame = new GameFrame(width, height, back, this, title);
 		colDetect = new CollisionDetection(this);
 		this.fps = fps;

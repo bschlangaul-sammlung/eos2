@@ -269,7 +269,7 @@ public abstract class Shape implements Comparable<Shape> {
      *
      * @return Art der Form
      */
-    abstract Types getOutlineType();
+    protected abstract Types getOutlineType();
 
     /* (non-Javadoc)
      * @see de.lathanda.sgl.geom2d.Point#getX()

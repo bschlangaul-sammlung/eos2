@@ -1,10 +1,10 @@
 package tron;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.game.Game;
 import de.lathanda.eos.game.Sprite;
@@ -31,15 +31,15 @@ public class GameOver extends Sprite {
 		g.setFont(WINNER);
 		switch (winner) {
 		case 0:
-			g.setLineColor(Color.RED);
+			g.setLineColor(MutableColor.RED);
 			g.drawText("Player one won", 0, -20);
 			break;
 		case 1:
-			g.setLineColor(Color.BLUE);
+			g.setLineColor(MutableColor.BLUE);
 			g.drawText("Player two won", 0, -20);
 			break;
 		case 2:
-			g.setLineColor(Color.BLACK);
+			g.setLineColor(MutableColor.BLACK);
 			g.drawText("Loosers", 0, -20);
 			break;
 		}

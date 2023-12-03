@@ -1,7 +1,5 @@
 package eos;
 
-import java.awt.Color;
-
 /**
  * @author Peter Schneider
  * 
@@ -33,23 +31,23 @@ public class Ellipse extends GefuellteFigur {
         ellipse.setRadiusY(d / 2);
         ellipse.setCenter(x, y);
 	}
-	public Ellipse(double x, double y, double breite, double hoehe, Color farbe) {
+	public Ellipse(double x, double y, double breite, double hoehe, Farbe farbe) {
     	super(new de.lathanda.eos.geo.Ellipse());
         ellipse = (de.lathanda.eos.geo.Ellipse)figure;
         ellipse.setRadiusX(breite / 2);
         ellipse.setRadiusY(hoehe / 2);
         ellipse.setCenter(x + breite / 2, y + hoehe /2);
-        ellipse.setLineColor(farbe);
-        ellipse.setFillColor(farbe);
+        ellipse.setLineColor(farbe.getColor());
+        ellipse.setFillColor(farbe.getColor());
 	}
-	public Ellipse(double x, double y, double a, Color farbe) {
+	public Ellipse(double x, double y, double a, Farbe farbe) {
     	super(new de.lathanda.eos.geo.Ellipse());
         ellipse = (de.lathanda.eos.geo.Ellipse)figure;
         ellipse.setRadiusX(a / 2);
         ellipse.setRadiusY(a / 2);
         ellipse.setCenter(x + a / 2, y + a /2);
-        ellipse.setLineColor(farbe);
-        ellipse.setFillColor(farbe);
+        ellipse.setLineColor(farbe.getColor());
+        ellipse.setFillColor(farbe.getColor());
 	}
     public void mitteySetzen(double y) {
         ellipse.setCenterY(y);

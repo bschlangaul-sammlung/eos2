@@ -1,7 +1,5 @@
 package eos;
 
-import java.awt.Color;
-
 import de.lathanda.eos.geo.Circle;
 
 /**
@@ -27,13 +25,13 @@ public class Kreis extends GefuellteFigur {
     circle.moveTo(x,y);
 		circle.setRadius(radius);
 	}
-	public Kreis(double x, double y, double radius, Color farbe) {
+	public Kreis(double x, double y, double radius, Farbe farbe) {
 		super(new Circle());
 		circle = (Circle)figure;
     circle.moveTo(x,y);
 		circle.setRadius(radius);
-		circle.setLineColor(farbe);
-		circle.setFillColor(farbe);
+		circle.setLineColor(farbe.getColor());
+		circle.setFillColor(farbe.getColor());
 	}
 	public void mitteySetzen(double y) {
 		circle.setCenterY(y);

@@ -1,7 +1,6 @@
 package de.lathanda.eos.base;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -33,8 +32,8 @@ public class Picture2D extends Picture {
     private double gridwidth = 10;
     private static double GRID_LINE_WIDTH = 0.25;
     private static double AXIS_LINE_WIDTH = 1;
-    private final LineDescriptor gridline = new LineDescriptor(new Color(128,128,128), LineStyle.SOLID, GRID_LINE_WIDTH);
-    private final LineDescriptor axesline = new LineDescriptor(new Color(128,128,128), LineStyle.SOLID, AXIS_LINE_WIDTH);    
+    private final LineDescriptor gridline = new LineDescriptor(MutableColor.GRID, LineStyle.SOLID, GRID_LINE_WIDTH);
+    private final LineDescriptor axesline = new LineDescriptor(MutableColor.GRID, LineStyle.SOLID, AXIS_LINE_WIDTH);    
     private boolean gridvisible = true;
     //coordinate transformation
     protected int pCenterX;
@@ -208,7 +207,7 @@ public class Picture2D extends Picture {
     }
     @Override
     public void translate(double dx, double dy) {
-        transform.translate(dx, dy);
+        transform = transform.translate(dx, dy);
         g.setTransform(baseTrans);
         g.translate(mm2unitd(transform.getdx()), -mm2unitd(transform.getdy()));
         g.rotate(-transform.getAngle()); 
@@ -219,7 +218,7 @@ public class Picture2D extends Picture {
     }
     @Override
     public void rotate(double angle) {
-        transform.rotate(angle);
+        transform = transform.rotate(angle);
         g.setTransform(baseTrans);
         g.translate(mm2unitd(transform.getdx()), -mm2unitd(transform.getdy()));
         g.rotate(-transform.getAngle()); 
@@ -233,7 +232,7 @@ public class Picture2D extends Picture {
      * @return sichtbar?
      */
     private boolean applyLine() {
-        g.setColor(line.getColor());
+        g.setColor(line.getColor().getColor());
         switch (line.getLineStyle()) {
         case DASHED:
             g.setStroke(new BasicStroke(
@@ -364,7 +363,7 @@ public class Picture2D extends Picture {
      * Farbe des Koordiantensystems festlegen.
      * @param color Farbe
      */
-    public void setGridColor(Color color) {
+    public void setGridColor(MutableColor color) {
         gridline.setColor(color);
         axesline.setColor(color);
     }
@@ -372,7 +371,7 @@ public class Picture2D extends Picture {
      * Farbe des Koordinatensystems abfragen.
      * @return
      */
-    public Color getGridColor() {
+    public MutableColor getGridColor() {
         return gridline.getColor();
     }
     /**
@@ -532,8 +531,8 @@ public class Picture2D extends Picture {
 	 */
 	private void drawShape(Shape shape) {
 		//fill
-    	g.setColor(fill.getColor());
-        g.setPaint(fill.getColor()); 
+    	g.setColor(fill.getColor().getColor());
+        g.setPaint(fill.getColor().getColor()); 
         switch (fill.getFillStyle()) {
         case FILLED:
             g.fill(shape);

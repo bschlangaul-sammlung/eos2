@@ -2,11 +2,11 @@ package de.lathanda.eos.base;
 
 import de.lathanda.eos.base.layout.Dimension;
 import de.lathanda.eos.base.math.Point;
+import de.lathanda.eos.base.util.GuiToolkit;
 import de.lathanda.eos.base.layout.Transform;
 import de.lathanda.eos.game.geom.Shape;
-import de.lathanda.eos.util.GuiToolkit;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Font;
 import java.util.Collection;
 import java.util.Iterator;
@@ -399,7 +399,7 @@ public abstract class Picture {
      * @param text Text
      * @return Liste der Textzeilen
      */
-    private List<String> split(String text) {
+    private static List<String> split(String text) {
         StringTokenizer st = new StringTokenizer(text, "\n\r\f", false);
         LinkedList<String> list = new LinkedList<>();
         while(st.hasMoreTokens()) {
@@ -425,7 +425,7 @@ public abstract class Picture {
      * Setzt die Linienfarbe.
      * @param c Linienfarbe
      */
-    public void setLineColor(Color c) {
+    public void setLineColor(MutableColor c) {
     	line.setColor(c);
     	line.setLineStyle(LineStyle.SOLID);
     }
@@ -440,7 +440,7 @@ public abstract class Picture {
      * Setzt die Füllfarbe.
      * @param c Füllfarbe
      */
-    public void setFillColor(Color c) {
+    public void setFillColor(MutableColor c) {
     	fill.setColor(c);
     	fill.setFillStyle(FillStyle.FILLED);
     }

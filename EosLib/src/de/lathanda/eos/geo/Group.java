@@ -1,16 +1,14 @@
 package de.lathanda.eos.geo;
 
-import java.awt.Color;
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.FillStyle;
 import de.lathanda.eos.base.LineStyle;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BalancePoint;
 import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.layout.Transform;
+import de.lathanda.eos.base.util.ConcurrentLinkedList;
 import de.lathanda.eos.geo.exceptions.RecursiveGroupException;
-import de.lathanda.eos.util.ConcurrentLinkedList;
 
 /**
  * Gruppen sind Kontainer für Figuren. Diese erlauben es mehrere Figuren
@@ -102,7 +100,7 @@ public class Group extends Figure implements FigureGroup {
 		super.fireLayoutChanged();
 	}
 
-	public void setLineColor(Color color) {
+	public void setLineColor(MutableColor color) {
 		for (Figure m : members) {
 			if (m instanceof LineFigure) {
 				((LineFigure) m).setLineColor(color);
@@ -142,7 +140,7 @@ public class Group extends Figure implements FigureGroup {
 		}
 	}
 
-	public void setFillColor(Color color) {
+	public void setFillColor(MutableColor color) {
 		for (Figure m : members) {
 			if (m instanceof FilledFigure) {
 				((FilledFigure) m).setFillColor(color);
@@ -238,11 +236,10 @@ public class Group extends Figure implements FigureGroup {
 		}
 		return bound;
 	}
-
-	@Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-		super.getAttributes(attributes);
-		attributes.add(new Attribut("autocenter", autoCenter));
-		attributes.add(new Attribut("members", members));
+	public boolean getAutoCenter() {
+		return autoCenter;
+	}
+	public ConcurrentLinkedList<Figure> getMembers() {
+		return members;
 	}
 }

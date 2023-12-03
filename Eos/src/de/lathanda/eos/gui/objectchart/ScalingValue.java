@@ -3,6 +3,7 @@ package de.lathanda.eos.gui.objectchart;
 import de.lathanda.eos.base.Scaling;
 import de.lathanda.eos.gui.diagram.Unit;
 import de.lathanda.eos.gui.diagram.Drawing;
+
 /**
  * Zeichnet Symbol für die Skalierung.
  *
@@ -11,7 +12,7 @@ import de.lathanda.eos.gui.diagram.Drawing;
  */
 public class ScalingValue extends Unit {
 	private Scaling scaling;
-	
+
 	public ScalingValue(Scaling scaling) {
 		super();
 		this.scaling = scaling;

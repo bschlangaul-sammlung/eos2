@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="Distribution/EosParserDe.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/EosParserDe/mf/EosParserDe.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/EosParserDe/mf/EosParserDe.mf" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/EosParserDe/javacc/eos_de.html"/>
+        <file path="/EosParserDe/javacc/eos_de.jj"/>
+        <file path="/EosParserDe/.project"/>
+        <file path="/EosParserDe/javacc/javacc_eos.bat"/>
+        <javaElement handleIdentifier="=EosParserDe/src=/optional=/true=/=/maven.pomderived=/true=/"/>
+        <file path="/EosParserDe/.classpath"/>
+        <file path="/EosParserDe/javacc/jjdoc_eos.bat"/>
+    </selectedElements>
+</jardesc>

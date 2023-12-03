@@ -1,6 +1,7 @@
 package eos;
 
-import java.awt.Color;
+import de.lathanda.eos.base.MutableColor;
+
 /**
  * @author Peter Schneider
  * 
@@ -18,21 +19,33 @@ import java.awt.Color;
  * es {@code gruen} zu schreiben.
  * 
  */
-public abstract class Farbe {
-    public static final Color gelb      = Color.YELLOW;
-    public static final Color rot       = Color.RED;
-    public static final Color gruen     = Color.GREEN;
-    public static final Color blau      = Color.BLUE;
-    public static final Color weiss     = Color.WHITE;
-    public static final Color schwarz   = Color.BLACK;
-    public static final Color braun     = new Color(118,80,8);
-    public static final Color hellblau  = new Color(123,177,244);
-    public static final Color hellgruen = new Color(87,225,4);
-    public static final Color grau      = Color.GRAY;
-    public static final Color hellgrau  = Color.LIGHT_GRAY;
-    public static final Color pink      = new Color(245,0,250);
-    public static final Color orange    = new Color(255,128,0);
-    public static final Color weinrot   = new Color(128,0,0);
-    public static final Color tuerkis   = new Color(0,255,255);
-    private Farbe() {}
+public class Farbe {
+	private MutableColor c;
+    public static final Farbe gelb      = new Farbe(MutableColor.YELLOW);
+    public static final Farbe rot       = new Farbe(MutableColor.RED);
+    public static final Farbe gruen     = new Farbe(MutableColor.GREEN);
+    public static final Farbe blau      = new Farbe(MutableColor.BLUE);
+    public static final Farbe weiss     = new Farbe(MutableColor.WHITE);
+    public static final Farbe schwarz   = new Farbe(MutableColor.BLACK);
+    public static final Farbe braun     = new Farbe(118,80,8);
+    public static final Farbe hellblau  = new Farbe(123,177,244);
+    public static final Farbe hellgruen = new Farbe(87,225,4);
+    public static final Farbe grau      = new Farbe(MutableColor.GRAY);
+    public static final Farbe hellgrau  = new Farbe(MutableColor.LIGHT_GRAY);
+    public static final Farbe pink      = new Farbe(245,0,250);
+    public static final Farbe orange    = new Farbe(255,128,0);
+    public static final Farbe weinrot   = new Farbe(128,0,0);
+    public static final Farbe tuerkis   = new Farbe(0,255,255);
+    public Farbe(int r, int g, int b) {
+    	c = new MutableColor(r,g,b);
+    }
+    public Farbe(int r, int g, int b, int a) {
+    	c = new MutableColor(r,g,b,a);
+    }
+    /*package*/ MutableColor getColor() {
+    	return c;
+    }
+    /*package*/ Farbe(MutableColor c) {
+    	this.c = c;
+    }
 }

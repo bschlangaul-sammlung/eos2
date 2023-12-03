@@ -2,15 +2,15 @@ package de.lathanda.eos.gui.objectchart;
 
 import de.lathanda.eos.gui.diagram.Unit;
 import de.lathanda.eos.gui.diagram.Drawing;
+
 /**
  * Zeichnet eine Variable oder ein Attribut.
  *
  * @author Peter (Lathanda) Schneider
- * @since 0.9.4
  */
 public class Property extends Unit {
-    private String name;
-    private Unit value;
+	private String name;
+	private Unit value;
 	private float xEquals;
 	private float yLine;
 
@@ -21,8 +21,9 @@ public class Property extends Unit {
 			this.name = name;
 		} else {
 			this.name = "\uFFFD";
-		}		
+		}
 	}
+
 	@Override
 	public void drawUnit(Drawing d) {
 		d.drawString(name, 0, yLine);
@@ -32,13 +33,14 @@ public class Property extends Unit {
 
 	@Override
 	public void layoutUnit(Drawing d) {
-        xEquals = d.stringWidth(name) + INDENT;
-        value.layout(d);
-        value.setOffsetX(xEquals + d.stringWidth("=") + INDENT);
-        yLine = d.getAscent();
-        this.height = Math.max(d.getHeight(), value.getHeight());
-        this.width = xEquals + INDENT + value.getWidth();
+		xEquals = d.stringWidth(name) + INDENT;
+		value.layout(d);
+		value.setOffsetX(xEquals + d.stringWidth("=") + INDENT);
+		yLine = d.getAscent();
+		this.height = Math.max(d.getHeight(), value.getHeight());
+		this.width = xEquals + INDENT + value.getWidth();
 	}
+
 	public static float align(Drawing d, Iterable<Property> properties) {
 		float alignedValueWidth = 0;
 		float alignedXEquals = 0;

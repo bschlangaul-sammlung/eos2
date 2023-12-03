@@ -1,10 +1,10 @@
 package asteroids;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.math.Vector;
@@ -25,7 +25,7 @@ public class Asteroids extends Sprite {
 	
 
 	private Asteroids() {
-		Game game = new Game(250, 200, Color.BLACK, "Asteroids");
+		Game game = new Game(250, 200, MutableColor.BLACK, "Asteroids");
 		game.addSprite(this);
 		schiff = new Schiff(this, 0, 0);
 		game.addSprite(schiff);
@@ -36,19 +36,19 @@ public class Asteroids extends Sprite {
 		switch (zustand) {
 		case 0:
 			g.setTextAlignment(Alignment.BOTTOM, Alignment.CENTER);
-			g.setLineColor(Color.WHITE);
+			g.setLineColor(MutableColor.WHITE);
 			g.drawText("A S T E R O I D S", 0, 30);
 			g.drawText("F1 drücken", 0, 20);
 			break;
 		case -1:
 			g.setTextAlignment(Alignment.BOTTOM, Alignment.CENTER);
-			g.setLineColor(Color.WHITE);
+			g.setLineColor(MutableColor.WHITE);
 			g.drawText("G A M E O V E R", 0, 30);
 			g.drawText("F1 drücken", 0, 20);
 			g.drawText("Punkte: " + punkte, 0, 10);
 			break;
 		default:
-			g.setLineColor(Color.WHITE);
+			g.setLineColor(MutableColor.WHITE);
 			g.setTextAlignment(Alignment.TOP, Alignment.LEFT);
 			g.drawText("Punkte: " + punkte, -124, 99);
 			g.setTextAlignment(Alignment.TOP, Alignment.RIGHT);

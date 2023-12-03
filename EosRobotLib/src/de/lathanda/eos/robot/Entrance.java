@@ -1,5 +1,7 @@
 package de.lathanda.eos.robot;
 
+import de.lathanda.eos.base.util.Direction;
+
 /**
  * Ein Eingang durch den ein Roboter die Welt betreten kann.
  *

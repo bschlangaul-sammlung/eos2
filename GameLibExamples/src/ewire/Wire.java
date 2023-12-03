@@ -1,7 +1,6 @@
 package ewire;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.game.Sprite;
@@ -15,7 +14,7 @@ public class Wire extends Sprite {
 
 	@Override
 	public void render(Picture g) {
-		g.setFillColor(Color.BLUE);
+		g.setFillColor(MutableColor.BLUE);
 		g.drawShape(shape);
 	}
 }

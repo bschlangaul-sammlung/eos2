@@ -3,9 +3,9 @@ package de.lathanda.eos.game.geom.tesselation;
 /**
  * \brief Korrupte Tesselierung
  *
- * Diese Ausnahme wird erzeugt, wenn versucht wird ein Polygon in Dreiecke zu zerlegen, dass
+ * Diese Ausnahme wird erzeugt, wenn versucht wurde ein Polygon in Dreiecke zu zerlegen, dass
  * so geringe Abstände aufweisst, dass aufgrund von numerischen Ungenauigkeiten
- * eine Zerlegung gescheitert ist.
+ * eine Zerlegung scheitert.
  *
  * @author Lathanda
  */

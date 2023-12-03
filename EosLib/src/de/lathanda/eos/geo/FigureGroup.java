@@ -6,7 +6,7 @@ package de.lathanda.eos.geo;
  *
  * @author Peter (Lathanda) Schneider
  */
-interface FigureGroup {
+public interface FigureGroup {
     /**
      * Fügt eine Figur einer Gruppe hinzu. Hierbei werden alle 
      * Transformationen auf das Koordinatensystem der Gruppe umgestellt.

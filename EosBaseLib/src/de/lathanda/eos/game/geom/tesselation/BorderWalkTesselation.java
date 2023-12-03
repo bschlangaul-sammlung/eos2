@@ -9,18 +9,18 @@ import java.util.TreeSet;
 
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.math.Vector;
+import de.lathanda.eos.base.util.IntervalTree;
 import de.lathanda.eos.game.geom.BoundingBox;
 import de.lathanda.eos.game.geom.Triangle;
 import de.lathanda.eos.game.geom.Tesselation;
-import de.lathanda.eos.util.IntervalTree;
 /**
  * \brief Tesselation
  * 
  * Diese Klasse dient dazu aus einem Polygonzug die äußere Grenze und eine zum Ausfüllen 
  * geeignete Menge von Dreieck zu berechnen.
- * Die äußere Grenze wird wird im Uhrzeigersinn angegeben, ausgehend vom linken Rand.
+ * Die äußere Grenze wird im Uhrzeigersinn angegeben, ausgehend vom linken Rand.
  * Aufgrund numerischer Effekte muss ein Kompromiss bei der Genauigkeit eingegangen werden.
- * Die Punkte des berechneten Randpolygons haben nur eine Genauigkeit von etwa 7 Stellen.
+ * Die Punkte des berechneten Randpolygons haben nur eine Genauigkeit von etwa 7 Nachkommastellen.
  * Spalte innerhalb des Polygons, welche unterhalb dieser Genauigkeit liegen, können verschwinden
  * oder auch nicht, je nachdem wie die Rundungsfehler zuschlagen.
  * 
@@ -153,7 +153,7 @@ public class BorderWalkTesselation implements Tesselation {
 					yInt = yHits.pollFirst();
 				}
 			}
-			// check all potential crossing edges, if they actually do intersect
+			// check all potential crossing edges, if they really intersect
 			CrossingPoint best = null;
 			for (Edge e : hits) {
 				if (e.id == act.id) {
@@ -513,14 +513,18 @@ public class BorderWalkTesselation implements Tesselation {
 				my = (py - b.y1) / (b.y2 - b.y1);
 			}
 			//detected values that are near the corners, and move them
+			double ax, ay;
 			if (lambda < 0.0000001 && lambda > -0.0000001) {
 				lambda = 0;
-				px = a.x1;
-				py = a.y1;
+				ax = a.x1;
+				ay = a.y1;
 			} else if (lambda > 0.9999999 && lambda < 1.0000001) {
 				lambda = 1;
-				px = a.x2;
-				py = a.y2;
+				ax = a.x2;
+				ay = a.y2;
+			} else {
+				ax = px;
+				ay = py;
 			}
 			if (my < 0.0000001 && my > -0.0000001) {
 				my = 0;
@@ -542,15 +546,15 @@ public class BorderWalkTesselation implements Tesselation {
 					double c = a.v.crossproduct(b.v);
 					//...choose the edge half that turns left
 					if (c > 0) {
-						edge = new Edge(px, py, b.x2, b.y2, b.id);					
+						edge = new Edge(ax, ay, b.x2, b.y2, b.id);					
 					} else if (c < 0) {
-						edge = new Edge(px, py, b.x1, b.y1, b.id);
+						edge = new Edge(ax, ay, b.x1, b.y1, b.id);
 					} else {
 						//...overlapping edges => choose the edge direction that continues
 						if (b.v.dotProduct(b.v) > 0) {
-							edge = new Edge(px, py, b.x2, b.y2, b.id);
+							edge = new Edge(ax, ay, b.x2, b.y2, b.id);
 						} else {
-							edge = new Edge(px, py, b.x1, b.y1, b.id);
+							edge = new Edge(ax, ay, b.x1, b.y1, b.id);
 						}
 					}
 				}

@@ -67,7 +67,7 @@ public class Sound {
 	 * @param inFormat Quelle
 	 * @return Format
 	 */
-	private AudioFormat getOutFormat(AudioFormat inFormat) {
+	private static AudioFormat getOutFormat(AudioFormat inFormat) {
 		final int ch = inFormat.getChannels();
 		final float rate = inFormat.getSampleRate();
 		return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);

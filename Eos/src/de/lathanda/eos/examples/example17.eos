@@ -1,0 +1,15 @@
+k:Kreis
+g:Gruppe
+g.zentrumSetzen(0,0)
+k.verschieben(50,0)
+wiederhole 11 mal
+   g.kopiere(k)
+   g.drehen(30)
+*wiederhole
+g.schlucke(k)
+g.randfarbeSetzen(blau)
+wiederhole 1000 mal
+   g.drehen(1)
+   g.füllfarbeSetzen(rot)
+   g.füllfarbeSetzen(gelb)
+*wiederhole

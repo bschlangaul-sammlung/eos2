@@ -8,8 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.Properties;
-
 import de.lathanda.eos.base.ResourceLoader;
+
 
 /**
  * Diese Klasse verwaltet alle Benutzereinstellungen.
@@ -20,7 +20,6 @@ import de.lathanda.eos.base.ResourceLoader;
 public class Configuration {
 
 	public static final Configuration def = new Configuration();
-	
 	private Properties configuration; 
 	private boolean dirty;
 	

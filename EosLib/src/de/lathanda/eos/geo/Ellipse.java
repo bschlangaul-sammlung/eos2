@@ -6,8 +6,6 @@ import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.layout.Transform;
 import static java.lang.Math.*;
 
-import java.util.LinkedList;
-
 /**
  * Ellipse.
  *
@@ -82,13 +80,5 @@ public class Ellipse extends FilledFigure {
         double h = sqrt(uy*uy + vy*vy); 
 
         return new BoundingBox(t.getdx() - w, t.getdx() + w, t.getdy() - h, t.getdy() + h);
-    }
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	attributes.add(new Attribut("centerx", getCenterX()));
-        attributes.add(new Attribut("centery", getCenterY()));        
-    	attributes.add(new Attribut("radiusx", getRadiusX()));
-        attributes.add(new Attribut("radiusy", getRadiusY()));
-	}    
+    }  
 }

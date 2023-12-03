@@ -9,6 +9,6 @@ import de.lathanda.eos.gui.diagram.Unit;
  * @since 0.8
  */
 public abstract class ConnectedUnit extends Unit {
-    protected boolean needsIncomingArrow = true;
-    protected boolean neverEnds = false;    
+	protected boolean needsIncomingArrow = true;
+	protected boolean neverEnds = false;
 }

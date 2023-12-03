@@ -1,7 +1,6 @@
 package asteroids;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.math.Vector;
@@ -22,7 +21,7 @@ public class Asteroid extends Sprite {
 	}
 
 	public void render(Picture g) {
-		g.setFillColor(Color.GRAY);
+		g.setFillColor(MutableColor.GRAY);
 		g.drawShape(shape);
 	}
 

@@ -2,9 +2,9 @@ package de.lathanda.eos.game;
 
 import java.util.Objects;
 
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.game.geom.Shape;
-import java.awt.Color;
 
 /**
  * \brief Spielobjekt
@@ -144,7 +144,7 @@ public abstract class Sprite implements Comparable<Sprite> {
      * sollten Sie überschreiben, um Code vor dem ersten update Aufruf
      * auszuführen.
      */
-    public void init(Game game) {
+    public void init(@SuppressWarnings("unused") Game game) {
     }
 
     /**
@@ -173,11 +173,11 @@ public abstract class Sprite implements Comparable<Sprite> {
      */
     public void render(Picture p) {
     	if (shape != null) {
-    		p.setFillColor(Color.GREEN);
-    		p.setLineColor(Color.GRAY);
+    		p.setFillColor(MutableColor.GREEN);
+    		p.setLineColor(MutableColor.GRAY);
     		p.drawShape(shape);
     	}
-    };
+    }
 
     /**
      * Diese Methode dient internen Zwecken.
@@ -208,9 +208,8 @@ public abstract class Sprite implements Comparable<Sprite> {
      * beschleunigt nachgeholt.
      *
      */
-    public void update(Game game) {
-    	
-    };
+    public void update(@SuppressWarnings("unused") Game game) {	
+    }
 
     /**
      * Diese Methode lässt diesen Sprite einige Runden schlafen. Befinden wir
@@ -280,7 +279,8 @@ public abstract class Sprite implements Comparable<Sprite> {
      * @param game Die Spielwelt
      * @return wahr, wenn die Kollision komplett behandelt wurde.
      */
-    public boolean processCollision(Sprite b, Game game) {
+    @SuppressWarnings("static-method")
+	public boolean processCollision(Sprite b, Game game) {
         return false;
     }    
 

@@ -1,0 +1,7 @@
+methode bewegen(r:RECHTECK, grad:real)
+   r.Verschieben(cos(grad), sin(grad))
+*methode
+r1:RECHTECK
+r2:RECHTECK
+bewegen(r1, 10)
+bewegen(r2, 20) 

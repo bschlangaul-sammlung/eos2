@@ -1,0 +1,5 @@
+q:Quadrat
+q.verschieben(20,20)
+q.seitenlänge = 15
+q.strecken(2)
+q.drehen(30)

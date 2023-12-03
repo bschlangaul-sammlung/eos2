@@ -92,7 +92,7 @@ public class ShapeGroup extends Shape {
     }
 
     @Override
-    public Types getOutlineType() {
+    protected Types getOutlineType() {
         return Types.GROUP;
     }
 

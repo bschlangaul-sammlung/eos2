@@ -10,11 +10,16 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
-import de.lathanda.eos.common.gui.Messages;
-import de.lathanda.eos.common.interpreter.AbstractProgram;
+
+import de.lathanda.eos.baseparser.AbstractProgram;
+import de.lathanda.eos.baseparser.Program;
+import de.lathanda.eos.config.Language;
+import de.lathanda.eos.gui.GuiConfiguration;
 import de.lathanda.eos.gui.MainWindow;
-import de.lathanda.eos.interpreter.parsetree.Program;
-import de.lathanda.eos.spi.LanguageManager;
+import de.lathanda.eos.gui.Messages;
+import de.lathanda.eos.parser.de.EosParserFactory;
+
+
 
 /**
  * \brief Startklasse
@@ -38,23 +43,18 @@ public class Start {
 	 */
 	public static void main(String args[]) {
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		        }
-		    }
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+				}
+			}
 		} catch (Throwable t) {
 		}
-	
-		Runtime.getRuntime().addShutdownHook(new Stop());		
+
+		Runtime.getRuntime().addShutdownHook(new Stop());
+		loadLanguage();
 		apply(args);
-		try {
-			LanguageManager.prepare();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, Messages.getString("Export.Error.Title"), e.getLocalizedMessage(),
-					JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}		switch (mode) {
+		switch (mode) {
 		case EDITOR:
 			editorStart();
 			break;
@@ -66,20 +66,42 @@ public class Start {
 		}
 	}
 
+	private static void loadLanguage() {
+		String id = GuiConfiguration.def.getLanguage();
+		var langs = Language.def.getAvailableLanguageConfigs();
+		for(var config : langs) {
+			if (config.getID().equals(id)) {
+				config.apply(Language.def);
+				return;
+			}
+		}
+		if (!langs.isEmpty()) {
+			var lc = langs.iterator().next();
+			lc.apply(Language.def);
+			GuiConfiguration.def.setLanguage(lc.getID());
+		} else {
+		    JOptionPane.showMessageDialog(null, "No languagedefinition found. Cannot start!", "Fatal Error", JOptionPane.ERROR_MESSAGE);
+		    System.exit(-1);
+
+		}
+	}
+
 	/**
-	 * Agrgument auswerten. /p bedeutet Programmmodus. Alles andere ist der Dateiname.
+	 * Argument auswerten. /p bedeutet Programmmodus. Alles andere ist der Dateiname.
+	 * /m keine direkten Attribut Zugriffe
+	 * /e Englisch
+	 * /d Deutsch 
 	 * @param arg
 	 */
 	private static void apply(String[] args) {
 		for (int an = 0; an < args.length; an++) {
-			System.out.println(args[an]);
 			if (args[an].startsWith("/") || args[an].startsWith("-")) {
 				for (int i = 1; i < args[an].length(); i++) {
 					switch (args[an].charAt(i)) {
-					case 'p': //directly start the program, no editor
+					case 'p': // directly start the program, no editor
 						mode = Mode.PROGRAM;
 						break;
-					case 'm': //only methods are allowed
+					case 'm': // only methods are allowed
 						allowProperties = false;
 						break;
 					case 'e':
@@ -131,7 +153,7 @@ public class Start {
 	 */
 	private static void editorStart() {
 		if (!allowProperties) {
-			LanguageManager.getInstance().lockProperties();
+			Language.def.setLockProperties(true);
 		}
 		MainWindow mainWindow = new MainWindow();
 		if (file != null) {
@@ -160,7 +182,13 @@ public class Start {
 			}
 			br.close();
 
-			AbstractProgram program = new Program(src.toString());
+			AbstractProgram program = new Program(
+				src.toString(), 
+				new EosParserFactory(), 
+				Language.def.getDefaultWindowName(), 
+				Language.def.isLockProperties(),
+				Language.def.getPredefinedVariables()
+			);
 			program.parse(path);
 			program.compile();
 			program.getMachine().skip();

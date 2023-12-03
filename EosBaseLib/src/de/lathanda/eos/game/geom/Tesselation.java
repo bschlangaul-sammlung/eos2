@@ -13,9 +13,9 @@ public interface Tesselation {
 		for (Point p : points) {
 			addVertice(p.getX(), p.getY());
 		}
-	};
+	}
 	public Collection<Triangle> getTriangles() throws TesselationFailedException;
-	public LinkedList<? extends Point> getOuterBorder() throws TesselationFailedException;;
+	public LinkedList<? extends Point> getOuterBorder() throws TesselationFailedException;
 	public static Tesselation getDefaultTesselation() {
 		return new BorderWalkTesselation();
 		//return new NoTesselationAvailable();

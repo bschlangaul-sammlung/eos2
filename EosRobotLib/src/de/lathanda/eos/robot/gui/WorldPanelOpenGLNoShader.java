@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.io.IOException;
 import java.util.Map.Entry;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
@@ -19,7 +18,6 @@ import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
-import de.lathanda.eos.base.ResourceLoader;
 import de.lathanda.eos.robot.Column;
 import de.lathanda.eos.robot.Coordinate;
 import de.lathanda.eos.robot.Cube;
@@ -27,17 +25,16 @@ import de.lathanda.eos.robot.Entrance;
 import de.lathanda.eos.robot.Robot;
 import de.lathanda.eos.robot.World;
 import de.lathanda.eos.robot.World.IntRange;
-import de.lathanda.eos.robot.geom3d.Material;
-import de.lathanda.eos.robot.geom3d.NFaceException;
-import de.lathanda.eos.robot.geom3d.ObjLoader;
+import de.lathanda.eos.robot.exceptions.RobotException;
 import de.lathanda.eos.robot.geom3d.Polyhedron;
+import static de.lathanda.eos.robot.obj.Models.*;
 
 /**
  * Grafische Darstellung der Welt.
  * 
  *
  * @author Peter (Lathanda) Schneider
- * @since 0.9.6
+ *
  */
 public class WorldPanelOpenGLNoShader extends GLCanvas
 		implements GLEventListener, MouseListener, MouseMotionListener, MouseWheelListener {
@@ -46,7 +43,7 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 	private FPSAnimator animator;
 
 	private Camera cam;
-	
+
 	private int lastMouseX, lastMouseY;
 	private int lastButton;
 	private World world;
@@ -161,24 +158,15 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 		int dY = e.getY() - lastMouseY;
 		switch (lastButton) {
 		case MouseEvent.BUTTON1: // Left
-			cam.moveCamera(
-				-(dX * cos(cam.getCameraRotationZ()) - dY * sin(cam.getCameraRotationZ())) * MOVE_SPEED_SIDE,
-				 (dX * sin(cam.getCameraRotationZ()) + dY * cos(cam.getCameraRotationZ())) * MOVE_SPEED_SIDE,
-				 0d
-			);
+			cam.moveCamera(-(dX * cos(cam.getCameraRotationZ()) - dY * sin(cam.getCameraRotationZ())) * MOVE_SPEED_SIDE,
+					(dX * sin(cam.getCameraRotationZ()) + dY * cos(cam.getCameraRotationZ())) * MOVE_SPEED_SIDE, 0d);
 			break;
 		case MouseEvent.BUTTON2: // middle
-			cam.moveCamera(
-				-dX * cos(cam.getCameraRotationZ()) * MOVE_SPEED_SIDE,
-				 dX * sin(cam.getCameraRotationZ()) * MOVE_SPEED_SIDE,
-				 dY * MOVE_SPEED_UP_DOWN
-			);
+			cam.moveCamera(-dX * cos(cam.getCameraRotationZ()) * MOVE_SPEED_SIDE,
+					dX * sin(cam.getCameraRotationZ()) * MOVE_SPEED_SIDE, dY * MOVE_SPEED_UP_DOWN);
 			break;
 		case MouseEvent.BUTTON3: // right
-			cam.rotateCamera(
-				dY * ROTATION_SPEED_UP_DOWN,
-				dX * ROTATION_SPEED_SIDE
-			);
+			cam.rotateCamera(dY * ROTATION_SPEED_UP_DOWN, dX * ROTATION_SPEED_SIDE);
 			break;
 		}
 		restrictCamera();
@@ -228,11 +216,9 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 	}
 
 	private void moveCamera(double distance) {
-		cam.moveCamera(
-			sin(cam.getCameraRotationZ()) * sin(cam.getCameraRotationX()) * distance,
-			cos(cam.getCameraRotationZ()) * sin(cam.getCameraRotationX()) * distance,
-			cos(cam.getCameraRotationX()) * distance
-		);
+		cam.moveCamera(sin(cam.getCameraRotationZ()) * sin(cam.getCameraRotationX()) * distance,
+				cos(cam.getCameraRotationZ()) * sin(cam.getCameraRotationX()) * distance,
+				cos(cam.getCameraRotationX()) * distance);
 		restrictCamera();
 	}
 
@@ -245,48 +231,23 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 	}
 
 	// rendering routines
-	static {
-		try {
-			skybox = ObjLoader.loadObj("obj/", "skybox.obj");
-			markObj = ObjLoader.loadObj("obj/", "mark.obj");
-			cubeObj = ObjLoader.loadObj("obj/", "cube.obj");
-			rockObj = ObjLoader.loadObj("obj/", "rock.obj");
-			robotObj = ObjLoader.loadObj("obj/", "robot.obj", 50000);
-			cursorObj = ObjLoader.loadObj("obj/", "cursor.obj");
-		} catch (IOException ioe) {
-			System.err.println("missing file! " + ioe.getMessage());
-			System.exit(-1);
-		} catch (NFaceException e) {
-			System.err.println("Illegal Face with "+e.getFaces()+" vertices");
-			System.exit(-1);
-		}
-	}
-
-	private static Polyhedron skybox;
-	private static Polyhedron markObj;
-	private static Polyhedron cubeObj;
-	private static Polyhedron rockObj;
-	private static Polyhedron robotObj;
-	private static Polyhedron cursorObj;
-
 	private static Color CURSOR_COLOR = new Color(1f, 1f, 0f, .5f);
 	public static double WIDTH = 1d;
 	public static double HEIGHT = 0.707117d;
 	public static double DEPTH = 1d;
-	private static final Material FLOOR_MATERIAL = new Material(ResourceLoader.loadImage("obj/stone.png"));
 
 	private void renderSkybox(GL2 gl) {
-		renderPolyhedron(skybox, Color.BLACK, gl);
+		renderPolyhedron(SKYBOX, Color.BLACK, gl);
 	}
 
 	public void renderWorld(GL2 gl) {
 		// floor
-		GLTextureBuffer floor = GLTextureBuffer.get(FLOOR_MATERIAL, gl); 
+		GLTextureBuffer floor = GLTextureBuffer.get(FLOOR_MATERIAL, gl);
 		floor.openMaterial(Color.GREEN, gl);
 		gl.glBegin(GL2.GL_QUADS);
 		gl.glNormal3f(0f, 0f, 1f);
 		IntRange rangeX = world.getxRange();
-		IntRange rangeY = world.getyRange(); 
+		IntRange rangeY = world.getyRange();
 		double left = rangeX.getMin() - 0.5d;
 		double width = rangeX.size();
 		double bottom = rangeY.getMin() - 0.5d;
@@ -330,7 +291,7 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 	private void renderCursor(GL2 gl) {
 		gl.glPushMatrix();
 		gl.glTranslated(world.getCursorX() * WIDTH, world.getCursorY() * DEPTH, world.getCursorZ() * HEIGHT);
-		renderPolyhedron(cursorObj, CURSOR_COLOR, gl);
+		renderPolyhedron(CURSOR, CURSOR_COLOR, gl);
 		gl.glPopMatrix();
 	}
 
@@ -338,7 +299,7 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 		gl.glPushMatrix();
 		gl.glTranslated(e.x * WIDTH, e.y * DEPTH, e.z * HEIGHT);
 		gl.glRotatef(e.d.getAngle(), 0f, 0f, 1f);
-		renderPolyhedron(robotObj, new Color(0.5f, 0.5f, 0.5f, 0.5f), gl);
+		renderPolyhedron(ROBOT, new Color(0.5f, 0.5f, 0.5f, 0.5f), gl);
 		gl.glPopMatrix();
 	}
 
@@ -346,26 +307,30 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 		gl.glPushMatrix();
 		gl.glTranslated(r.getX() * WIDTH, r.getY() * DEPTH, r.getZ() * HEIGHT);
 		gl.glRotatef(r.getDirection().getAngle(), 0f, 0f, 1f);
-		renderPolyhedron(robotObj, r.getRobotColor(), gl);
+		renderPolyhedron(ROBOT, r.getRobotColor().getColor(), gl);
 		gl.glPopMatrix();
 	}
 
 	private void renderColumn(Column column, GL2 gl) {
 		gl.glPushMatrix();
 		boolean doMark = true;
-		Cube[] cubes = column.getCubes();
-		for (int i = 0; i < cubes.length; i++) {
-			if (!cubes[i].isEmpty()) {
-				renderCube(cubes[i], gl);
-				doMark = true;
-			} else if (column.isMarked() && doMark) {
-				renderPolyhedron(markObj, column.getMark(), gl);
-				doMark = false;
+		Cube[] cubes;
+		try {
+			cubes = column.getCubes();
+			for (int i = 0; i < cubes.length; i++) {
+				if (!cubes[i].isEmpty()) {
+					renderCube(cubes[i], gl);
+					doMark = true;
+				} else if (column.isMarked() && doMark) {
+					renderPolyhedron(MARK, column.getMark().getColor(), gl);
+					doMark = false;
+				}
+				gl.glTranslated(0d, 0d, HEIGHT);
 			}
-			gl.glTranslated(0d, 0d, HEIGHT);
-		}
-		if (column.isMarked() && doMark) {
-			renderPolyhedron(markObj, column.getMark(), gl);
+			if (column.isMarked() && doMark) {
+				renderPolyhedron(MARK, column.getMark().getColor(), gl);
+			}
+		} catch (RobotException e) {
 		}
 		gl.glPopMatrix();
 	}
@@ -377,10 +342,10 @@ public class WorldPanelOpenGLNoShader extends GLCanvas
 		case 1: // ground
 			break;
 		case 2: // stone
-			renderPolyhedron(cubeObj, cube.getColor(), gl);
+			renderPolyhedron(CUBE, cube.getColor().getColor(), gl);
 			break;
 		case 3: // rock
-			renderPolyhedron(rockObj, cube.getColor(), gl);
+			renderPolyhedron(ROCK, cube.getColor().getColor(), gl);
 			break;
 		}
 	}

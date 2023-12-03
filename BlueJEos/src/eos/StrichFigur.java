@@ -2,7 +2,6 @@ package eos;
 
 import de.lathanda.eos.base.LineStyle;
 import de.lathanda.eos.geo.LineFigure;
-import java.awt.Color;
 
 /**
  * @author Peter Schneider
@@ -23,11 +22,11 @@ public abstract class StrichFigur extends Figur {
     	line = (LineFigure)figure;
     }
     
-    public void randfarbeSetzen(Color farbe) {
-    	line.setLineColor(farbe);
+    public void randfarbeSetzen(Farbe farbe) {
+    	line.setLineColor(farbe.getColor());
     }
-    public Color randfarbeLesen() {
-        return line.getLineColor();
+    public Farbe randfarbeLesen() {
+        return new Farbe(line.getLineColor());
     }
     public void randartSetzen(LineStyle randart) {
     	line.setLineStyle(randart);

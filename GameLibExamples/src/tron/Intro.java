@@ -1,10 +1,10 @@
 package tron;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.game.Game;
 import de.lathanda.eos.game.Sprite;
@@ -17,7 +17,7 @@ public class Intro extends Sprite {
 
 	@Override
 	public void render(Picture g) {
-		g.setLineColor(Color.BLACK);
+		g.setLineColor(MutableColor.BLACK);
 		g.setTextAlignment(Alignment.CENTER, Alignment.CENTER);
 		g.setFont(TITLE);
 		g.drawText("TRON", 0, 20);

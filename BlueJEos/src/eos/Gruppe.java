@@ -3,7 +3,6 @@ package eos;
 import de.lathanda.eos.base.FillStyle;
 import de.lathanda.eos.base.LineStyle;
 import de.lathanda.eos.geo.Group;
-import java.awt.Color;
 
 /**
  * @author Peter Schneider
@@ -24,8 +23,8 @@ public class Gruppe extends Figur {
 		group = (Group)figure;
 	}
 
-	public void randfarbeSetzen(Color farbe) {
-		group.setLineColor(farbe);
+	public void randfarbeSetzen(Farbe farbe) {
+		group.setLineColor(farbe.getColor());
 	}
 
 	public void randartSetzen(LineStyle randart) {
@@ -40,8 +39,8 @@ public class Gruppe extends Figur {
 		group.setFillStyle(fuellart);
 	}
 
-	public void fuellfarbeSetzen(Color farbe) {
-		group.setFillColor(farbe);
+	public void fuellfarbeSetzen(Farbe farbe) {
+		group.setFillColor(farbe.getColor());
 	}
 
 	public void schlucke(Figur figur) {

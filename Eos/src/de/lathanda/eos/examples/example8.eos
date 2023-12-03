@@ -1,0 +1,6 @@
+d:Dreieck
+d.eckenSetzen(- 30 , 0 , 0 , 20 , 10 , 0 )
+d.spiegeleX()
+d.spiegeleY()
+d.spiegeleX()
+d.spiegeleY()

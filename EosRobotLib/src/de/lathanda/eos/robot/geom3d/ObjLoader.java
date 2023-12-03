@@ -1,13 +1,10 @@
 package de.lathanda.eos.robot.geom3d;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.zip.ZipInputStream;
-
 import de.lathanda.eos.base.ResourceLoader;
 
 /**
@@ -20,17 +17,28 @@ import de.lathanda.eos.base.ResourceLoader;
  *
  */
 public class ObjLoader {
-	public static final Polyhedron loadObj(String path, String filename) throws IOException, NFaceException {
-		BufferedReader data = openStream(path + filename);
-		return readPolyhedron(data, path, 100);
+	public static final Polyhedron loadObj(String path, String filename) {
+		try (BufferedReader data = openStream(path + filename)) {
+			return readPolyhedron(data, path, 100);
+		} catch (Exception e) {
+			System.err.println("missing file "+path+filename);
+			System.exit(-1);
+			return null;
+		}
 	}
 
-	public static final Polyhedron loadObj(String path, String filename, int hint) throws IOException, NFaceException {
-		BufferedReader data = openStream(path + filename);
-		return readPolyhedron(data, path, hint);
+	public static final Polyhedron loadObj(String path, String filename, int hint) {
+		try (BufferedReader data = openStream(path + filename)) {
+			return readPolyhedron(data, path, hint);
+		} catch (Exception e) {
+			System.err.println("missing file "+path+filename);
+			System.exit(-1);
+			return null;
+		}
 	}
 
-	private static final Polyhedron readPolyhedron(BufferedReader data, String path, int hint) throws IOException, NFaceException {
+	private static final Polyhedron readPolyhedron(BufferedReader data, String path, int hint)
+			throws IOException, NFaceException {
 		final Polyhedron ph = new Polyhedron();
 		final Hashtable<String, Material> matIndex = new Hashtable<>();
 		final ArrayList<Vertice> v = new ArrayList<>(hint);
@@ -80,7 +88,7 @@ public class ObjLoader {
 					mat = new Material();
 					matIndex.put(line.substring(7).trim(), mat);
 				} else if (line.startsWith("map_Kd ")) {
-					mat.setImage(ResourceLoader.loadImage(path + line.substring(6).trim()));
+					mat.setImage(ResourceLoader.loadResourceImage(path + line.substring(6).trim()));
 				} else if (line.startsWith("Ka ")) {
 					// Ka spectral color
 					mat.setKA(readFloat(line, 3));
@@ -153,16 +161,6 @@ public class ObjLoader {
 	}
 
 	private static final BufferedReader openStream(String filename) throws IOException {
-		BufferedReader br = null;
-		if (filename.endsWith(".zip")) {
-			ZipInputStream zis = new ZipInputStream(
-					new BufferedInputStream(ResourceLoader.getResourceAsStream(filename)));
-			zis.getNextEntry();
-			br = new BufferedReader(new InputStreamReader(zis));
-		} else {
-			br = new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(filename)));
-		}
-
-		return br;
+		return new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsStream(filename)));
 	}
 }

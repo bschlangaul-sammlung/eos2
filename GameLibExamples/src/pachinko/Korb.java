@@ -1,8 +1,7 @@
 package pachinko;
 
-import java.awt.Color;
-
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.game.Game;
 import de.lathanda.eos.game.Sprite;
 import de.lathanda.eos.game.geom.Rectangle;
@@ -19,9 +18,9 @@ public class Korb extends Sprite {
 
 	@Override
 	public void render(de.lathanda.eos.base.Picture p) {
-		p.setFillColor(Color.GREEN);
+		p.setFillColor(MutableColor.GREEN);
 		p.drawShape(shape);
-		p.setLineColor(Color.BLUE);
+		p.setLineColor(MutableColor.BLUE);
 		p.setTextAlignment(Alignment.CENTER, Alignment.CENTER);
 		p.drawString(""+punkte, shape);
 	}

@@ -1,37 +1,35 @@
 package de.lathanda.eos.gui;
 
-import de.lathanda.eos.base.ResourceLoader;
-import de.lathanda.eos.common.gui.Messages;
-import de.lathanda.eos.spi.LanguageManager;
-import de.lathanda.eos.util.GuiToolkit;
+import de.lathanda.eos.base.util.GuiToolkit;
+import de.lathanda.eos.config.HelpPage;
+import de.lathanda.eos.config.Language;
 
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
-
+import java.util.TreeMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
+import javax.swing.ToolTipManager;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.html.HTMLEditorKit;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
+import static de.lathanda.eos.base.icons.Icons.*;
 
 /**
  * Hilfeseiten
@@ -44,7 +42,7 @@ public class Help extends JFrame {
 	 * Hilfefenster Singelton
 	 */
 	private static Help help = null;
-
+	
 	/**
 	 * Hilfefenster anzeigen.
 	 */
@@ -57,7 +55,7 @@ public class Help extends JFrame {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		help.setBounds((int) (screen.width * 0.5), 0, (int) (screen.height * 0.9), (int) (screen.width * 0.5));
 		help.setTitle(Messages.getString("Help.Title"));
-		help.setIconImage(ResourceLoader.loadImage("icons/eos.png"));
+		help.setIconImage(LOGO);
 		help.setVisible(true);
 		help.resetDivider();
 	}
@@ -69,7 +67,7 @@ public class Help extends JFrame {
 	/**
 	 * Inhaltsverzeichnis
 	 */
-	private static DefaultMutableTreeNode topics;
+	private static DefaultMutableTreeNode topics = new DefaultMutableTreeNode();
 	/**
 	 * Standard Htmlseite.
 	 */
@@ -78,105 +76,34 @@ public class Help extends JFrame {
 	 * Klassenkonstruktor lädt die Hilfe.
 	 */
 	static {
+		idHelpMap = new TreeMap<>();
 		createTopics();
 	}
-
+	private static TreeMap<String, HelpPage> idHelpMap; 
 	/**
 	 * Hilfeseiten vorbereiten.
 	 */
 	private static void createTopics() {
-		InputStream xmlData = null;
-		try {
-			xmlData = LanguageManager.getInstance().getHelpXml();
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(xmlData);
-			NodeList xmlchildren = doc.getChildNodes();
-			for (int i = 0; i < xmlchildren.getLength(); i++) {
-				Node xmlchild = xmlchildren.item(i);
-				if (xmlchild.getNodeName().equals("help")) {
-					topics = new DefaultMutableTreeNode(new TreeEntry(xmlchild));
-					fillTree(topics, xmlchild);
-					break;
-				}
-			}
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), Messages.getString("InternalError.Title"),
-					JOptionPane.ERROR_MESSAGE);
-		} finally {
-			ResourceLoader.closeQuietly(xmlData);
-		}
-
-	}
-
-	/**
-	 * Inhalteverzeichnis ausfüllen
-	 * 
-	 * @param treenode
-	 * @param xmlnode
-	 */
-	private static void fillTree(DefaultMutableTreeNode treenode, Node xmlnode) {
-		NodeList xmlchildren = xmlnode.getChildNodes();
-		for (int i = 0; i < xmlchildren.getLength(); i++) {
-			Node xmlchild = xmlchildren.item(i);
-			if (xmlchild.getNodeName().equals("node")) {
-				TreeEntry treeEntry = new TreeEntry(xmlchild);
-				if (defaultHtml == null || defaultHtml.isEmpty()) {
-					defaultHtml = treeEntry.getHtmlfile();
-				}
-				DefaultMutableTreeNode treechild = new DefaultMutableTreeNode(treeEntry);
-				treenode.add(treechild);
-				fillTree(treechild, xmlchild);
-			}
+		var helppages = Language.def.getHelpData();
+		for (var helppage : helppages) {
+			DefaultMutableTreeNode tree = new DefaultMutableTreeNode(helppage);
+			topics.add(tree);
+			addHelpPage(helppage, tree);
 		}
 	}
 
-	/**
-	 * Eintrag im Inhaltsverzeichnis. Jeder Eintrag entspricht einer Hilfeseite.
-	 * 
-	 * @author Peter (Lathanda) Schneider
-	 *
-	 */
-	private static class TreeEntry {
-		/**
-		 * Text im Inhaltsverzeichnis.
-		 */
-		private final String title;
-		/**
-		 * Hilfeseite.
-		 */
-		private final String htmlfile;
-
-		/**
-		 * Hilfeseite aus XML erzeugen.
-		 * 
-		 * @param xmlnode
-		 */
-		private TreeEntry(Node xmlnode) {
-			Node item = xmlnode.getAttributes().getNamedItem("title");
-			if (item != null) {
-				title = item.getNodeValue();
-			} else {
-				title = "?";
-			}
-			item = xmlnode.getAttributes().getNamedItem("html");
-			if (item != null) {
-				htmlfile = item.getNodeValue();
-			} else {
-				htmlfile = "";
-			}
+	private static void addHelpPage(HelpPage helppage, DefaultMutableTreeNode treenode) {
+		idHelpMap.put(helppage.getId(), helppage);
+		for(HelpPage hp:helppage.getChildren()) {
+			DefaultMutableTreeNode child = new DefaultMutableTreeNode(hp);
+			if (defaultHtml == null || defaultHtml.isEmpty()) {
+				defaultHtml = hp.getHtml();
+			}			
+			treenode.add(child);
+			addHelpPage(hp, child);						
 		}
-
-		@Override
-		public String toString() {
-			return title;
-		}
-
-		public String getHtmlfile() {
-			return htmlfile;
-		}
-
 	}
+
 
 	/**
 	 * Html Hilfeklasse
@@ -190,11 +117,11 @@ public class Help extends JFrame {
 		initComponents();
 		treeTopic.setRootVisible(false);
 		treeTopic.setFont(GuiToolkit.createFont(Font.SANS_SERIF, Font.PLAIN, 10));
+		treeTopic.setRootVisible(false);
 		txtHelp.setEditorKit(kit);
 		txtHelp.setFont(GuiToolkit.createFont(Font.SERIF, Font.PLAIN, 10));
 		javax.swing.text.Document doc = kit.createDefaultDocument();
 		txtHelp.setDocument(doc);
-		setHtml(defaultHtml);
 	}
 
 	/**
@@ -208,24 +135,34 @@ public class Help extends JFrame {
 		scrollHelp = new javax.swing.JScrollPane();
 		txtHelp = new javax.swing.JTextPane();
 
-		helpSplit.setResizeWeight(1);
+		helpSplit.setResizeWeight(0);
 
 		treeTopic.addTreeSelectionListener(evt -> treeTopicValueChanged(evt));
+		ToolTipManager.sharedInstance().registerComponent(treeTopic);
+		treeTopic.setCellRenderer(new HelpTreeCellRenderer());
 		expandAll(treeTopic);
 		scrollTopic.setViewportView(treeTopic);
 
-		helpSplit.setRightComponent(scrollTopic);
+		helpSplit.setLeftComponent(scrollTopic);
 
 		txtHelp.setEditable(false);
 		txtHelp.setFont(GuiToolkit.createFont(Font.SANS_SERIF, Font.PLAIN, 10));
 		txtHelp.addHyperlinkListener(e -> hyperlinkUpdate(e));
 		scrollHelp.setViewportView(txtHelp);
 
-		helpSplit.setLeftComponent(scrollHelp);
+		helpSplit.setRightComponent(scrollHelp);
 
 		helpSplit.setPreferredSize(GuiToolkit.scaledDimension(768, 517));
 		getContentPane().add(helpSplit);
 		pack();
+		helpSplit.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent ce) {
+               	helpSplit.removeComponentListener(this);
+              	helpSplit.setDividerLocation(0.2);
+            }
+        });
+        
 	}
 
 	/**
@@ -262,15 +199,35 @@ public class Help extends JFrame {
 		try {
 			if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 				URL target = e.getURL();
-				if (target.getProtocol().equals("file")) {
+				String protocol = "";
+				String newpage = "";
+				if (target != null) {
+					protocol = target.getProtocol();
+					newpage = e.getDescription();
+				} else if (e.getDescription() != null) {
+					String[] url = e.getDescription().split(":");
+					protocol = url[0];
+					newpage =  url[1];
+				}
+				switch (protocol) {
+				case "file":
 					treeTopic.clearSelection();
 					txtHelp.setPage(target);
-				} else if (target.getProtocol().equals("jar")){
+					break;
+				case "jar":
 					treeTopic.clearSelection();
 					txtHelp.setPage(target);
-				}else {
+					break;
+				case "help":					
+					treeTopic.clearSelection();
+					if (idHelpMap.containsKey(newpage)) {
+						treeTopic.clearSelection();
+						txtHelp.setText(idHelpMap.get(newpage).getHtml());
+					}
+					break;
+				default:
 					URI uri = target.toURI();
-					Desktop.getDesktop().browse(uri);
+					Desktop.getDesktop().browse(uri);					
 				}
 			}
 		} catch (IOException | URISyntaxException ioe) {
@@ -288,31 +245,44 @@ public class Help extends JFrame {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) treeTopic.getLastSelectedPathComponent();
 		if (node == null)
 			return;
-		TreeEntry entry = (TreeEntry) node.getUserObject();
-		setHtml(entry.getHtmlfile());
+		HelpPage entry = (HelpPage) node.getUserObject();
+		txtHelp.setText(entry.getHtml());
 	}
 
-	/**
-	 * Neue Hilfeseite anzeigen. Hier können auch externe Seiten angegeben werden.
-	 * Bei externen Seiten wird die Auswahl im Inhaltsverzeichnis gelöscht.
-	 * 
-	 * @param filename
-	 */
-	private void setHtml(String filename) {
-		if (filename.equals(""))
-			return;
-		try {
-			URL url = ClassLoader.getSystemClassLoader().getResource(filename);
-			txtHelp.setPage(url);
-		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, ioe.getLocalizedMessage(), Messages.getString("Info.Error.Title"),
-					JOptionPane.ERROR_MESSAGE);
-		}
-	}
 
 	private javax.swing.JSplitPane helpSplit;
 	private javax.swing.JScrollPane scrollHelp;
 	private javax.swing.JScrollPane scrollTopic;
 	private javax.swing.JTree treeTopic;
 	private javax.swing.JTextPane txtHelp;
+	
+	class HelpTreeCellRenderer extends DefaultTreeCellRenderer {
+
+		private static final long serialVersionUID = -7681923490490608654L;
+
+	    public HelpTreeCellRenderer() {
+	    }
+
+	    public Component getTreeCellRendererComponent(
+	                        JTree tree,
+	                        Object value,
+	                        boolean sel,
+	                        boolean expanded,
+	                        boolean leaf,
+	                        int row,
+	                        boolean hasFocus) {
+
+	        super.getTreeCellRendererComponent(
+	                        tree, value, sel,
+	                        expanded, leaf, row,
+	                        hasFocus);
+	        if (value instanceof DefaultMutableTreeNode && ((DefaultMutableTreeNode)value).getUserObject() instanceof HelpPage) {
+	        	HelpPage hp = (HelpPage)((DefaultMutableTreeNode)value).getUserObject();
+	        	this.setText(hp.getTitle());
+	        	this.setToolTipText(hp.getTooltip());
+	        }
+	        return this;
+	    }
+	}
+
 }

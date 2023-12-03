@@ -1,10 +1,10 @@
 package tron;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.text.MessageFormat;
 
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.game.Game;
 import de.lathanda.eos.game.Sprite;
@@ -28,10 +28,10 @@ public class Level extends Sprite {
 	public void init(Game game) {
 		game.addSprite(p1);
 		game.addSprite(p2);
-		game.addSprite(new Block(Color.BLACK, 0, -99, 300, 2));
-		game.addSprite(new Block(Color.BLACK, 0,  99, 300, 2));
-		game.addSprite(new Block(Color.BLACK, -149, 0, 2, 200));
-		game.addSprite(new Block(Color.BLACK,  149, 0, 2, 200));		
+		game.addSprite(new Block(MutableColor.BLACK, 0, -99, 300, 2));
+		game.addSprite(new Block(MutableColor.BLACK, 0,  99, 300, 2));
+		game.addSprite(new Block(MutableColor.BLACK, -149, 0, 2, 200));
+		game.addSprite(new Block(MutableColor.BLACK,  149, 0, 2, 200));		
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class Level extends Sprite {
 		if (countDown > 0) {
 			switch (countDown % 3) {
 			case 0:
-				g.setLineColor(Color.RED);
+				g.setLineColor(MutableColor.RED);
 				break;
 			case 1:
-				g.setLineColor(Color.GRAY);
+				g.setLineColor(MutableColor.GRAY);
 				break;
 			case 2:
-				g.setLineColor(Color.YELLOW);
+				g.setLineColor(MutableColor.YELLOW);
 				break;
 			}
 			g.drawText(MessageFormat.format(

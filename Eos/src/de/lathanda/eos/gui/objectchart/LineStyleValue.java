@@ -3,6 +3,7 @@ package de.lathanda.eos.gui.objectchart;
 import de.lathanda.eos.base.LineStyle;
 import de.lathanda.eos.gui.diagram.Unit;
 import de.lathanda.eos.gui.diagram.Drawing;
+
 /**
  * Zeichnet Symbol für die Linienart.
  *
@@ -11,7 +12,7 @@ import de.lathanda.eos.gui.diagram.Drawing;
  */
 public class LineStyleValue extends Unit {
 	private LineStyle lineStyle;
-	
+
 	public LineStyleValue(LineStyle lineStyle) {
 		super();
 		this.lineStyle = lineStyle;
@@ -24,21 +25,21 @@ public class LineStyleValue extends Unit {
 			d.fillRect(0, 3.75f, 8f, 0.5f);
 			break;
 		case INVISIBLE:
-			//nothing
+			// nothing
 			break;
 		case DOTTED:
-			for(int i = 0; i < 8; i += 2) {
+			for (int i = 0; i < 8; i += 2) {
 				d.fillRect(i, 3.75f, 0.5f, 0.5f);
 			}
 			break;
 		case DASHED_DOTTED:
-			for(int i = 0; i < 8; i += 4) {
+			for (int i = 0; i < 8; i += 4) {
 				d.fillRect(i, 3.75f, 0.5f, 0.5f);
-				d.fillRect(i+1f, 3.75f, 2.5f, 0.5f);
+				d.fillRect(i + 1f, 3.75f, 2.5f, 0.5f);
 			}
 			break;
 		case DASHED:
-			for(int i = 0; i < 8; i += 3) {
+			for (int i = 0; i < 8; i += 3) {
 				d.fillRect(i, 3.75f, 0.5f, 0.5f);
 				d.fillRect(i, 3.75f, 2f, 0.5f);
 			}

@@ -2,8 +2,6 @@ package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.layout.BalancePoint;
 
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.layout.Transform;
@@ -56,10 +54,5 @@ public class Square extends FilledFigure {
         bound.add(t.transform(- side / 2, - side / 2));
         bound.add(t.transform(+ side / 2, - side / 2));       
         return bound;
-    }    
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	attributes.add(new Attribut("side", side));
-	}     
+    }      
 }

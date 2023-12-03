@@ -36,7 +36,7 @@ public class Dot extends Shape {
 	 * @return Punktumriss
 	 */
         @Override
-	public Types getOutlineType() {
+	protected Types getOutlineType() {
 		return Types.DOT;
 	}
 

@@ -1,0 +1,5 @@
+kasten:Rechteck
+kasten.links = 0
+kasten.rechts = 40
+kasten.oben = 60
+kasten.unten = -20

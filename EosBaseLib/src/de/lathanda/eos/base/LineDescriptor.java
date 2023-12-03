@@ -1,6 +1,5 @@
 package de.lathanda.eos.base;
 
-import java.awt.Color;
 
 /**
  * Linien-/Randeigenschaften.
@@ -8,14 +7,14 @@ import java.awt.Color;
  * @author Peter (Lathanda) Schneider
  */
 public class LineDescriptor {
-	public static final LineDescriptor NONE = new LineDescriptor(Color.BLACK, LineStyle.INVISIBLE, 0);
-    private Color color;
+	public static final LineDescriptor NONE = new LineDescriptor(MutableColor.BLACK, LineStyle.INVISIBLE, 0);
+    private MutableColor color;
     private LineStyle type;
     private double thickness;
     public LineDescriptor() {
-        this(Color.BLACK, LineStyle.SOLID, 0.25f);
+        this(MutableColor.BLACK, LineStyle.SOLID, 0.25f);
     }
-    public LineDescriptor(Color color, LineStyle type, double thickness) {
+    public LineDescriptor(MutableColor color, LineStyle type, double thickness) {
         this.color = color;
         this.type = type;
         this.thickness = thickness;
@@ -25,10 +24,10 @@ public class LineDescriptor {
         this.type = org.type;
         this.thickness = org.thickness;
     }
-    public Color getColor() {
+    public MutableColor getColor() {
         return color;
     }
-    public void setColor(Color c) {
+    public void setColor(MutableColor c) {
         this.color = c;
     }
     public LineStyle getLineStyle() {

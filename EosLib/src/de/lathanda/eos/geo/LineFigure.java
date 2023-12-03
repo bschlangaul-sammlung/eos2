@@ -2,9 +2,8 @@ package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.LineDescriptor;
 import de.lathanda.eos.base.LineStyle;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
-import java.awt.Color;
-import java.util.LinkedList;
 
 /**
  * Basisklasse für alle Figuren mit Rand.
@@ -29,12 +28,12 @@ public abstract class LineFigure extends Figure {
         p.setLine(line);
     }
 
-    public void setLineColor(Color color) {
+    public void setLineColor(MutableColor color) {
         line.setColor(color);
         fireDataChanged();
     }
 
-    public Color getLineColor() {
+    public MutableColor getLineColor() {
         return line.getColor();
     }
 
@@ -58,11 +57,4 @@ public abstract class LineFigure extends Figure {
     public LineDescriptor getLineDescriptor() {
         return line;
     }
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);    	
-        attributes.add(new Attribut("bordercolor", line.getColor()));
-        attributes.add(new Attribut("borderstyle", line.getLineStyle()));
-        attributes.add(new Attribut("borderwidth", line.getDrawWidth()));
-	} 
 }

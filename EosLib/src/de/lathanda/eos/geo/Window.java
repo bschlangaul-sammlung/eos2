@@ -1,15 +1,14 @@
 package de.lathanda.eos.geo;
 
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
-import de.lathanda.eos.base.Readout;
 import de.lathanda.eos.base.event.CleanupListener;
 import de.lathanda.eos.base.math.Point;
-import de.lathanda.eos.gui.ViewFrame;
-import de.lathanda.eos.gui.event.CursorListener;
-import de.lathanda.eos.gui.event.FigureListener;
-import de.lathanda.eos.util.ConcurrentLinkedList;
+import de.lathanda.eos.base.util.ConcurrentLinkedList;
+import de.lathanda.eos.geo.gui.ViewFrame;
+import de.lathanda.eos.geo.gui.event.CursorListener;
+import de.lathanda.eos.geo.gui.event.FigureListener;
 
-import java.awt.Color;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.LinkedList;
@@ -19,7 +18,7 @@ import java.util.LinkedList;
  *
  * @author Peter (Lathanda) Schneider
  */
-public class Window implements FigureGroup, CleanupListener, Readout, CursorListener, ComponentListener  {
+public class Window implements FigureGroup, CleanupListener, CursorListener, ComponentListener  {
     ViewFrame vf;
     ChangeMultiCaster cmc;
     protected ConcurrentLinkedList<Figure> members;
@@ -73,20 +72,20 @@ public class Window implements FigureGroup, CleanupListener, Readout, CursorList
         cmc.fireDataChanged();
     }
 
-    public void setGridColor(Color color) {
+    public void setGridColor(MutableColor color) {
         vf.setGridColor(color);
         fireDataChanged();
     }
 
-    public Color getGridColor() {
+    public MutableColor getGridColor() {
         return vf.getGridColor();
     }
 
-    public void setBackgroundColor(Color color) {
+    public void setBackgroundColor(MutableColor color) {
         vf.setBackgroundColor(color);
     }
 
-    public Color getBackgroundColor() {
+    public MutableColor getBackgroundColor() {
         return vf.getBackgroundColor();
     }
 
@@ -187,20 +186,6 @@ public class Window implements FigureGroup, CleanupListener, Readout, CursorList
         members.clear();
         members = null;
     }
-
-	@Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-        attributes.add(new Attribut("gridcolor", getGridColor()));
-        attributes.add(new Attribut("height", getHeight()));
-        attributes.add(new Attribut("width", getWidth()));
-        attributes.add(new Attribut("top", getTop()));
-        attributes.add(new Attribut("left", getLeft()));
-        attributes.add(new Attribut("title", getTitle()));
-        attributes.add(new Attribut("backcolor", getBackgroundColor()));
-        attributes.add(new Attribut("gridwidth", getGridWidth()));
-        attributes.add(new Attribut("gridvisible", getGridVisible()));	
-	}
-
 
 	public boolean isCursorClick() {
 		if (cursorClick) {

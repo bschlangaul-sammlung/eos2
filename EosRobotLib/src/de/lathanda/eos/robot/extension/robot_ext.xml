@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension id="eos2.robot" extends="eos2"> 
+    <text lang = "de">
+        <label>Robotererweiterung</label>        
+    	<menuitem id="eos2.robot" pid="" label="Roboter"/>
+        <menuitem id="1" pid="eos2.robot" label="Welteditor" action="de.lathanda.eos.robot.gui.ShowWorldEditor"/>
+        <class id="robot" scan="roboter" show="true">
+            <label>Roboter</label>
+            <tooltip>Ein Roboter. Dieser ist ohne Welt nutzlos.</tooltip>
+            <property id="x">
+                <label>x</label>
+                <tooltip>x-Koordinate des Roboters.</tooltip>
+            </property>                  
+            <property id="y">
+                <label>y</label>
+                <tooltip>y-Koordinate des Roboters.</tooltip>
+            </property>                  
+            <property id="z">
+                <label>z</label>
+                <tooltip>z-Koordinate des Roboters.</tooltip>
+            </property>  
+            <property id="robotcolor">
+                <label>roboterfarbe</label>
+                <tooltip>Farbe des Roboters.</tooltip>
+            </property>    
+            <property id="direction">
+                <label>richtung</label>
+                <tooltip>Blickrichtung des Roboter.</tooltip>
+            </property>    
+            <property id="stonecolor">
+                <label>steinfarbe</label>
+                <tooltip>Farbe für neue Steine.</tooltip>
+            </property>                            
+            <method id="1" scan="aufheben">
+                <label>aufheben</label>
+                <tooltip>Der Roboter hebt einen Stein auf.</tooltip>
+            </method>
+            <method id="2" scan="aufheben">
+                <label>aufheben</label>
+                <parameter name="anzahl"/>                                                        
+                <tooltip>Der Roboter hebt anzahl Steine auf.</tooltip>
+            </method>
+            <method id="3" scan="roboterfarbelesen">
+                <label>roboterFarbeLesen</label>
+                <tooltip>Setzt die Farbe des Roboters.</tooltip>
+            </method>
+            <method id="4" scan="roboterfarbesetzen">
+                <label>roboterFarbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Farbe des Roboters.</tooltip>
+            </method>
+            <method id="5" scan="fliegen">
+                <label>fliegen</label>
+                <tooltip>Der Roboter fliegt nach vorne.</tooltip>
+            </method>
+            <method id="6" scan="hinlegen">
+                <label>hinlegen</label>
+                <tooltip>Der Roboter legt einen Stein hin.</tooltip>
+            </method>
+            <method id="7" scan="hochfliegen">
+                <label>hochFliegen</label>
+                <tooltip>Der Roboter fliegt nach oben.</tooltip>
+            </method>
+            <method id="8" scan="istfrei">
+                <label>istFrei</label>
+                <tooltip>Prüft ob vorwärts fliegen möglich ist.</tooltip>
+            </method>
+            <method id="9" scan="isthindernis">
+                <label>istHindernis</label>
+                <tooltip>Prüft ob vor dem Roboter ein Hindernis ist.</tooltip>
+            </method>
+            <method id="10" scan="isthintenfrei">
+                <label>istHintenFrei</label>
+                <tooltip>Prüft ob rückwärts fliegen möglich ist.</tooltip>
+            </method>
+            <method id="11" scan="isthintenhindernis">
+                <label>istHintenHindernis</label>
+                <tooltip>Prüft ob hinter dem Roboter ein Hindernis ist.</tooltip>
+            </method>
+            <method id="12" scan="istlinksfrei">
+                <label>istLinksFrei</label>
+                <tooltip>Prüft ob nach links fliegen möglich ist.</tooltip>
+            </method>
+            <method id="13" scan="istlinkshindernis">
+                <label>istLinksHindernis</label>
+                <tooltip>Prüft, ob links vom Roboter ein Hindernis ist.</tooltip>
+            </method>
+            <method id="14" scan="istmarke">
+                <label>istMarke</label>
+                <tooltip>Prüft ob der Roboter in einer Marke steht.</tooltip>
+            </method>
+            <method id="15" scan="istmarke">
+                <label>istMarke</label>
+                <parameter name="farbe"/>            
+                <tooltip>Prüft ob der Roboter in einer Marke in dieser Farbe steht.</tooltip>
+            </method>
+            <method id="16" scan="istnorden">
+                <label>istNorden</label>
+                <tooltip>Prüft ob der Roboter nach Norden blickt.</tooltip>
+            </method>
+            <method id="17" scan="istobenfrei">
+                <label>istObenFrei</label>
+                <tooltip>Prüft ob nach oben fliegen möglich ist.</tooltip>
+            </method>
+            <method id="18" scan="istosten">
+                <label>istOsten</label>
+                <tooltip>Prüft ob der Roboter nach Osten blickt.</tooltip>
+            </method>
+            <method id="19" scan="istrechtsfrei">
+                <label>istRechtsFrei</label>
+                <tooltip>Prüft ob nach rechts fliegen möglich ist.</tooltip>
+            </method>
+            <method id="20" scan="istrechtshindernis">
+                <label>istRechtsHindernis</label>
+                <tooltip>Prüft, ob rechts vom Roboter ein Hindernis ist.</tooltip>
+            </method>
+            <method id="21" scan="iststein">
+                <label>istStein</label>
+                <tooltip>Prüft ob das Feld vor dem Roboter mindestens einen Stein enthält.</tooltip>
+            </method>
+            <method id="22" scan="iststein">
+                <label>istStein</label>
+                <parameter name="anzahl"/>            
+                <tooltip>Prüft ob das Feld vor dem Roboter genau anzahl Steine enthält.</tooltip>
+            </method>
+            <method id="23" scan="istsüden">
+                <label>istSüden</label>
+                <tooltip>Prüft ob der Roboter nach Süden blickt.</tooltip>
+            </method>
+            <method id="24" scan="istuntenfrei">
+                <label>istUntenFrei</label>
+                <tooltip>Prüft ob nach unten fliegen möglich ist.</tooltip>
+            </method>
+            <method id="25" scan="istwesten">
+                <label>istWesten</label>
+                <tooltip>Prüft ob der Roboter nach Westen blickt.</tooltip>
+            </method>
+            <method id="26" scan="linksdrehen">
+                <label>linksdrehen</label>
+                <tooltip>Der Roboter dreht sich nach links.</tooltip>
+            </method>
+            <method id="27" scan="linksfliegen">
+                <label>linksFliegen</label>
+                <tooltip>Roboter fliegt nach links.</tooltip>
+            </method>
+            <method id="28" scan="markelöschen">
+                <label>markeLöschen</label>
+                <tooltip>Löscht die Marke vom Feld in dem der Roboter steht.</tooltip>
+            </method>
+            <method id="29" scan="markesetzen">
+                <label>markeSetzen</label>
+                <tooltip>Markiert das Feld in dem der Roboter steht.</tooltip>
+            </method>
+            <method id="30" scan="markesetzen">
+                <label>markeSetzen</label>
+                <parameter name="farbe"/>            
+                <tooltip>Markiert das Feld in dem der Roboter steht mit einer Marke in dieser Farbe.</tooltip>
+            </method>
+            <method id="31" scan="rechtsdrehen">
+                <label>rechtsdrehen</label>
+                <tooltip>Der Roboter dreht sich nach rechts.</tooltip>
+            </method>
+            <method id="32" scan="rechtsfliegen">
+                <label>rechtsFliegen</label>
+                <tooltip>Der Roboter fliegt nach rechts.</tooltip>
+            </method>
+            <method id="33" scan="runterfliegen">
+                <label>runterFliegen</label>
+                <tooltip>Der Roboter fliegt nach unten. </tooltip>
+            </method>
+            <method id="34" scan="schritt">
+                <label>schritt</label>
+                <tooltip>Der Roboter macht einen Schritt.</tooltip>
+            </method>
+            <method id="35" scan="schritt">
+                <label>schritt</label>
+                <parameter name="anzahl"/>                                            
+                <tooltip>Der Roboter macht anzahl Schritte.</tooltip>
+            </method>
+            <method id="36" scan="schrittlinks">
+                <label>schrittLinks</label>
+                <tooltip>Der Roboter macht einen Seitwärtsschritt nach links.</tooltip>
+            </method>
+            <method id="37" scan="schrittrechts">
+                <label>schrittRechts</label>
+                <tooltip>Der Roboter macht einen Seitwärtsschritt nach rechts.</tooltip>
+            </method>
+            <method id="38" scan="schrittzurück">
+                <label>schrittZurück</label>
+                <tooltip>Der Roboter macht einen Schritt rückwärts.</tooltip>
+            </method>
+            <method id="39" scan="steinentfernen">
+                <label>steinEntfernen</label>
+                <parameter name="n"/>                                            
+                <tooltip>Der Roboter entfernt einen Stein bei seinen Füssen + n.</tooltip>
+            </method>
+            <method id="40" scan="steinfarbe">
+                <label>steinfarbe</label>
+                <tooltip>Der Roboter schaut sich den obersten Stein vor ihm an.</tooltip>
+            </method>
+            <method id="41" scan="steinfarbesetzen">
+                <label>steinfarbeSetzen</label>
+                <parameter name="farbe"/>                                                        
+                <tooltip>Ändert die Farbe die neue Steine haben.</tooltip>
+            </method>
+            <method id="42" scan="steinsetzen">
+                <label>steinSetzen</label>
+                <parameter name="n"/>                                            
+                <tooltip>Der Roboter setzt einen Stein bei seinen Füssen + n.</tooltip>
+            </method>                           
+            <method id="43" scan="umdrehen">
+                <label>umdrehen</label>
+                <tooltip>Der Roboter dreht sich um.</tooltip>
+            </method>
+            <method id="44" scan="zurückfliegen">
+                <label>zurückFliegen</label>
+                <tooltip>Der Roboter fliegt rückwärts.</tooltip>
+            </method>
+        </class>   
+        <class id="world" scan="welt" show="true">
+            <label>Welt</label>
+            <tooltip>Eine Welt für Roboter.</tooltip>      
+            <property id="robots">
+                <label>anzahlRoboter</label>
+                <tooltip>Anzahl der Roboter.</tooltip>
+            </property>    
+            <property id="entrances">
+                <label>ungenutzeEingänge</label>
+                <tooltip>Anzahl der ungenutzten Eingänge für neue Roboter.</tooltip>
+            </property>  
+            <method id="1" scan="betreten">
+                <label>betreten</label>
+                <parameter name="roboter"/>                                            
+                <tooltip>Der Roboter betritt die Welt. </tooltip>
+            </method>
+            <method id="2" scan="laden">
+                <label>laden</label>
+                <parameter name="dateiname"/>                                                        
+                <tooltip>Lädt die Welt die vorher mit dem Welteditor erstellt wurde.</tooltip>
+            </method>
+            <method id="3" scan="steinaufheben">
+                <label>steinAufheben</label>
+                <parameter name="x"/>                                            
+                <parameter name="y"/>                                            
+                <tooltip>Hebt den obersten Stein des Feldes auf.</tooltip>
+            </method>
+            <method id="4" scan="steinentfernen">
+                <label>steinEntfernen</label>
+                <parameter name="x"/>                                            
+                <parameter name="y"/>                                            
+                <parameter name="z"/>                                            
+                <tooltip>Entfernt einen Stein von der Position.</tooltip>
+            </method>
+            <method id="5" scan="steinfarbesetzen">
+                <label>steinFarbeSetzen</label>
+                <parameter name="farbe"/>                                            
+                <tooltip>Setzt die Farbe, welche neue Steine haben werden.</tooltip>
+            </method>
+            <method id="6" scan="steinhinlegen">
+                <label>steinHinlegen</label>
+                <parameter name="x"/>                                            
+                <parameter name="y"/>                                            
+                <tooltip>Legt einen Stein auf dem Feld ab.</tooltip>
+            </method>
+            <method id="7" scan="steinsetzen">
+                <label>steinSetzen</label>
+                <parameter name="x"/>                                            
+                <parameter name="y"/>                                            
+                <parameter name="z"/>                                            
+                <tooltip>Setzt einen Stein in die Welt.</tooltip>
+            </method>
+            <method id="8" scan="ziegelverstreuen">
+                <label>ziegelVerstreuen</label>
+                <parameter name="links"/>                                            
+                <parameter name="oben"/>                                            
+                <parameter name="rechts"/>                                            
+                <parameter name="unten"/>                                            
+                <parameter name="dichte"/>                                            
+                <tooltip>Verstreut innerhalb des Rechtecks zufällige Ziegel.</tooltip>
+            </method>
+        </class>
+    </text>
+</extension>   

@@ -1,0 +1,9 @@
+k:Kreis
+wenn k.x < 10 dann
+  k.verschieben(1,2)
+*wenn
+wenn k.x < 100 dann
+  k.verschieben(1, 0)
+sonst
+  k.verschieben(-1,0)
+*wenn

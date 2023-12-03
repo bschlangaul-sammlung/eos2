@@ -2,7 +2,6 @@ package eos;
 
 import de.lathanda.eos.base.FillStyle;
 import de.lathanda.eos.geo.FilledFigure;
-import java.awt.Color;
 
 /**
  * @author Peter Schneider
@@ -31,11 +30,11 @@ public abstract class GefuellteFigur extends StrichFigur {
 		return filled.getFillStyle();
 	}
 
-	public void fuellfarbeSetzen(Color farbe) {
-		filled.setFillColor(farbe);
+	public void fuellfarbeSetzen(Farbe farbe) {
+		filled.setFillColor(farbe.getColor());
 	}
 
-	public Color fuellfarbeLesen() {
-		return filled.getFillColor();
+	public Farbe fuellfarbeLesen() {
+		return new Farbe(filled.getFillColor());
 	}
 }

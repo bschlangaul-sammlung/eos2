@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
-import de.lathanda.eos.common.gui.BackgroundCompiler;
+import de.lathanda.eos.gui.BackgroundCompiler;
 
 /**
  * Basisklasse für alle Diagramme.
@@ -17,38 +17,41 @@ public abstract class Diagram extends JPanel {
 	 * Fenstertitel
 	 */
 	private final String title;
+
 	/**
 	 * Erzeugt eine neue Diagrammkomponente
 	 * @param title
 	 */
-    public Diagram(String title) {
-        this.title = title;
-        setBackground(Color.WHITE);
-    }
+	public Diagram(String title) {
+		this.title = title;
+		setBackground(Color.WHITE);
+	}
 
-    /**
-     * Erzeugt eine Bitmap des Diagramms.
-     * Die Bitmap muss vom Aufrufer zerstört werden wenn sie nicht mehr benötigt wird.
-     * @param dpi Auflösung
-     * @return 
-     */
-    public abstract BufferedImage export(float dpi);
- 
-    /**
-     * Bereitet das Zeichnen vor und registriert Ereignisse.
-     * @param bc Compiler
-     */
-    public abstract void init(BackgroundCompiler bc);
-    /**
-     * Entfernt alle Ereignisse.
-     * @param bc Compiler
-     */
-    public abstract void deinit(BackgroundCompiler bc);
-    /**
-     * Name des Diagramms
-     * @return 
-     */
-    public final String getTitle() {
-        return title;
-    }
+	/**
+	 * Erzeugt eine Bitmap des Diagramms.
+	 * Die Bitmap muss vom Aufrufer zerstört werden wenn sie nicht mehr benötigt wird.
+	 * @param dpi Auflösung
+	 * @return 
+	 */
+	public abstract BufferedImage export(float dpi);
+
+	/**
+	 * Bereitet das Zeichnen vor und registriert Ereignisse.
+	 * @param bc Compiler
+	 */
+	public abstract void init(BackgroundCompiler bc);
+
+	/**
+	 * Entfernt alle Ereignisse.
+	 * @param bc Compiler
+	 */
+	public abstract void deinit(BackgroundCompiler bc);
+
+	/**
+	 * Name des Diagramms
+	 * @return 
+	 */
+	public final String getTitle() {
+		return title;
+	}
 }

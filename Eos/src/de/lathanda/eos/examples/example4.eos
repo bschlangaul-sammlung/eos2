@@ -1,0 +1,11 @@
+r:Rechteck
+k:Kreis
+k.verschieben(10, 10)
+r.verschiebenNach(-20, 0)
+wiederhole 10 mal
+    k.drehenUm(20, 0, 10)
+    r.drehenUm(20, 0, 10)
+*wiederhole
+k.strecken(2)
+r.streckenAn(0, 0, 2) 
+             

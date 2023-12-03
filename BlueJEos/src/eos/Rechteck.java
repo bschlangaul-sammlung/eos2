@@ -1,7 +1,5 @@
 package eos;
 
-import java.awt.Color;
-
 import de.lathanda.eos.geo.Rectangle;
 
 /**
@@ -34,19 +32,19 @@ public class Rechteck extends GefuellteFigur {
 		rectangle = (Rectangle)figure;
 		rectangle.setCorners(x, y, x + a, y + a);
 	}
-	public Rechteck(double x, double y, double breite, double hoehe, Color farbe) {
+	public Rechteck(double x, double y, double breite, double hoehe, Farbe farbe) {
 		super(new Rectangle());
 		rectangle = (Rectangle)figure;
 		rectangle.setCorners(x, y, x + breite, y + hoehe);
-		rectangle.setLineColor(farbe);
-		rectangle.setFillColor(farbe);
+		rectangle.setLineColor(farbe.getColor());
+		rectangle.setFillColor(farbe.getColor());
 	}
-	public Rechteck(double x, double y, double a, Color farbe) {
+	public Rechteck(double x, double y, double a, Farbe farbe) {
 		super(new Rectangle());
 		rectangle = (Rectangle)figure;
 		rectangle.setCorners(x, y, x + a, y + a);
-		rectangle.setLineColor(farbe);
-		rectangle.setFillColor(farbe);
+		rectangle.setLineColor(farbe.getColor());
+		rectangle.setFillColor(farbe.getColor());
 	}
 	public void hoeheSetzen(double hoehe) {
 		rectangle.setHeight(hoehe);

@@ -2,8 +2,6 @@ package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.layout.BalancePoint;
 
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.math.Point;
@@ -105,11 +103,13 @@ public class Triangle  extends FilledFigure {
         bound.add(t.transform(points[C]));
         return bound;
     }    
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	attributes.add(new Attribut("a", getTransformedPosition(points[A]).toString()));
-    	attributes.add(new Attribut("b", getTransformedPosition(points[B]).toString()));
-    	attributes.add(new Attribut("c", getTransformedPosition(points[C]).toString()));
-	}     
+    public String getAText() {
+    	return getTransformedPosition(points[A]).toString();
+    }
+    public String getBText() {
+    	return getTransformedPosition(points[B]).toString();
+    }
+    public String getCText() {
+    	return getTransformedPosition(points[C]).toString();
+    }
 }

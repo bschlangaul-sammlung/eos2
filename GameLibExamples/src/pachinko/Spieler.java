@@ -1,9 +1,9 @@
 package pachinko;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.game.Game;
 import de.lathanda.eos.game.Sprite;
 
@@ -24,7 +24,7 @@ public class Spieler extends Sprite {
 	}
 	@Override
 	public void render(de.lathanda.eos.base.Picture p) {	
-		p.setLineColor(Color.BLACK);
+		p.setLineColor(MutableColor.BLACK);
 		p.setTextAlignment(Alignment.TOP, Alignment.LEFT);
 		p.drawText("Punkte: " + punkte, -100, 100);
 		p.setTextAlignment(Alignment.TOP, Alignment.CENTER);
@@ -32,16 +32,16 @@ public class Spieler extends Sprite {
 		p.setTextAlignment(Alignment.CENTER, Alignment.CENTER);
 		switch(zustand) {
 		case 0:
-			p.setFillColor(Color.WHITE);
-			p.setLineColor(Color.BLACK);
+			p.setFillColor(MutableColor.WHITE);
+			p.setLineColor(MutableColor.BLACK);
 			p.drawRect(-25, -10, 50, 20);
 			p.drawText("F1 drücken für start", 0, 0);
 			break;
 		case 1:
 			break;
 		case 2:
-			p.setFillColor(Color.WHITE);
-			p.setLineColor(Color.BLACK);
+			p.setFillColor(MutableColor.WHITE);
+			p.setLineColor(MutableColor.BLACK);
 			p.drawRect(-35, -20, 70, 30);
 			p.drawText("F1 drücken für neue Runde!", 0, 0);
 			p.drawText("Erreichte Punktezahl:" + punkte, 0, -10);

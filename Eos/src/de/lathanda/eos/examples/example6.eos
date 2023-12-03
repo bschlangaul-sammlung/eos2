@@ -1,0 +1,4 @@
+k:Kreis
+wiederhole solange k.x < 500 und k.y > 100
+    k.x := k.x * 2 + 1
+*wiederhole

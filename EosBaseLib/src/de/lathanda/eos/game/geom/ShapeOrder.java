@@ -25,7 +25,7 @@ class ShapeOrder implements Comparable<ShapeOrder> {
         Y0,
         /// nach obere Grenze
         Y1
-    };
+    }
 
     /**
      * \brief Klammerart
@@ -38,7 +38,7 @@ class ShapeOrder implements Comparable<ShapeOrder> {
         private Bracket(int order) {
             this.order = order;
         }
-    };
+    }
 
     /**
      * \brief Wert

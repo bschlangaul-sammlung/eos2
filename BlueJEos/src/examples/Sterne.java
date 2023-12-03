@@ -1,7 +1,8 @@
 package examples;
 
-import java.awt.Color;
 import static eos.Funktionen.zufall;
+
+import eos.Farbe;
 import eos.Gruppe;
 import eos.Kreis;
 import eos.SchrittUhr;
@@ -11,7 +12,7 @@ public class Sterne {
 		Gruppe sterne = new Gruppe();
 		Kreis stern = new Kreis();
 		SchrittUhr uhr = new SchrittUhr(10);
-		stern.fuellfarbeSetzen(Color.YELLOW);
+		stern.fuellfarbeSetzen(Farbe.gelb);
 		stern.radiusSetzen(1);
 		sterne.zentrumSetzen(0, 0);
 		while (true) {

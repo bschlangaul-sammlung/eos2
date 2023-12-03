@@ -1,11 +1,12 @@
 package de.lathanda.eos.game;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
+
+import de.lathanda.eos.base.MutableColor;
 /**
  * \brief Standard Fenster für Spiele
  * 
@@ -22,7 +23,7 @@ import javax.swing.JFrame;
 	 * @param game  Spiel
 	 * @param title Fenstertitel
 	 */
-	protected GameFrame(double width, double height, Color back, Game game, String title) {
+	protected GameFrame(double width, double height, MutableColor back, Game game, String title) {
 		super(title);
 		
 		setLocation(0, 0);

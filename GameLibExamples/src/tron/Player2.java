@@ -1,8 +1,8 @@
 package tron;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.Sound;
 import de.lathanda.eos.game.Game;
@@ -22,19 +22,19 @@ public class Player2 extends Sprite {
 
 	@Override
 	public void render(Picture g) {
-		g.setFillColor(Color.BLUE);
+		g.setFillColor(MutableColor.BLUE);
 		g.drawShape(shape);
 		if (outoforder > 0) {
 			outoforder++;
 			switch (outoforder % 3) {
 			case 0:
-				g.setFillColor(Color.RED);
+				g.setFillColor(MutableColor.RED);
 				break;
 			case 1:
-				g.setFillColor(Color.YELLOW);
+				g.setFillColor(MutableColor.YELLOW);
 				break;
 			case 2:
-				g.setFillColor(Color.GRAY);
+				g.setFillColor(MutableColor.GRAY);
 				break;
 			}
 			g.drawEllipse(shape.getX(), shape.getY(), 4, 4);
@@ -44,7 +44,7 @@ public class Player2 extends Sprite {
 	@Override
 	public void update(Game game) {
 		if (level.isRunning()) {
-			game.addSprite(new Block(Color.BLUE, shape.getX(), shape.getY(), 1, 1));
+			game.addSprite(new Block(MutableColor.BLUE, shape.getX(), shape.getY(), 1, 1));
 
 			if (game.isKeyDown(KeyEvent.VK_LEFT)) {
 				shape.setAngle(Math.PI * 3.0 / 2.0);

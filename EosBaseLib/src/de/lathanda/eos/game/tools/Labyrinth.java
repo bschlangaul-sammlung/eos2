@@ -17,9 +17,7 @@ import java.util.Random;
  * {@link #setCell(int, int, int)} können andere Werte ergänzt werden oder man
  * lässt sich das gesamt Labyrinth per {@link #getLabyrinth()} geben.
  *
- * @author Lathanda
- * @version 2.0.4
- * @since 2.0.0
+ * @author Peter (Lathanda) Schneider
  */
 
 

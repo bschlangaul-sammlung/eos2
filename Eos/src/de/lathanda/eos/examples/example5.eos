@@ -1,0 +1,10 @@
+anweisung bewegen(r:RECHTECK, grad:real)
+    r.Verschieben(100*cos(grad),100*sin(grad))
+    r.drehen(grad)
+*anweisung
+i:Integer
+wiederhole 36 mal
+    r:RECHTECK
+    bewegen(r, 10*i)
+    i = i + 1
+*wiederhole                         

@@ -1,11 +1,10 @@
 package de.lathanda.eos.robot;
 
-import java.awt.Color;
-import java.util.LinkedList;
-
-import de.lathanda.eos.base.Readout;
+import de.lathanda.eos.base.MutableColor;
+import de.lathanda.eos.base.util.Direction;
 import de.lathanda.eos.robot.exceptions.CubeImmutableException;
 import de.lathanda.eos.robot.exceptions.CubeMissingException;
+import de.lathanda.eos.robot.exceptions.RobotException;
 import de.lathanda.eos.robot.exceptions.RobotMovementFailedException;
 import de.lathanda.eos.robot.exceptions.RobotVoidException;
 import de.lathanda.eos.robot.gui.Configuration;
@@ -17,7 +16,7 @@ import de.lathanda.eos.robot.gui.Configuration.ConfigurationListener;
  * @author Peter (Lathanda) Schneider
  * @since 0.8
  */
-public class Robot implements ConfigurationListener, Readout {
+public class Robot implements ConfigurationListener {
     /**
      * Größe des Roboters
      */
@@ -37,7 +36,7 @@ public class Robot implements ConfigurationListener, Readout {
     /**
      * Farb des Roboters
      */
-    private Color robotColor = Color.BLUE;
+    private MutableColor robotColor = MutableColor.BLUE;
     /**
      * Blickrichtung des Roboters
      */
@@ -57,7 +56,7 @@ public class Robot implements ConfigurationListener, Readout {
     /**
      * Farbe von neuen Steinen
      */
-    private Color stoneColor = Color.RED;
+    private MutableColor stoneColor = MutableColor.RED;
     /**
      * Standard Roboter
      */
@@ -142,14 +141,14 @@ public class Robot implements ConfigurationListener, Readout {
     /**
      * Setzt eine Marke zu Füssen des Roboters.
      */
-    public final void setMark() throws RobotVoidException {
+    public final void setMark() throws RobotException {
     	getColumn().setMark(true);
     }
 
     /**
      * Setzt eine farbige Marke zu Füssen des Roboters.
      */
-    public final void setMark(Color c) throws RobotVoidException {
+    public final void setMark(MutableColor c) throws RobotException {
     	getColumn().setMark(c);
     }
     
@@ -157,14 +156,14 @@ public class Robot implements ConfigurationListener, Readout {
      * Entfernt die Marke zu Füssen des Robters.
      * @throws RobotVoidException
      */
-    public final void removeMark() throws RobotVoidException {
+    public final void removeMark() throws RobotException {
     	getColumn().setMark(false);
     }
     /**
      * Legt einen Stein vor dem Roboter ab.
      * @throws RobotVoidException
      */
-    public final void dropStone() throws RobotVoidException {
+    public final void dropStone() throws RobotException {
         frontColumn().dropCube(z, Cube.createStone(stoneColor));
     }
     /**
@@ -172,14 +171,14 @@ public class Robot implements ConfigurationListener, Readout {
      * @param c Farbe des Steins
      * @throws RobotVoidException
      */
-    public final void dropStone(Color c) throws RobotVoidException {
+    public final void dropStone(MutableColor c) throws RobotException {
         frontColumn().dropCube(z, Cube.createStone(c));
     }
     /**
      * Gibt die Farbe des Steins zurück auf den der Roboter einen neuen Stein legen würde.
      * @return Farbe des Bodensteins, Bodenfarbe falls es diesen nicht gibt.
      */
-    public final Color stoneColor() throws RobotVoidException {
+    public final MutableColor stoneColor() throws RobotException {
     	return frontColumn().stoneColor(z);
     }
     /**
@@ -187,7 +186,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws RobotVoidException
      * @throws CubeMissingException
      */
-    public final void pickup() throws RobotVoidException, CubeMissingException , CubeImmutableException {
+    public final void pickup() throws RobotException {
         frontColumn().pickup(z);
     }
     /**
@@ -197,7 +196,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws CubeMissingException
      * @throws CubeImmutableException
      */
-    public final void pickup(int n) throws RobotVoidException, CubeMissingException , CubeImmutableException {
+    public final void pickup(int n) throws RobotException {
     	for (int i = n; i --> 0; ) {
     		pickup();
     	}
@@ -207,7 +206,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @return
      * @throws RobotVoidException 
      */
-    public final boolean isMarked() throws RobotVoidException {
+    public final boolean isMarked() throws RobotException {
         return getColumn().isMarked();
     }
     /**
@@ -215,7 +214,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @return
      * @throws RobotVoidException 
      */
-    public final boolean isMarked(Color c) throws RobotVoidException {
+    public final boolean isMarked(MutableColor c) throws RobotException {
         return getColumn().isMarked(c);
     }    
     /**
@@ -243,7 +242,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws RobotMovementFailedException
      * @throws RobotVoidException 
      */
-    private void stepDirection(Direction d) throws RobotMovementFailedException, RobotVoidException {
+    private void stepDirection(Direction d) throws RobotException {
         Column columnTo = getColumn(d);
         int newZ = columnTo.isReachable(z, SIZE, jump, fall);
         if (newZ >= 0) {
@@ -256,7 +255,7 @@ public class Robot implements ConfigurationListener, Readout {
      * Der Roboter macht einen Schritt nach vorne.
      * @throws RobotMovementFailedException
      */
-    public void step() throws RobotMovementFailedException, RobotVoidException {
+    public void step() throws RobotException {
         stepDirection(direction);
     }
     /**
@@ -265,7 +264,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws RobotMovementFailedException
      * @throws RobotVoidException
      */
-    public void step(int count) throws RobotMovementFailedException, RobotVoidException {
+    public void step(int count) throws RobotException {
         for(int i = count; i --> 0; ) {
             step();
         }
@@ -275,14 +274,14 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws RobotMovementFailedException
      * @throws RobotVoidException
      */
-	public void stepBack() throws RobotMovementFailedException, RobotVoidException {
+	public void stepBack() throws RobotException {
         stepDirection(direction.getBack());		
 	}
 	/**
 	 * Der Roboter macht einen Schritt nach links.
 	 * @throws RobotMovementFailedException
 	 */
-	public void stepLeft() throws RobotMovementFailedException, RobotVoidException {
+	public void stepLeft() throws RobotException {
         stepDirection(direction.getLeft());		
     }
 	/**
@@ -290,7 +289,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotMovementFailedException
 	 * @throws RobotVoidException
 	 */
-	public void stepRight() throws RobotMovementFailedException, RobotVoidException {
+	public void stepRight() throws RobotException {
         stepDirection(direction.getRight());		
 	}
 	/**
@@ -298,7 +297,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @param direction
 	 * @return
 	 */
-	private boolean isObstacleDirection(Direction direction) throws RobotVoidException {
+	private boolean isObstacleDirection(Direction direction) throws RobotException {
 		return getColumn(direction).isReachable(z, SIZE, jump, fall) < 0;
 	}
 	/**
@@ -306,7 +305,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @return
 	 * @throws RobotVoidException
 	 */
-	public boolean isObstacle() throws RobotVoidException {
+	public boolean isObstacle() throws RobotException {
 		return isObstacleDirection(direction);
 	}
 	/**
@@ -314,7 +313,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @return
 	 * @throws RobotVoidException
 	 */
-	public boolean isLeftObstacle() throws RobotVoidException {
+	public boolean isLeftObstacle() throws RobotException {
 		return isObstacleDirection(direction.getLeft());
 	}
 	/**
@@ -322,7 +321,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @return
 	 * @throws RobotVoidException
 	 */
-	public boolean isRightObstacle() throws RobotVoidException {
+	public boolean isRightObstacle() throws RobotException {
 		return isObstacleDirection(direction.getRight());
 	}
 	/**
@@ -330,7 +329,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @return
 	 * @throws RobotVoidException
 	 */
-	public boolean isBackObstacle() throws RobotVoidException {
+	public boolean isBackObstacle() throws RobotException {
 		return isObstacleDirection(direction.getBack());
 	}
 	/**
@@ -340,7 +339,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @param dz
 	 * @throws RobotMovementFailedException
 	 */
-    private void flyDirection(int dx, int dy, int dz) throws RobotVoidException, RobotMovementFailedException {
+    private void flyDirection(int dx, int dy, int dz) throws RobotException {
         Column column=  world.getColumn(new Coordinate(x + dx, y + dx));
         if (column.isFree(z+dz, SIZE)) {
             setPosition(x + dx, y + dy, z+dz);
@@ -353,7 +352,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws RobotVoidException
      * @throws RobotMovementFailedException
      */
-    public void flyDown() throws RobotVoidException, RobotMovementFailedException {
+    public void flyDown() throws RobotException {
 		flyDirection(0,0,-1);
 	}
     /**
@@ -361,7 +360,7 @@ public class Robot implements ConfigurationListener, Readout {
      * @throws RobotVoidException
      * @throws RobotMovementFailedException
      */
-	public void flyUp() throws RobotVoidException, RobotMovementFailedException {
+	public void flyUp() throws RobotException {
 		flyDirection(0,0,1);
 	}
 	/**
@@ -369,7 +368,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws RobotMovementFailedException
 	 */
-	public void fly() throws RobotVoidException, RobotMovementFailedException {
+	public void fly() throws RobotException {
 		flyDirection(direction.dx, direction.dy, 0);
 	}
 	/**
@@ -377,7 +376,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws RobotMovementFailedException
 	 */
-	public void flyLeft() throws RobotVoidException, RobotMovementFailedException {
+	public void flyLeft() throws RobotException {
 		flyDirection(direction.getLeft().dx, direction.getLeft().dy, 0);
 	} 
 	/**
@@ -385,7 +384,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws RobotMovementFailedException
 	 */
-	public void flyRight() throws RobotVoidException, RobotMovementFailedException {
+	public void flyRight() throws RobotException {
 		flyDirection(direction.getRight().dx, direction.getRight().dy, 0);
 	} 
 	/**
@@ -393,7 +392,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws RobotMovementFailedException
 	 */
-	public void flyBack() throws RobotVoidException, RobotMovementFailedException {
+	public void flyBack() throws RobotException {
 		flyDirection(direction.getBack().dx, direction.getBack().dy, 0);
 	} 
 	/**
@@ -403,49 +402,49 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @param dz
 	 * @return
 	 */
-	private boolean isFreeDirection(int dx, int dy, int dz) throws RobotVoidException {
+	private boolean isFreeDirection(int dx, int dy, int dz) throws RobotException {
 		return getColumn(x+dx, y+dy).isFree(z+dz, SIZE);
 	}
 	/**
 	 * Prüft ober der Roboter nach vorne fliegen könnte.
 	 * @return
 	 */
-	public boolean isFree() throws RobotVoidException {
+	public boolean isFree() throws RobotException {
 		return isFreeDirection(direction.dx, direction.dy, 0);
 	}
 	/**
 	 * Prüft ober der Roboter nach links fliegen könnte.
 	 * @return
 	 */
-	public boolean isLeftFree() throws RobotVoidException {
+	public boolean isLeftFree() throws RobotException {
 		return isFreeDirection(direction.getLeft().dx, direction.getLeft().dy, 0);
 	}
 	/**
 	 * Prüft ober der Roboter nach rechts fliegen könnte.
 	 * @return
 	 */
-	public boolean isRightFree() throws RobotVoidException {
+	public boolean isRightFree() throws RobotException {
 		return isFreeDirection(direction.getRight().dx, direction.getRight().dy, 0);
 	}
 	/**
 	 * Prüft ober der Roboter zurück fliegen könnte.
 	 * @return
 	 */
-	public boolean isBackFree() throws RobotVoidException {
+	public boolean isBackFree() throws RobotException {
 		return isFreeDirection(direction.getBack().dx, direction.getBack().dy, 0);
 	}
 	/**
 	 * Prüft ober der Roboter nach oben fliegen könnte.
 	 * @return
 	 */
-	public boolean isTopFree() throws RobotVoidException {
+	public boolean isTopFree() throws RobotException {
 		return isFreeDirection(0,0,1);
 	}
 	/**
 	 * Prüft ober der Roboter nach unten fliegen könnte.
 	 * @return
 	 */
-	public boolean isBottomFree() throws RobotVoidException {
+	public boolean isBottomFree() throws RobotException {
 		return isFreeDirection(0,0,-1);
 	}
 	/**
@@ -454,7 +453,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws CubeImmutableException
 	 */
-	public void placeStone(int n) throws RobotVoidException, CubeImmutableException {
+	public void placeStone(int n) throws RobotException {
 		frontColumn().setCube(z+n, Cube.createStone(stoneColor));	
 	}
 	/**
@@ -464,7 +463,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws CubeImmutableException
 	 */
-	public void placeStone(int n, Color c) throws RobotVoidException, CubeImmutableException {
+	public void placeStone(int n, MutableColor c) throws RobotException {
 		frontColumn().setCube(z+n, Cube.createStone(c));	
 	}
 	/**
@@ -472,22 +471,25 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @throws RobotVoidException
 	 * @throws CubeImmutableException
 	 */
-	public void removeStone(int n) throws RobotVoidException, CubeImmutableException {
+	public void removeStone(int n) throws RobotException {
 		frontColumn().removeCube(z+ n);
 	}
 	/**
 	 * Setzt die Farbe die neue Steine haben.
 	 * @param c
 	 */
-	public void setStoneColor(Color c) {
+	public void setStoneColor(MutableColor c) {
 		stoneColor = c;		
+	}
+	public MutableColor getStoneColor() {
+		return stoneColor;
 	}
 	/**
 	 * Prüft ob vor dem Roboter mindestens ein Stein liegt.
 	 * @return
 	 * @throws RobotVoidException
 	 */
-	public boolean hasStone() throws RobotVoidException {
+	public boolean hasStone() throws RobotException {
 		return frontColumn().hasCube();
 	}
 	/**
@@ -496,7 +498,7 @@ public class Robot implements ConfigurationListener, Readout {
 	 * @return
 	 * @throws RobotVoidException
 	 */
-	public boolean hasStone(int n) throws RobotVoidException  {
+	public boolean hasStone(int n) throws RobotException  {
 		return frontColumn().hasCube(n);
 	}
 	/**
@@ -527,19 +529,11 @@ public class Robot implements ConfigurationListener, Readout {
 	public boolean isFacingEast() {
 		return direction == Direction.EAST;
 	}
-    @Override
- 	public void getAttributes(LinkedList<Attribut> attributes) {
-        attributes.add(new Attribut("robotcolor", robotColor));
-        attributes.add(new Attribut("direction", direction));
-        attributes.add(new Attribut("x", x));
-        attributes.add(new Attribut("y", y));
-        attributes.add(new Attribut("z", z));
-        attributes.add(new Attribut("stonecolor", stoneColor));
-	}
-	public Color getRobotColor() {
+	
+	public MutableColor getRobotColor() {
 		return robotColor;
 	}
-	public void setRobotColor(Color robotColor) {
+	public void setRobotColor(MutableColor robotColor) {
 		this.robotColor = robotColor;
 	}
 	public Direction getDirection() {

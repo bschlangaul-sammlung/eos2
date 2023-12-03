@@ -1,7 +1,6 @@
 package billard;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.math.Vector;
@@ -13,13 +12,13 @@ public class WhiteBall extends Ball {
 	boolean drawLine = false;
 
 	public WhiteBall(int x, int y) {
-		super(x, y, Color.WHITE);
+		super(x, y, MutableColor.WHITE);
 	}
 
 	public void render(Picture g) {
 		super.render(g);
 		if (drawLine) {
-			g.setLineColor(Color.BLUE);
+			g.setLineColor(MutableColor.BLUE);
 			g.setLineWidth(1);
 			g.drawLine(loc, shape.getCenter());
 		}

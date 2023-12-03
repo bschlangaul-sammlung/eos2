@@ -1,0 +1,5 @@
+l:Linie
+l.endpunkteSetzen(20,20,30,10)
+l.linienartSetzen(gestrichelt)
+l.linienstärkeSetzen(4)
+l.x1 = 5

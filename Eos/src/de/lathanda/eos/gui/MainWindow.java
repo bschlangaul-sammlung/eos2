@@ -40,23 +40,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import de.lathanda.eos.base.ResourceLoader;
-import de.lathanda.eos.common.gui.BackgroundCompiler;
-import de.lathanda.eos.common.gui.CodeColoring;
-import de.lathanda.eos.common.gui.ConfigFrame;
-import de.lathanda.eos.common.gui.GuiConfiguration;
-import de.lathanda.eos.common.gui.GuiConfiguration.GuiConfigurationListener;
-import de.lathanda.eos.common.gui.HtmlExport;
-import de.lathanda.eos.common.gui.PrintFrame;
-import de.lathanda.eos.common.gui.SideInformation;
-import de.lathanda.eos.common.gui.SourceCode;
-import de.lathanda.eos.common.gui.Messages;
+import de.lathanda.eos.base.util.GuiToolkit;
+import de.lathanda.eos.config.Language;
+import de.lathanda.eos.gui.GuiConfiguration.GuiConfigurationListener;
 import de.lathanda.eos.gui.classchart.ClassChart;
 import de.lathanda.eos.gui.diagram.DiagramFrame;
 import de.lathanda.eos.gui.flowchart.FlowChart;
 import de.lathanda.eos.gui.objectchart.ObjectChart;
 import de.lathanda.eos.gui.structogram.Structogram;
-import de.lathanda.eos.spi.LanguageManager;
-import de.lathanda.eos.util.GuiToolkit;
+import static de.lathanda.eos.base.icons.Icons.*;
+import static de.lathanda.eos.gui.icons.Icons.*;
 
 /**
  * Das Hauptfenster.
@@ -107,7 +100,7 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 		initComponents();
 		data.init(new AutoCompletion(txtProgram, this), new CodeColoring());
 		sliderSpeed.setToolTipText(MessageFormat.format(Messages.getString("Speed.Tooltip"), data.getSpeed()));
-		setIconImage(ResourceLoader.loadImage("icons/eos.png"));
+		setIconImage(LOGO);
 
 		txtProgram.setDocument(data);
 		txtOutput.setDocument(data.getOutput());
@@ -127,7 +120,7 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 	 * Alle Komponenten einrichten.
 	 */
 	private void initComponents() {
-		setIconImage(ResourceLoader.loadImage("icon/eos.png"));
+		setIconImage(LOGO);
 		mainMenu = new JMenuBar();
 		mainToolbar = new JToolBar();
 		jSeparator1 = new JToolBar.Separator();
@@ -156,51 +149,51 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 		mainToolbar.setBackground(new Color(0xEEEEEE));
 		toolbarGroup.add(mainToolbar);
 
-		btnSave = GuiToolkit.createButton("icons/floppy_disk.png", Messages.getString("Menu.Save.Tooltip"),
+		btnSave = GuiToolkit.createButton(SAVE, Messages.getString("Menu.Save.Tooltip"),
 				evt -> SaveActionPerformed(evt));
 		mainToolbar.add(btnSave);
 
-		btnOpen = GuiToolkit.createButton("icons/folder_open.png", Messages.getString("Menu.Open.Tooltip"),
+		btnOpen = GuiToolkit.createButton(OPEN, Messages.getString("Menu.Open.Tooltip"),
 				evt -> OpenActionPerformed(evt));
 		mainToolbar.add(btnOpen);
 
 		mainToolbar.add(jSeparator1);
 
-		btnCopy = GuiToolkit.createButton("icons/copy.png", Messages.getString("Menu.Copy.Tooltip"),
+		btnCopy = GuiToolkit.createButton(COPY, Messages.getString("Menu.Copy.Tooltip"),
 				evt -> CopyActionPerformed(evt));
 		mainToolbar.add(btnCopy);
 
-		btnCut = GuiToolkit.createButton("icons/cut.png", Messages.getString("Menu.Cut.Tooltip"),
+		btnCut = GuiToolkit.createButton(CUT, Messages.getString("Menu.Cut.Tooltip"),
 				evt -> CutActionPerformed(evt));
 		mainToolbar.add(btnCut);
 
-		btnPaste = GuiToolkit.createButton("icons/clipboard_paste.png", Messages.getString("Menu.Paste.Tooltip"),
+		btnPaste = GuiToolkit.createButton(PASTE, Messages.getString("Menu.Paste.Tooltip"),
 				evt -> PasteActionPerformed(evt));
 		mainToolbar.add(btnPaste);
 
 		mainToolbar.add(jSeparator2);
 
-		btnUndo = GuiToolkit.createButton("icons/undo.png", Messages.getString("Menu.Undo.Tooltip"),
+		btnUndo = GuiToolkit.createButton(UNDO, Messages.getString("Menu.Undo.Tooltip"),
 				evt -> UndoActionPerformed(evt));
 		mainToolbar.add(btnUndo);
 
-		btnRedo = GuiToolkit.createButton("icons/redo.png", Messages.getString("Menu.Redo.Tooltip"),
+		btnRedo = GuiToolkit.createButton(REDO, Messages.getString("Menu.Redo.Tooltip"),
 				evt -> RedoActionPerformed(evt));
 		mainToolbar.add(btnRedo);
 
 		mainToolbar.add(jSeparator3);
 
-		btnBreakpoint = GuiToolkit.createButton("icons/sign_stop.png", Messages.getString("Tooltip.Breakpoint"),
+		btnBreakpoint = GuiToolkit.createButton(STOP, Messages.getString("Tooltip.Breakpoint"),
 				evt -> BreakpointActionPerformed(evt));
 		mainToolbar.add(btnBreakpoint);
 
 		mainToolbar.add(jSeparator4);
 
-		btnClassDoc = GuiToolkit.createButton("icons/books.png", Messages.getString("Menu.Classbook.Tooltip"),
+		btnClassDoc = GuiToolkit.createButton(BOOKS, Messages.getString("Menu.Classbook.Tooltip"),
 				evt -> ClassDocActionPerformed(evt));
 		mainToolbar.add(btnClassDoc);
 
-		btnHelp = GuiToolkit.createButton("icons/question_and_answer.png", Messages.getString("Menu.Handbook.Tooltip"),
+		btnHelp = GuiToolkit.createButton(HELP, Messages.getString("Menu.Handbook.Tooltip"),
 				evt -> HelpActionPerformed(evt));
 		mainToolbar.add(btnHelp);
 
@@ -225,30 +218,30 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 		runToolbar.setRollover(true);
 		runToolbar.setBackground(new Color(0xEEEEEE));
 		runToolbar.setLayout(new GridBagLayout());
-		
+
 		GridBagConstraints LAST = new GridBagConstraints();
 		LAST.fill = GridBagConstraints.BOTH;
 		LAST.weightx = 1;
 		LAST.weighty = 1;
 		toolbarGroup.add(runToolbar);
 
-		btnStart = GuiToolkit.createButton("icons/media_play.png", Messages.getString("Tooltip.Start"),
+		btnStart = GuiToolkit.createButton(PLAY, Messages.getString("Tooltip.Start"),
 				evt -> StartActionPerformed(evt));
 		runToolbar.add(btnStart);
 
-		btnSingleStep = GuiToolkit.createButton("icons/media_end.png", Messages.getString("Tooltip.SingleStep"),
+		btnSingleStep = GuiToolkit.createButton(STOP, Messages.getString("Tooltip.SingleStep"),
 				evt -> SingleStepActionPerformed(evt));
 		runToolbar.add(btnSingleStep);
 
-		btnPause = GuiToolkit.createButton("icons/media_pause.png", Messages.getString("Tooltip.Pause"),
+		btnPause = GuiToolkit.createButton(PAUSE, Messages.getString("Tooltip.Pause"),
 				evt -> PauseActionPerformed(evt));
 		runToolbar.add(btnPause);
 
-		btnStop = GuiToolkit.createButton("icons/media_stop.png", Messages.getString("Tooltip.Stop"),
+		btnStop = GuiToolkit.createButton(STOP, Messages.getString("Tooltip.Stop"),
 				evt -> StopActionPerformed(evt));
 		runToolbar.add(btnStop);
 
-		btnSkip = GuiToolkit.createButton("icons/media_fast_forward.png", Messages.getString("Tooltip.Skip"),
+		btnSkip = GuiToolkit.createButton(FAST, Messages.getString("Tooltip.Skip"),
 				evt -> SkipActionPerformed(evt));
 		runToolbar.add(btnSkip);
 
@@ -341,7 +334,7 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 
 		mainMenu.add(diagramMenu);
 
-		LanguageManager.getInstance().addPluginMenues(mainMenu);
+		Language.def.addPluginMenues(mainMenu);
 
 		helpMenu = GuiToolkit.createMenue(Messages.getString("Menu.Help"));
 
@@ -362,7 +355,7 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 		getContentPane().add(mainSplit, BorderLayout.CENTER);
 		mainSplit.setPreferredSize(GuiToolkit.scaledDimension(500, 600));
 		pack();
-		mainSplit.setDividerLocation(mainSplit.getHeight()-GuiToolkit.scaledSize(100));
+		mainSplit.setDividerLocation(mainSplit.getHeight() - GuiToolkit.scaledSize(100));
 	}
 
 	/**
@@ -752,6 +745,8 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 			return true;
 		}
 	}
+
+	@Override
 	public void fontsizeChanged(int fontsize) {
 		txtProgram.setFont(GuiToolkit.createFont(Font.MONOSPACED, Font.PLAIN, fontsize));
 	}
@@ -888,6 +883,7 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 		}
 
 	}
+
 	private class FunctionKeyDispatcher implements KeyEventDispatcher {
 
 		@Override
@@ -913,6 +909,6 @@ public class MainWindow extends JFrame implements WindowListener, GuiConfigurati
 			}
 			return false;
 		}
-	
+
 	}
 }

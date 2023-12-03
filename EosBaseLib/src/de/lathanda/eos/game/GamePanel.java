@@ -1,5 +1,4 @@
 ﻿package de.lathanda.eos.game;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,6 +12,7 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JPanel;
 
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture2D;
 
 /**
@@ -53,7 +53,7 @@ import de.lathanda.eos.base.Picture2D;
 	 * @param height Höhe in mm
 	 */
 	public GamePanel(Game game, double width, double height)  {
-		this(game, 30, Color.WHITE, width, height);
+		this(game, 30, MutableColor.WHITE, width, height);
 	}
 
 	/**
@@ -65,7 +65,7 @@ import de.lathanda.eos.base.Picture2D;
 	 * @param height Höhe in mm
 	 */
 	public GamePanel(Game game, int fps, double width, double height) {
-		this(game, fps, Color.WHITE, width, height);
+		this(game, fps, MutableColor.WHITE, width, height);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ import de.lathanda.eos.base.Picture2D;
 	 * @param width Breite in mm
 	 * @param height Höhe in mm
 	 */
-	public GamePanel(Game game, int fps, Color background, double width, double height) {
+	public GamePanel(Game game, int fps, MutableColor background, double width, double height) {
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
 		.addKeyEventDispatcher(this);
 		this.p = new Picture2D(width, height, this);
@@ -85,8 +85,8 @@ import de.lathanda.eos.base.Picture2D;
         prefWidth  = p.mm2pixel(width);
         this.game = game;
 		this.fps = fps;
-		setForeground(Color.BLACK);
-		setBackground(background);
+		setForeground(MutableColor.BLACK.getColor());
+		setBackground(background.getColor());
 		// add events
 		addMouseListener(this);
 		addMouseMotionListener(this);

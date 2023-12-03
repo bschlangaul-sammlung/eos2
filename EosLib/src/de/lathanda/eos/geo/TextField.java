@@ -1,9 +1,9 @@
 package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.Alignment;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.layout.Dimension;
 import de.lathanda.eos.base.Picture;
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -19,7 +19,7 @@ public class TextField extends Rectangle {
     private boolean autoadjust;
     private boolean dirty = false;
     private int size;
-    private Color color;
+    private MutableColor color;
     private boolean hideBorder;
     private LinkedList<String> text;
     private String fontname;
@@ -29,7 +29,7 @@ public class TextField extends Rectangle {
         vertical = Alignment.CENTER;
         horizontal = Alignment.CENTER;
         size = 16;
-        color = Color.BLACK;
+        color = MutableColor.BLACK;
         text = new LinkedList<>();
         hideBorder = false;
     }
@@ -55,17 +55,17 @@ public class TextField extends Rectangle {
         }
         p.setFont(fontname, size);
         p.setTextSpacing(1, 1);
-        p.setTextAlignment(vertical, horizontal);        
+        p.setTextAlignment(vertical, horizontal);   
         p.setLineColor(color);
         p.drawText(text, -width/2, -height/2, width, height);
     }
 
-    public void setTextColor(Color color) {
+    public void setTextColor(MutableColor color) {
         this.color = color;
         fireDataChanged();
     }
 
-    public Color getTextColor() {
+    public MutableColor getTextColor() {
         return color;
     }
     public void setHideBorder(boolean hideBorder) {
@@ -169,16 +169,14 @@ public class TextField extends Rectangle {
         }
         return tf;
     }    
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	attributes.add(new Attribut("vertical", vertical));
-        attributes.add(new Attribut("horizontal", horizontal));
-        attributes.add(new Attribut("autoadjust", autoadjust));
-        attributes.add(new Attribut("fontsize", size));
-        attributes.add(new Attribut("fontcolor", color));
-        attributes.add(new Attribut("hideborder", hideBorder));
-        attributes.add(new Attribut("text", text));
-        attributes.add(new Attribut("fontname", fontname));     
-	}     
+    public String getText() {
+    	StringBuilder t = new StringBuilder();
+    	for(String s:text) {
+    		if (!t.isEmpty()) {
+    			t.append("\n");
+    		}
+    		t.append(s);
+    	}
+    	return t.toString();
+    }
 }

@@ -92,7 +92,7 @@ public class Circle extends Shape {
      * @return 
      */
     @Override
-    Types getOutlineType() {
+    protected Types getOutlineType() {
         return Types.CIRCLE;
     }
 

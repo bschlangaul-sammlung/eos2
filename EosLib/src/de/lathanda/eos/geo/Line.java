@@ -2,8 +2,6 @@ package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.layout.BalancePoint;
 
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.math.Point;
@@ -135,17 +133,7 @@ public class Line extends LineFigure {
         bound.add(t.transform( length/2d, 0));
         return bound;
     }    
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	TrueLine t = this.new TrueLine();
-        attributes.add(new Attribut("linecolor", line.getColor()));
-        attributes.add(new Attribut("linestyle", line.getLineStyle()));    
-        attributes.add(new Attribut("linewidth", line.getDrawWidth()));        
-    	attributes.add(new Attribut("length", length));
-    	attributes.add(new Attribut("x1", t.A.getX()));
-        attributes.add(new Attribut("y1", t.A.getY()));
-        attributes.add(new Attribut("x2", t.B.getX()));
-        attributes.add(new Attribut("y2", t.B.getY()));
-	}     
+    public double getLength() {
+    	return length;
+    }
 }

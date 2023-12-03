@@ -1,11 +1,10 @@
 package eos;
 
-import java.awt.Color;
-
 import de.lathanda.eos.robot.World;
 import de.lathanda.eos.robot.exceptions.CubeImmutableException;
 import de.lathanda.eos.robot.exceptions.CubeMissingException;
 import de.lathanda.eos.robot.exceptions.RobotEntranceMissingException;
+import de.lathanda.eos.robot.exceptions.RobotException;
 import de.lathanda.eos.robot.exceptions.RobotNoSpaceException;
 import de.lathanda.eos.robot.exceptions.UnknownWorldVersionException;
 import de.lathanda.eos.robot.exceptions.WorldLoadFailedException;
@@ -13,6 +12,7 @@ import de.lathanda.eos.robot.exceptions.WorldNotFoundException;
 import eos.ausnahmen.EingangFehltAusnahme;
 import eos.ausnahmen.KeinPlatzAusnahme;
 import eos.ausnahmen.KeinSteinVorhandenAusnahme;
+import eos.ausnahmen.RoboterAusnahme;
 import eos.ausnahmen.SteinFeststehendAusnahme;
 import eos.ausnahmen.WeltKorruptAusnahme;
 import eos.ausnahmen.WeltNichtGefundenAusnahme;
@@ -35,7 +35,7 @@ public class Welt {
     		throw new WeltKorruptAusnahme(cwe);
     	} catch (WorldNotFoundException wnfe) {
     		throw new WeltNichtGefundenAusnahme(wnfe);
-		}
+    	}
     }
     public void betreten(Roboter roboter) {
         try {
@@ -44,22 +44,34 @@ public class Welt {
 			throw new EingangFehltAusnahme(nle);
 		} catch (RobotNoSpaceException rnse) {
 			throw new KeinPlatzAusnahme(rnse);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
     }
     public void steinSetzen(int x, int y, int z) {
-    	world.setStone(x,y,z);
+    	try {
+			world.setStone(x,y,z);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
     }
-    public void steinFarbeSetzen(Color farbe) {
-    	world.setStoneColor(farbe);
+    public void steinFarbeSetzen(Farbe farbe) {
+    	world.setStoneColor(farbe.getColor());
     }
     public void steinHinlegen(int x, int y) {
-    	world.dropStone(x, y);
+    	try {
+			world.dropStone(x, y);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
     }
     public void steinEntfernen(int x, int y, int z) {
     	try {
 			world.removeStone(x,y,z);
 		} catch (CubeImmutableException e) {
 			throw new SteinFeststehendAusnahme(e); 
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
     }
     public void steinAufheben(int x, int y) {
@@ -69,6 +81,8 @@ public class Welt {
     		throw new KeinSteinVorhandenAusnahme(cme); 
 		} catch (CubeImmutableException cie) {
     		throw new SteinFeststehendAusnahme(cie); 
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
     }
     public void laden(String name) {
@@ -81,6 +95,10 @@ public class Welt {
 		}
     }
     public void ziegelVerstreuen(int links, int oben, int rechts, int unten, double dichte) {
-    	world.fillRandom(links, oben, rechts, unten, dichte);
+    	try {
+			world.fillRandom(links, oben, rechts, unten, dichte);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
     }
 }

@@ -2,7 +2,6 @@ package eos;
 
 import de.lathanda.eos.base.LineStyle;
 import de.lathanda.eos.geo.Line;
-import java.awt.Color;
 
 /**
  * @author Peter Schneider
@@ -36,12 +35,12 @@ public class Linie extends StrichFigur {
 	public LineStyle linienartLesen() {
 		return line.getLineStyle();
 	}
-	public void farbeSetzen(Color farbe) {
-		line.setLineColor(farbe);
+	public void farbeSetzen(Farbe farbe) {
+		line.setLineColor(farbe.getColor());
 	}
 
-	public Color farbeLesen() {
-		return line.getLineColor();
+	public Farbe farbeLesen() {
+		return new Farbe(line.getLineColor());
 	}
 
 	public void x1Setzen(double x) {

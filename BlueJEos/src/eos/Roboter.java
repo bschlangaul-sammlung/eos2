@@ -1,15 +1,15 @@
 
 package eos;
 
-import java.awt.Color;
-
 import de.lathanda.eos.robot.Robot;
 import de.lathanda.eos.robot.exceptions.CubeImmutableException;
 import de.lathanda.eos.robot.exceptions.CubeMissingException;
+import de.lathanda.eos.robot.exceptions.RobotException;
 import de.lathanda.eos.robot.exceptions.RobotMovementFailedException;
 import de.lathanda.eos.robot.exceptions.RobotVoidException;
 import eos.ausnahmen.BewegungFehlgeschlagenAusnahme;
 import eos.ausnahmen.KeinSteinVorhandenAusnahme;
+import eos.ausnahmen.RoboterAusnahme;
 import eos.ausnahmen.RoboterOhneWeltAusnahme;
 import eos.ausnahmen.SteinFeststehendAusnahme;
 
@@ -44,7 +44,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 
 	public void schritt(int anzahl) {
@@ -54,7 +56,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void schrittZurueck() {
 		try {
@@ -63,7 +67,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void schrittLinks() {
 		try {
@@ -72,7 +78,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void schrittRechts() {
 		try {
@@ -81,7 +89,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void runterFliegen() {
 		try {
@@ -90,7 +100,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void hochFliegen() {
 		try {
@@ -99,7 +111,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void linksFliegen() {
 		try {
@@ -108,7 +122,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void rechtsFliegen() {
 		try {
@@ -117,7 +133,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void fliegen() {
 		try {
@@ -126,7 +144,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}	
 	public void zurueckFliegen() {
 		try {
@@ -135,7 +155,9 @@ public class Roboter {
     		throw new BewegungFehlgeschlagenAusnahme(e); 
 		} catch (RobotVoidException e) {
     		throw new RoboterOhneWeltAusnahme(e); 
-    	}
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
+		}
 	}
 	public void linksdrehen() {
 		robot.turnLeft();
@@ -153,6 +175,8 @@ public class Roboter {
 			robot.dropStone();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 
@@ -165,6 +189,8 @@ public class Roboter {
 			throw new KeinSteinVorhandenAusnahme(e);
 		} catch (CubeImmutableException e) {
 			throw new SteinFeststehendAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public void aufheben(int n) {
@@ -176,6 +202,8 @@ public class Roboter {
 			throw new KeinSteinVorhandenAusnahme(e);
 		} catch (CubeImmutableException e) {
 			throw new SteinFeststehendAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public void steinSetzen(int n) {
@@ -185,6 +213,8 @@ public class Roboter {
 			throw new RoboterOhneWeltAusnahme(e);
 		} catch (CubeImmutableException e) {
 			throw new SteinFeststehendAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public void steinEntfernen(int n) {
@@ -194,16 +224,18 @@ public class Roboter {
 			throw new RoboterOhneWeltAusnahme(e);
 		} catch (CubeImmutableException e) {
 			throw new SteinFeststehendAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
-	public void farbeSetzen(Color farbe) {
-		robot.setRobotColor(farbe);
+	public void farbeSetzen(Farbe farbe) {
+		robot.setRobotColor(farbe.getColor());
 	}
-	public Color farbeLesen() {
-		return robot.getRobotColor();
+	public Farbe farbeLesen() {
+		return new Farbe(robot.getRobotColor());
 	}
-	public void steinFarbeSetzen(Color farbe) {
-		robot.setStoneColor(farbe);
+	public void steinFarbeSetzen(Farbe farbe) {
+		robot.setStoneColor(farbe.getColor());
 	}
 
 	public void markeSetzen() {
@@ -211,13 +243,17 @@ public class Roboter {
 			robot.setMark();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
-	public void markeSetzen(Color farbe) {
+	public void markeSetzen(Farbe farbe) {
 		try {
-			robot.setMark(farbe);
+			robot.setMark(farbe.getColor());
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 
@@ -226,6 +262,8 @@ public class Roboter {
 			robot.removeMark();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istMarke() {
@@ -233,13 +271,17 @@ public class Roboter {
 			return robot.isMarked();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
-	public boolean istMarke(Color farbe) {
+	public boolean istMarke(Farbe farbe) {
 		try {
-			return robot.isMarked(farbe);
+			return robot.isMarked(farbe.getColor());
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istFrei() {
@@ -247,6 +289,8 @@ public class Roboter {
 			return robot.isFree();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istLinksFrei() {
@@ -254,6 +298,8 @@ public class Roboter {
 			return robot.isLeftFree();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istRechtsFrei() {
@@ -261,6 +307,8 @@ public class Roboter {
 			return robot.isRightFree();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istHintenFrei() {
@@ -268,6 +316,8 @@ public class Roboter {
 			return robot.isBackFree();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istObenFrei() {
@@ -275,6 +325,8 @@ public class Roboter {
 			return robot.isTopFree();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istUntenFrei() {
@@ -282,6 +334,8 @@ public class Roboter {
 			return robot.isBottomFree();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istHindernis() {
@@ -289,6 +343,8 @@ public class Roboter {
 			return robot.isObstacle();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}		
 	}
 	public boolean istHintenHindernis() {
@@ -296,6 +352,8 @@ public class Roboter {
 			return robot.isBackObstacle();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}		
 	}
 	public boolean istLinksHindernis() {
@@ -303,6 +361,8 @@ public class Roboter {
 			return robot.isLeftObstacle();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}		
 	}
 	public boolean istRechtsHindernis() {
@@ -310,6 +370,8 @@ public class Roboter {
 			return robot.isRightObstacle();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}		
 	}
 	public boolean istStein() {
@@ -317,6 +379,8 @@ public class Roboter {
 			return robot.hasStone();
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istStein(int n) {
@@ -324,6 +388,8 @@ public class Roboter {
 			return robot.hasStone(n);
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}
 	}
 	public boolean istSueden() {
@@ -338,11 +404,13 @@ public class Roboter {
 	public boolean istOsten() {
 		return robot.isFacingEast();
 	}	
-	public Color steinFarbe() {
+	public Farbe steinFarbe() {
 		try {
-			return robot.stoneColor();
+			return new Farbe(robot.stoneColor());
 		} catch (RobotVoidException e) {
 			throw new RoboterOhneWeltAusnahme(e);
+		} catch (RobotException re) {
+			throw new RoboterAusnahme(re);
 		}		
 	}
 }

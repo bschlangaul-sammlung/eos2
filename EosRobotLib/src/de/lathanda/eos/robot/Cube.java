@@ -1,6 +1,6 @@
 package de.lathanda.eos.robot;
 
-import java.awt.Color;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.robot.exceptions.CubeImmutableException;
 
 /**
@@ -10,7 +10,7 @@ import de.lathanda.eos.robot.exceptions.CubeImmutableException;
  * @since 0.8
  */
 public class Cube {
-    private Color color;
+    private MutableColor color;
     private int type;
     private boolean free;
     private Cube(int type) {
@@ -32,25 +32,25 @@ public class Cube {
     	}
     }
 
-    public Color getColor() {
+    public MutableColor getColor() {
     	return color;
     }
     public int getType() {
     	return type;
     }
-	public static Cube createCube(int type, Color color) {
+	public static Cube createCube(int type, MutableColor color) {
 		Cube cube = new Cube(type);		
 		cube.color = color;
 		cube.free  = type == 0;
 		return cube;
 	}
-	public static Cube createStone(Color stoneColor) {
+	public static Cube createStone(MutableColor stoneColor) {
 		Cube cube = new Cube(2);
 		cube.color = stoneColor;
 		cube.free = false;
 		return cube;
 	}
-	public static Cube createRock(Color stoneColor) {
+	public static Cube createRock(MutableColor stoneColor) {
 		Cube cube = new Cube(3);
 		cube.color = stoneColor;
 		cube.free = false;
@@ -58,13 +58,13 @@ public class Cube {
 	}
 	public static Cube createEmpty() {
 		Cube cube = new Cube(0);
-		cube.color = Color.BLACK;
+		cube.color = MutableColor.BLACK;
 		cube.free = true;
 		return cube;
 	}
 	public static Cube createGround() {
 		Cube cube = new Cube(1);
-		cube.color = new Color(.5f, .25f, 0);
+		cube.color = MutableColor.DIRTY_BROWN;
 		cube.free = false;
 		return cube;		
 	}

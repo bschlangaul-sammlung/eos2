@@ -1,7 +1,6 @@
 package billard;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Vector;
 import de.lathanda.eos.game.Sprite;
@@ -17,7 +16,7 @@ public class Border extends Sprite {
 
 	@Override
 	public void render(Picture g) {
-		g.setFillColor(Color.BLACK);
+		g.setFillColor(MutableColor.BLACK);
 		g.drawShape(shape);
 	}
 }

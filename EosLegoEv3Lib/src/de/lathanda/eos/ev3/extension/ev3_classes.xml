@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<types>
+    <class class="de.lathanda.eos.robot.Robot" id="robot" super="string">
+        <property id="x" type="int" view="getX"/>
+        <property id="y" type="int" view="getY"/>
+        <property id="z" type="int" view="getZ"/>
+        <property id="robotcolor" type="color" view="getRobotColor"/>
+        <property id="direction" type="direction" view="getDirection"/>
+        <property id="stonecolor" type="color" view="getStoneColor"/>
+        <method id="2" name="pickup">
+            <parameter type="integer"/>
+        </method>
+        <method id="3" name="getRobotColor" return="color"/>
+        <method id="4" name="setRobotColor">
+            <parameter type="color"/>
+        </method>
+        <method id="5" name="fly"/>
+        <method id="6" name="dropStone"/>
+        <method id="7" name="flyUp"/>
+        <method id="8" name="isFree" return="boolean"/>
+        <method id="9" name="isObstacle" return="boolean"/>
+        <method id="10" name="isBackFree" return="boolean"/>
+        <method id="11" name="isBackObstacle" return="boolean"/>
+        <method id="12" name="isLeftFree" return="boolean"/>
+        <method id="13" name="isLeftObstacle" return="boolean"/>
+        <method id="14" name="isMarked" return="boolean"/>
+        <method id="15" name="isMarked" return="boolean">
+            <parameter type="color"/>
+        </method>
+        <method id="16" name="isFacingNorth" return="boolean"/>
+        <method id="17" name="isTopFree" return="boolean"/>
+        <method id="18" name="isFacingEast" return="boolean"/>
+        <method id="19" name="isRightFree" return="boolean"/>
+        <method id="20" name="isRightObstacle" return="boolean"/>
+        <method id="21" name="hasStone" return="boolean"/>
+        <method id="22" name="hasStone" return="boolean">
+            <parameter type="integer"/>
+        </method>
+        <method id="23" name="isFacingSouth" return="boolean"/>
+        <method id="24" name="isBottomFree" return="boolean"/>
+        <method id="25" name="isFacingWest" return="boolean"/>
+        <method id="26" name="turnLeft"/>
+        <method id="27" name="flyLeft"/>
+        <method id="28" name="removeMark"/>
+        <method id="29" name="setMark"/>
+        <method id="30" name="setMark">
+            <parameter type="color"/>
+        </method>
+        <method id="31" name="turnRight"/>
+        <method id="32" name="flyRight"/>
+        <method id="33" name="flyDown"/>
+        <method id="34" name="step"/>
+        <method id="35" name="step">
+            <parameter type="integer"/>
+        </method>
+        <method id="36" name="stepLeft"/>
+        <method id="37" name="stepRight"/>
+        <method id="38" name="stepBack"/>
+        <method id="39" name="removeStone">
+            <parameter type="integer"/>
+        </method>
+        <method id="40" name="stoneColor" return="color"/>
+        <method id="41" name="setStoneColor">
+            <parameter type="color"/>
+        </method>
+        <method id="42" name="placeStone">
+            <parameter type="integer"/>
+        </method>
+        <method id="43" name="turnAround"/>
+        <method id="44" name="flyBack"/>
+    </class>
+    <class class="de.lathanda.eos.robot.World" id="world" super="string">
+        <property id="robots" type="int" view="getRobotCount"/>
+        <property id="entrances" type="int" view="getEntranceCount"/>
+        <method id="1" name="enter">
+            <parameter type="robot"/>
+        </method>
+        <method id="2" name="load">
+            <parameter type="string"/>
+        </method>
+        <method id="3" name="pickupStone">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+        </method>
+        <method id="4" name="removeStone">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+        </method>
+        <method id="5" name="setStoneColor">
+            <parameter type="color"/>
+        </method>
+        <method id="6" name="dropStone">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+        </method>
+        <method id="7" name="setStone">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+        </method>
+        <method id="8" name="fillRandom">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+            <parameter type="real"/>
+        </method>
+    </class>
+</types>

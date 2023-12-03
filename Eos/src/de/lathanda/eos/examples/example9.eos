@@ -1,0 +1,7 @@
+//Es muss eine Datei a.eos existieren, welche die Anweisung a(g:Gruppe) definiert.
+einfügen
+  "a.eos"
+*einfügen
+g:Gruppe
+a(g)
+g.verschieben( 50 , 0 ) 

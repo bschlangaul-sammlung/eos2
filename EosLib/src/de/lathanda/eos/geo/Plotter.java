@@ -1,13 +1,11 @@
 package de.lathanda.eos.geo;
 
-import java.awt.Color;
 import java.util.Iterator;
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.FillDescriptor;
 import de.lathanda.eos.base.FillStyle;
 import de.lathanda.eos.base.LineDescriptor;
 import de.lathanda.eos.base.LineStyle;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 
@@ -68,7 +66,7 @@ public class Plotter extends Group {
 	private void startPlot() {
 		if (polygon == null) {
 			polygon = new Polygon();
-			polygon.setLineColor(Color.BLACK);
+			polygon.setLineColor(MutableColor.BLACK);
 			polygon.setFillStyle(FillStyle.TRANSPARENT);
 		} else {
 			Polygon newPolygon = new Polygon();
@@ -146,18 +144,14 @@ public class Plotter extends Group {
 		return pen.getVisible();
 	}
 
-	public void setPenColor(Color c) {
+	public void setPenColor(MutableColor c) {
 		pen.setLineColor(c);
 	}
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-        attributes.add(new Attribut("isplotting", isPlotting));
-    	attributes.add(new Attribut("penx", pen.getAbsolutePosition().getX()));
-        attributes.add(new Attribut("peny", pen.getAbsolutePosition().getY()));
-        attributes.add(new Attribut("penangle", pen.getRotation()));
-        attributes.add(new Attribut("penvisible", pen.getVisible()));
-        attributes.add(new Attribut("pencolor", polygon.getLineColor()));               	
+	public boolean isPlotting() {
+		return isPlotting;
+	}
+	public MutableColor getPenColor() {
+		return polygon.getLineColor();
 	}
     @Override
     public Figure copy() {
@@ -167,12 +161,12 @@ public class Plotter extends Group {
         return g;
     }
 	@Override
-	public void setLineColor(Color color) {
+	public void setLineColor(MutableColor color) {
 		startPlot();
 		polygon.setLineColor(color);
 	}
 
-	public Color getLineColor() {
+	public MutableColor getLineColor() {
 		return polygon.getLineColor();
 	}
 
@@ -197,7 +191,7 @@ public class Plotter extends Group {
 	}
 
 	@Override
-	public void setFillColor(Color color) {
+	public void setFillColor(MutableColor color) {
 		startPlot();
 		polygon.setFillColor(color);
 	}   

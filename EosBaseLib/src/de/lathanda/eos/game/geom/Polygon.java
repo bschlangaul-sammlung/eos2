@@ -126,7 +126,7 @@ public class Polygon extends Shape {
         transform();
     }
 
-    public Types getOutlineType() {
+    protected Types getOutlineType() {
         return Types.POLYGON;
     }
 

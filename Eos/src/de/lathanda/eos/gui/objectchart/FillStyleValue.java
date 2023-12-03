@@ -3,6 +3,7 @@ package de.lathanda.eos.gui.objectchart;
 import de.lathanda.eos.base.FillStyle;
 import de.lathanda.eos.gui.diagram.Unit;
 import de.lathanda.eos.gui.diagram.Drawing;
+
 /**
  * Zeichnet Symbol für die Füllart.
  *
@@ -11,7 +12,7 @@ import de.lathanda.eos.gui.diagram.Drawing;
  */
 public class FillStyleValue extends Unit {
 	private FillStyle fillStyle;
-	
+
 	public FillStyleValue(FillStyle fillStyle) {
 		super();
 		this.fillStyle = fillStyle;
@@ -22,10 +23,10 @@ public class FillStyleValue extends Unit {
 		d.drawRect(0, 0, 8, 8);
 		switch (fillStyle) {
 		case TRANSPARENT:
-			//nothing
+			// nothing
 			break;
 		case RULED:
-			for(int i = 2; i < 8; i += 2) {
+			for (int i = 2; i < 8; i += 2) {
 				d.drawLine(0, i, 8, i);
 			}
 			break;
@@ -33,10 +34,10 @@ public class FillStyleValue extends Unit {
 			d.fillRect(0, 0, 8, 8);
 			break;
 		case CHECKED:
-			for(int i = 2; i < 8; i += 2) {
+			for (int i = 2; i < 8; i += 2) {
 				d.drawLine(0, i, 8, i);
 				d.drawLine(i, 0, i, 8);
-			}			
+			}
 			break;
 		}
 

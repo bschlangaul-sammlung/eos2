@@ -1,0 +1,8 @@
+f:Fenster
+f.gitterFarbeSetzen( blau )
+f.hintergrundFarbeSetzen( rot )
+f.verschiebe(- 50 , 0 )
+f.breiteSetzen( 100 )
+f.höheSetzen( 100 )
+r:Rechteck
+f.zeichne(r) 

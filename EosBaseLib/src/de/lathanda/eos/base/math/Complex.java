@@ -293,18 +293,4 @@ public class Complex {
     public boolean equals(Complex c) {
         return a == c.a && b == c.b;
     }
-
-    /**
-     * @return Eins
-     */
-    public Complex one() {
-        return ONE;
-    }
-
-    /**
-     * @return Null
-     */
-    public Complex zero() {
-        return ZERO;
-    }
 }

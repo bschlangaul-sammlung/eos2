@@ -81,7 +81,7 @@ public class Rectangle extends Polygon {
     /* (non-Javadoc)
      * @see de.lathanda.sgl.geom2d.Polygon#getOutlineType()
      */
-    public Types getOutlineType() {
+    protected Types getOutlineType() {
         if (angle == 0) {
             return Types.RECTANGLE;
         } else {

@@ -1,20 +1,18 @@
 package de.lathanda.eos.base;
 
-import java.awt.Color;
-
 /**
  * F&uuml;llungseigenschaften.
  *
  * @author Peter (Lathanda) Schneider
  */
 public class FillDescriptor {
-	public static final FillDescriptor EMPTY = new FillDescriptor(Color.BLACK, FillStyle.TRANSPARENT);
-    private Color color;
+	public static final FillDescriptor EMPTY = new FillDescriptor(MutableColor.BLACK, FillStyle.TRANSPARENT);
+    private MutableColor color;
     private FillStyle type;
     public FillDescriptor() {
-        this(Color.WHITE, FillStyle.FILLED);
+        this(MutableColor.WHITE, FillStyle.FILLED);
     }
-    public FillDescriptor(Color color, FillStyle type) {
+    public FillDescriptor(MutableColor color, FillStyle type) {
         this.color = color;
         this.type = type;
     }
@@ -22,10 +20,10 @@ public class FillDescriptor {
         this.color = fill.color;
         this.type = fill.type;
     }
-    public Color getColor() {
+    public MutableColor getColor() {
         return color;
     }
-    public void setColor(Color c) {
+    public void setColor(MutableColor c) {
         this.color = c;
     }
     public FillStyle getFillStyle() {

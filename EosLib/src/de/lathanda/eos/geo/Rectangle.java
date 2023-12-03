@@ -2,8 +2,6 @@ package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.layout.BalancePoint;
 
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.layout.Transform;
@@ -158,14 +156,4 @@ public class Rectangle extends FilledFigure {
         bound.add(t.transform(+ width / 2, - height / 2));       
         return bound;
     }
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-    	attributes.add(new Attribut("width", getWidth()));
-        attributes.add(new Attribut("height", getHeight()));
-    	attributes.add(new Attribut("left", getLeft()));
-    	attributes.add(new Attribut("top", getTop()));
-        attributes.add(new Attribut("right", getRight()));
-        attributes.add(new Attribut("bottom", getBottom()));
-	} 
 }

@@ -1,8 +1,8 @@
 package asteroids;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.math.Vector;
@@ -30,10 +30,10 @@ public class Schiff extends Sprite {
 	@Override
 	public void render(Picture g) {
 		if (unverwundbar > 0) {
-			g.setFillColor(Color.BLUE);
+			g.setFillColor(MutableColor.BLUE);
 			g.drawEllipse(shape.getX(), shape.getY(), 10, 10);
 		}
-		g.setFillColor(Color.WHITE);
+		g.setFillColor(MutableColor.WHITE);
 		g.drawShape(shape);
 	}
 

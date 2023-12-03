@@ -2,7 +2,6 @@ package eos;
 
 import de.lathanda.eos.base.Alignment;
 import de.lathanda.eos.geo.TextField;
-import java.awt.Color;
 
 /**
  * @author Peter Schneider
@@ -20,11 +19,11 @@ public class TextFeld extends Rechteck {
     	super(new TextField());
         textfield = (TextField)figure;
     }
-    public void schriftfarbeSetzen(Color farbe) {
-        textfield.setTextColor(farbe);
+    public void schriftfarbeSetzen(Farbe farbe) {
+        textfield.setTextColor(farbe.getColor());
     }
-    public Color schriftfarbeLesen() {
-        return textfield.getTextColor();
+    public Farbe schriftfarbeLesen() {
+        return new Farbe(textfield.getTextColor());
     }
     public void schriftgroesseSetzen(int groesse) {
         textfield.setTextSize(groesse);

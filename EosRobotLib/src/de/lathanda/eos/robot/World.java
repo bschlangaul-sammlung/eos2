@@ -1,6 +1,5 @@
 package de.lathanda.eos.robot;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,18 +20,20 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import de.lathanda.eos.base.Readout;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.ResourceLoader;
 import de.lathanda.eos.base.event.CleanupListener;
+import de.lathanda.eos.base.util.Direction;
 import de.lathanda.eos.robot.exceptions.CubeImmutableException;
-import de.lathanda.eos.robot.exceptions.CubeMissingException;
 import de.lathanda.eos.robot.exceptions.RobotEntranceMissingException;
+import de.lathanda.eos.robot.exceptions.RobotException;
 import de.lathanda.eos.robot.exceptions.RobotNoSpaceException;
 import de.lathanda.eos.robot.exceptions.UnknownWorldVersionException;
 import de.lathanda.eos.robot.exceptions.WorldLoadFailedException;
@@ -45,9 +46,9 @@ import de.lathanda.eos.robot.gui.WorldFrame;
  * Sie erzeugt das 3D Fenster und verwaltet alle Inhalte der Welt.
  *
  * @author Peter (Lathanda) Schneider
- * @since 0.8
+ *
  */
-public class World implements CleanupListener, Readout {
+public class World implements CleanupListener {
 	/**
 	 * Menge aller Säulen.
 	 */
@@ -63,11 +64,11 @@ public class World implements CleanupListener, Readout {
 	/**
 	 * Farbe neuer Steine die über die Welt erzeugt werden.
 	 */
-	private Color stoneColor = Color.RED;
+	private MutableColor stoneColor = MutableColor.RED;
 	/**
 	 * Farbe neuer Markierungen die über die Welt erzeugt werden.
 	 */
-	private Color markColor = Color.YELLOW;
+	private MutableColor markColor = MutableColor.YELLOW;
 	/**
 	 * Genutzter x-Bereich.
 	 */
@@ -121,18 +122,19 @@ public class World implements CleanupListener, Readout {
 			load(worldStream);
 		} catch (IOException fnfe) {
 			throw new WorldNotFoundException();
-		}
+		} 
 	}
 
 	/**
 	 * Lädt eine Welt aus einem Datenstrom.
 	 * @param worldStream
-	 * @throws WorldLoadFailedException
+	 * @throws WorldLoadFailedException 
+	 * @throws RobotException 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public void load(InputStream worldStream) throws WorldLoadFailedException, UnknownWorldVersionException {
+	public void load(InputStream worldStream) throws WorldLoadFailedException {
 		synchronized (columns) {
 			columns.clear();
 		}
@@ -142,7 +144,7 @@ public class World implements CleanupListener, Readout {
 		synchronized (robots) {
 			robots.clear();
 		}
-		stoneColor = Color.RED;
+		stoneColor = MutableColor.RED;
 		xRange = new IntRange(0, 0);
 		yRange = new IntRange(0, 0);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -162,7 +164,7 @@ public class World implements CleanupListener, Readout {
 			default:
 				throw new UnknownWorldVersionException();
 			}
-		} catch (SAXException | IOException | ParserConfigurationException e) {
+		} catch (SAXException | IOException | ParserConfigurationException | RobotException e) {
 			throw new WorldLoadFailedException();
 		}
 	}
@@ -170,8 +172,9 @@ public class World implements CleanupListener, Readout {
 	/**
 	 * Dekodiert eine Version 1 XML-Datei als Welt. 
 	 * @param world
+	 * @throws RobotException 
 	 */
-	private void parseVersion1(Element world) {
+	private void parseVersion1(Element world) throws RobotException {
 		if (world.hasAttribute("minx")) {
 			minX = Integer.parseInt(world.getAttribute("minx"));
 		} else {
@@ -214,13 +217,14 @@ public class World implements CleanupListener, Readout {
 							Integer.parseInt(element.getAttribute("y")));
 					Column column = getColumn(coordinate);
 					column.setMark(Integer.parseInt(element.getAttribute("mark")) == 1);
+
 					NodeList cubeNodes = node.getChildNodes();
 					for (int j = 0; j < cubeNodes.getLength(); j++) {
 						Node cubeNode = cubeNodes.item(j);
 						if (cubeNode.getNodeType() == Node.ELEMENT_NODE && cubeNode.getNodeName().equals("cube")) {
 							Element cubeElement = (Element) cubeNode;
 							Cube cube = Cube.createCube(Integer.parseInt(cubeElement.getAttribute("type")),
-									new Color(Integer.parseInt(cubeElement.getAttribute("color"))));
+									new MutableColor(Integer.parseInt(cubeElement.getAttribute("color"))));
 							int level = Integer.parseInt(cubeElement.getAttribute("index"));
 							if (level >= 0) {
 								column.setCube(level, cube);
@@ -236,8 +240,9 @@ public class World implements CleanupListener, Readout {
 	/**
 	 * Dekodiert eine Version 1 XML-Datei als Welt. 
 	 * @param world
+	 * @throws RobotException 
 	 */
-	private void parseVersion2(Element world) {
+	private void parseVersion2(Element world) throws RobotException {
 		if (world.hasAttribute("minx")) {
 			minX = Integer.parseInt(world.getAttribute("minx"));
 		} else {
@@ -297,7 +302,7 @@ public class World implements CleanupListener, Readout {
 							Integer.parseInt(element.getAttribute("y")));
 					Column column = getColumn(coordinate);
 					if (element.hasAttribute("mark")) {
-						column.setMark(new Color(Integer.parseInt(element.getAttribute("mark"))));
+						column.setMark(new MutableColor(Integer.parseInt(element.getAttribute("mark"))));
 					}
 					NodeList cubeNodes = node.getChildNodes();
 					for (int j = 0; j < cubeNodes.getLength(); j++) {
@@ -305,7 +310,7 @@ public class World implements CleanupListener, Readout {
 						if (cubeNode.getNodeType() == Node.ELEMENT_NODE && cubeNode.getNodeName().equals("cube")) {
 							Element cubeElement = (Element) cubeNode;
 							Cube cube = Cube.createCube(Integer.parseInt(cubeElement.getAttribute("type")),
-									new Color(Integer.parseInt(cubeElement.getAttribute("color"))));
+									new MutableColor(Integer.parseInt(cubeElement.getAttribute("color"))));
 							int level = Integer.parseInt(cubeElement.getAttribute("index"));
 							if (level >= 0) {
 								column.setCube(level, cube);
@@ -324,8 +329,10 @@ public class World implements CleanupListener, Readout {
 	 * @param targetStream
 	 * @throws ParserConfigurationException
 	 * @throws TransformerException
+	 * @throws RobotException 
+	 * @throws DOMException 
 	 */
-	public void save(OutputStream targetStream) throws ParserConfigurationException, TransformerException {
+	public void save(OutputStream targetStream) throws ParserConfigurationException, TransformerException, RobotException {
 		Document world = buildDocumentVersion2();
 		DOMSource worldSource = new DOMSource(world);
 		TransformerFactory tf = TransformerFactory.newInstance();
@@ -340,8 +347,10 @@ public class World implements CleanupListener, Readout {
 	 * Kodiert eine Welt als Version 2 XML-Datei.
 	 * @return
 	 * @throws ParserConfigurationException
+	 * @throws RobotException 
+	 * @throws DOMException 
 	 */
-	private Document buildDocumentVersion2() throws ParserConfigurationException {
+	private Document buildDocumentVersion2() throws ParserConfigurationException, DOMException, RobotException {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.newDocument();
@@ -423,8 +432,9 @@ public class World implements CleanupListener, Readout {
 	 * @param right Rechte Grenze
 	 * @param bottom Untere Grenze
 	 * @param density Wahrscheinlichkeit einen Stein zu setzen. 0 Nie 1 Immer 
+	 * @throws RobotException 
 	 */
-	public void fillRandom(int left, int top, int right, int bottom, double density) {
+	public void fillRandom(int left, int top, int right, int bottom, double density) throws RobotException {
 		for (int x = left; x <= right; x++) {
 			next: for (int y = bottom; y <= top; y++) {
 				if (random.nextDouble() <= density) {
@@ -487,8 +497,9 @@ public class World implements CleanupListener, Readout {
 	/**
 	 * Roboter betritt die Welt beim ersten freien Eingang.
 	 * @param r 
+	 * @throws RobotException 
 	 */
-	public void enter(Robot r) throws RobotEntranceMissingException, RobotNoSpaceException {
+	public void enter(Robot r) throws RobotException {
 		synchronized (entrances) {
 			if (entrances.size() == 0) {
 				throw new RobotEntranceMissingException();
@@ -548,8 +559,9 @@ public class World implements CleanupListener, Readout {
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @throws RobotException 
 	 */
-	public void setStone(int x, int y, int z) {
+	public void setStone(int x, int y, int z) throws RobotException {
 		getColumn(x, y).setCube(z, Cube.createStone(stoneColor));
 	}
 	/**
@@ -558,11 +570,12 @@ public class World implements CleanupListener, Readout {
 	 * @param y
 	 * @param z
 	 * @param c Farbe des Steins
+	 * @throws RobotException 
 	 */
-	public void setStone(int x, int y, int z, Color c) {
+	public void setStone(int x, int y, int z, MutableColor c) throws RobotException {
 		getColumn(x, y).setCube(z, Cube.createStone(c));
 	}
-	public void setStoneCursor() {
+	public void setStoneCursor() throws RobotException {
 		getColumn(cursorX, cursorY).setCube(cursorZ, Cube.createStone(stoneColor));
 	}
 	/**
@@ -570,26 +583,27 @@ public class World implements CleanupListener, Readout {
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @throws RobotException 
 	 */
-	public void setRock(int x, int y, int z) {
+	public void setRock(int x, int y, int z) throws RobotException {
 		getColumn(x, y).setCube(z, Cube.createRock(stoneColor));
 	}
 	
-	public void setRockCursor() {
+	public void setRockCursor() throws RobotException {
 		getColumn(cursorX, cursorY).setCube(cursorZ, Cube.createRock(stoneColor));
 	}
 
-	public void toggleMarkCursor() {
+	public void toggleMarkCursor() throws RobotException {
 		getColumn(cursorX, cursorY).toggleMark(markColor);
 	}
-	public void setMark(int x, int y, Color c) {
+	public void setMark(int x, int y, MutableColor c) throws RobotException {
 		getColumn(x, y).setMark(c);
 	}
 	/**
 	 * Setzt die Farbe für neue Steine
 	 * @param c
 	 */
-	public void setStoneColor(Color c) {
+	public void setStoneColor(MutableColor c) {
 		this.stoneColor = c;
 	}
 
@@ -597,21 +611,21 @@ public class World implements CleanupListener, Readout {
 	 * Liefert die Farbe für neue Steine.
 	 * @return
 	 */
-	public Color getStoneColor() {
+	public MutableColor getStoneColor() {
 		return this.stoneColor;
 	}
 	/**
 	 * Setzt die Farbe für neue Markierungen
 	 * @param c
 	 */
-	public void setMarkColor(Color c) {
+	public void setMarkColor(MutableColor c) {
 		this.markColor = c;
 	}
 	/**
 	 * Liefert die Farbe für neue Markierungen.
 	 * @return
 	 */
-	public Color getMarkColor() {
+	public MutableColor getMarkColor() {
 		return this.markColor;
 	}
 	/**
@@ -619,7 +633,7 @@ public class World implements CleanupListener, Readout {
 	 * @param x
 	 * @param y
 	 */
-	public void dropStone(int x, int y) {
+	public void dropStone(int x, int y) throws RobotException {
 		getColumn(x, y).dropCube(Cube.createStone(stoneColor));
 	}
 	/**
@@ -628,7 +642,7 @@ public class World implements CleanupListener, Readout {
 	 * @param y
 	 * @param c Farbe des Steins
 	 */
-	public void dropStone(int x, int y, Color c) {
+	public void dropStone(int x, int y, MutableColor c) throws RobotException {
 		getColumn(x, y).dropCube(Cube.createStone(c));
 	}
 	/**
@@ -638,7 +652,7 @@ public class World implements CleanupListener, Readout {
 	 * @param z
 	 * @throws CubeImmutableException 
 	 */
-	public void removeStone(int x, int y, int z) throws CubeImmutableException {
+	public void removeStone(int x, int y, int z) throws RobotException {
 		getColumn(x, y).removeCube(z);
 	}
 
@@ -647,11 +661,12 @@ public class World implements CleanupListener, Readout {
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @throws RobotException 
 	 */
-	public void remove(int x, int y, int z) {
+	public void remove(int x, int y, int z) throws RobotException {
 		getColumn(x, y).remove(z);
 	}
-	public void removeCursor() {
+	public void removeCursor() throws RobotException {
 		getColumn(cursorX, cursorY).remove(cursorZ);
 		synchronized (entrances) {
 			Entrance e;
@@ -669,10 +684,9 @@ public class World implements CleanupListener, Readout {
 	 * Hebt den obersten Stein auf.
 	 * @param x
 	 * @param y
-	 * @throws CubeMissingException
-	 * @throws CubeImmutableException
+	 * @throws RobotException 
 	 */
-	public void pickupStone(int x, int y) throws CubeMissingException, CubeImmutableException {
+	public void pickupStone(int x, int y) throws RobotException {
 		getColumn(x, y).pickup();
 	}
 	
@@ -870,10 +884,11 @@ public class World implements CleanupListener, Readout {
 			robots.clear();
 		}
 	}
-    @Override
- 	public void getAttributes(LinkedList<Attribut> attributes) {
-        attributes.add(new Attribut("robots", robots.size()));
-        attributes.add(new Attribut("entrances", entrances.size()));
+	public int getRobotCount() {
+		return robots.size();
+	}
+	public int getEntranceCount() {
+		return entrances.size();
 	}
 
 	public void setRange(Integer minX, Integer maxX, Integer minY, Integer maxY) {

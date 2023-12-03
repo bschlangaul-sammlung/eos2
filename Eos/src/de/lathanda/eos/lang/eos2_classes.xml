@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<types>
+	<global id="base" class="de.lathanda.eos.base.Constants"> 	
+    	<variable id="1"  name="DASHED" type="linestyle"/>
+    	<variable id="2"  name="SOLID" type="linestyle"/>
+    	<variable id="3"  name="DOTTED" type="linestyle"/>
+    	<variable id="4"  name="DASHED_DOTTED" type="linestyle"/>
+    	<variable id="5"  name="INVISIBLE" type="linestyle"/>    	
+    	<variable id="6"  name="FILLED" type="fillstyle"/>
+    	<variable id="7"  name="SHADED" type="fillstyle"/>
+    	<variable id="8"  name="DARK_SHADED" type="fillstyle"/>
+    	<variable id="9"  name="TRANSPARENT" type="fillstyle"/>
+    	<variable id="10" name="CENTER" type="alignment"/>
+    	<variable id="11" name="LEFT" type="alignment"/>
+    	<variable id="12" name="RIGHT" type="alignment"/>
+    	<variable id="13" name="TOP" type="alignment"/>
+    	<variable id="14" name="BOTTOM" type="alignment"/>
+    	<variable id="15" name="YELLOW" type="color"/>
+    	<variable id="16" name="BLACK" type="color"/>
+    	<variable id="17" name="WHITE" type="color"/>
+    	<variable id="18" name="GRID" type="color"/>
+    	<variable id="19" name="BLUE" type="color"/>
+    	<variable id="20" name="GREEN" type="color"/>
+    	<variable id="21" name="RED" type="color"/>
+    	<variable id="22" name="GRAY" type="color"/>
+    	<variable id="23" name="CYAN" type="color"/>
+    	<variable id="24" name="MAGENTA" type="color"/>
+    	<variable id="25" name="ORANGE" type="color"/>
+    	<variable id="26" name="PINK" type="color"/>
+    	<variable id="27" name="DARK_GRAY" type="color"/>
+    	<variable id="28" name="LIGHT_GRAY" type="color"/>
+    	<variable id="29" name="BROWN" type="color"/>
+    	<variable id="30" name="DIRTY_BROWN" type="color"/>
+    	<variable id="31" name="LIGHT_BLUE" type="color"/>
+    	<variable id="32" name="LIGHT_GREEN" type="color"/>
+	</global>
+    <class class="de.lathanda.eos.base.Alignment" id="alignment" super="string"/>
+    <class class="de.lathanda.eos.base.LineStyle" id="linestyle" super="string"/>
+    <class class="de.lathanda.eos.base.FillStyle" id="fillstyle" super="string"/>
+    <class class="boolean"                        id="boolean"   super="string"/>
+    <class class="int"                            id="integer"   super="real"/>
+    <class class="double"                         id="real"      super="string"/>
+    <class class="de.lathanda.eos.base.util.Direction" id="direction" super="string"/>
+    <class class="java.lang.String"               id="string"/>
+    <class class="de.lathanda.eos.base.Scaling"   id ="scaling"/>
+    <class class="?"                              id="figurelist"/>
+    <class class="?"                              id="point"/>
+    <class class="?"                              id="class"/>
+    <class class="?"                              id="?"/>
+    <class class="?"                              id="#"/>
+
+    <class class="de.lathanda.eos.base.MutableColor" id="color" super="string">
+        <method id="1" name="getAlpha" return="integer"/>
+        <method id="2" name="getBlue" return="integer"/>
+        <method id="3" name="darker" return="color"/>
+        <method id="4" name="getGreen" return="integer"/>
+        <method id="5" name="brighter" return="color"/>
+        <method id="6" name="getRed" return="integer"/>
+        <method id="7" name="setRed">
+            <parameter type="integer"/>
+        </method>
+        <method id="8" name="setGreen">
+            <parameter type="integer"/>
+        </method>
+        <method id="9" name="setBlue">
+            <parameter type="integer"/>
+        </method>
+        <method id="10" name="setAlpha">
+            <parameter type="integer"/>
+        </method>
+    </class>
+    
+    <class class="de.lathanda.eos.geo.Triangle" id="triangle" super="filledfigure">
+        <property id="a" type="point" view="getAText"/>
+        <property id="b" type="point" view="getBText"/>
+        <property id="c" type="point" view="getCText"/>
+        <method id="1" name="setCorners">
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="2" name="mirrorX"/>
+        <method id="3" name="mirrorY"/>
+    </class>
+    <class class="de.lathanda.eos.geo.Ellipse" id="ellipse" super="filledfigure">
+        <property id="centerx" type="real" getter="getCenterX" setter="setCenterX"/>
+        <property id="centery" type="real" getter="getCenterY" setter="setCenterY"/>
+        <property id="radiusx" type="real" getter="getRadiusX" setter="setRadiusX"/>
+        <property id="radiusy" type="real" getter="getRadiusY" setter="setRadiusY"/>
+        <method id="5" name="setCenter">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="6" name="getCenterX" return="real"/>
+        <method id="7" name="setCenterX">
+            <parameter type="real"/>
+        </method>
+        <method id="8" name="getCenterY" return="real"/>
+        <method id="9" name="setCenterY">
+            <parameter type="real"/>
+        </method>
+        <method id="10" name="getRadiusX" return="real"/>
+        <method id="11" name="setRadiusX">
+            <parameter type="real"/>
+        </method>
+        <method id="12" name="getRadiusY" return="real"/>
+        <method id="13" name="setRadiusY">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Window" id="window" super="string">
+        <property id="gridvisible" type="boolean" getter="getGridVisible" setter="setGridVisible"/>
+        <property id="width" type="real" getter="getWidth" setter="setWidth"/>
+        <property id="gridcolor" type="color" getter="getGridColor" setter="setGridColor"/>
+        <property id="backcolor" type="color" getter="getBackgroundColor" setter="setBackgroundColor"/>
+        <property id="height" type="real" getter="getHeight" setter="setHeight"/>
+        <property id="left" type="real" getter="getLeft" setter="setLeft"/>
+        <property id="title" type="string" getter="getTitle" setter="setTitle"/>
+        <property id="top" type="real" getter="getTop" setter="setTop"/>
+        <property id="gridwidth" type="real" getter="getGridWidth" setter="setGridWidth"/>
+        <property id="name" type="string" getter="getTitle" setter="setTitle"/>
+        <method id="9" name="getWidth" return="real"/>
+        <method id="10" name="setWidth">
+            <parameter type="real"/>
+        </method>
+        <method id="11" name="turnGridOff"/>
+        <method id="12" name="turnGridOn"/>
+        <method id="13" name="getGridColor" return="color"/>
+        <method id="14" name="setGridColor">
+            <parameter type="color"/>
+        </method>
+        <method id="15" name="getBackgroundColor" return="color"/>
+        <method id="16" name="setBackgroundColor">
+            <parameter type="color"/>
+        </method>
+        <method id="17" name="getHeight" return="real"/>
+        <method id="18" name="setHeight">
+            <parameter type="real"/>
+        </method>
+        <method id="19" name="getLeft" return="real"/>
+        <method id="20" name="setLeft">
+            <parameter type="real"/>
+        </method>
+        <method id="21" name="isCursorDown" return="boolean"/>
+        <method id="22" name="isCursorClick" return="boolean"/>
+        <method id="23" name="getCursorX" return="real"/>
+        <method id="24" name="getCursorY" return="real"/>
+        <method id="25" name="setCenter">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="26" name="getTitle" return="string"/>
+        <method id="27" name="setTitle">
+            <parameter type="string"/>
+        </method>
+        <method id="28" name="getTop" return="real"/>
+        <method id="29" name="setTop">
+            <parameter type="real"/>
+        </method>
+        <method id="30" name="getGridWidth" return="real"/>
+        <method id="31" name="setGridWidth">
+            <parameter type="real"/>
+        </method>
+        <method id="32" name="move">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="33" name="addFigure">
+            <parameter type="figure"/>
+        </method>
+        <method id="34" name="setZoom">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Figure" id="figure" super="string">
+        <property id="visible" type="boolean" getter="getVisible" setter="setVisible"/>
+        <property id="x" type="real" getter="getX" setter="setX"/>
+        <property id="y" type="real" getter="getY" setter="setY"/>
+        <property id="angle" type="real" view="getAngleText"/>
+        <property id="mirrored" type="boolean" view="getMirrored"/>
+        <method id="4" name="rotate">
+            <parameter type="real"/>
+        </method>
+        <method id="5" name="rotateAround">
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="6" name="getVisible" return="boolean"/>
+        <method id="7" name="setVisible">
+            <parameter type="boolean"/>
+        </method>
+        <method id="8" name="scale">
+            <parameter type="real"/>
+        </method>
+        <method id="9" name="scaleAt">
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="10" name="move">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="11" name="moveTo">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="12" name="getX" return="real"/>
+        <method id="13" name="setX">
+            <parameter type="real"/>
+        </method>
+        <method id="14" name="getY" return="real"/>
+        <method id="15" name="setY">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.FilledFigure" id="filledfigure" super="linefigure">
+        <property id="fillstyle" type="fillstyle" getter="getFillStyle" setter="setFillStyle"/>
+        <property id="fillcolor" type="color" getter="getFillColor" setter="setFillColor"/>
+        <method id="3" name="getFillStyle" return="fillstyle"/>
+        <method id="4" name="setFillStyle">
+            <parameter type="fillstyle"/>
+        </method>
+        <method id="5" name="getFillColor" return="color"/>
+        <method id="6" name="setFillColor">
+            <parameter type="color"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Graphic" id="grafic" super="rectangle">
+        <property id="mode" type="scaling" view="getMode"/>
+        <property id="image" type="string" view="getImage"/>
+        <method id="1" name="cutImage"/>
+        <method id="2" name="fitImage"/>
+        <method id="3" name="stretchImage"/>
+        <method id="4" name="loadImage">
+            <parameter type="string"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Group" id="group" super="figure">
+        <property id="autocenter" type="boolean" view="getAutoCenter"/>
+        <property id="members" type="figurelist" view="getMembers"/>
+        <method id="1" name="setFillStyle">
+            <parameter type="fillstyle"/>
+        </method>
+        <method id="2" name="setFillColor">
+            <parameter type="color"/>
+        </method>
+        <method id="3" name="addFigure">
+            <parameter type="figure"/>
+        </method>
+        <method id="4" name="copyFigure">
+            <parameter type="figure"/>
+        </method>
+        <method id="5" name="setLineStyle">
+            <parameter type="linestyle"/>
+        </method>
+        <method id="6" name="setLineColor">
+            <parameter type="color"/>
+        </method>
+        <method id="7" name="setLineWidth">
+            <parameter type="real"/>
+        </method>
+        <method id="8" name="mirrorX"/>
+        <method id="9" name="mirrorY"/>
+        <method id="10" name="setCenter">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Circle" id="circle" super="filledfigure">
+        <property id="centerx" type="real" getter="getCenterX" setter="setCenterX"/>
+        <property id="centery" type="real" getter="getCenterY" setter="setCenterY"/>
+        <property id="radius" type="real" getter="getRadius" setter="setRadius"/>
+        <method id="4" name="setCenter">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="5" name="getCenterX" return="real"/>
+        <method id="6" name="setCenterX">
+            <parameter type="real"/>
+        </method>
+        <method id="7" name="getCenterY" return="real"/>
+        <method id="8" name="setCenterY">
+            <parameter type="real"/>
+        </method>
+        <method id="9" name="getRadius" return="real"/>
+        <method id="10" name="setRadius">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Line" id="line" super="linefigure">   
+        <property id="linecolor" type="color" getter="getLineColor" setter="setLineColor"/>
+        <property id="linestyle" type="linestyle" getter="getLineStyle" setter="setLineStyle"/>
+        <property id="length" type="real" view="getLength"/>
+        <property id="linewidth" type="real" getter="getLineWidth" setter="setLineWidth"/>
+        <property id="x1" type="real" getter="getX1" setter="setX1"/>
+        <property id="x2" type="real" getter="getX2" setter="setX2"/>
+        <property id="y1" type="real" getter="getY1" setter="setY1"/>
+        <property id="y2" type="real" getter="getY2" setter="setY2"/>
+        <method id="8" name="setPoints">
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="9" name="getLineColor" return="color"/>
+        <method id="10" name="setLineColor">
+            <parameter type="color"/>
+        </method>
+        <method id="11" name="getLineStyle" return="linestyle"/>
+        <method id="12" name="setLineStyle">
+            <parameter type="linestyle"/>
+        </method>
+        <method id="13" name="getLineWidth" return="real"/>
+        <method id="14" name="setLineWidth">
+            <parameter type="real"/>
+        </method>
+        <method id="15" name="setPoint1">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="16" name="setPoint2">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="17" name="getX1" return="real"/>
+        <method id="18" name="setX1">
+            <parameter type="real"/>
+        </method>
+        <method id="19" name="getX2" return="real"/>
+        <method id="20" name="setX2">
+            <parameter type="real"/>
+        </method>
+        <method id="21" name="getY1" return="real"/>
+        <method id="22" name="setY1">
+            <parameter type="real"/>
+        </method>
+        <method id="23" name="getY2" return="real"/>
+        <method id="24" name="setY2">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Square" id="square" super="filledfigure">
+        <property id="side" type="real" getter="getSide" setter="setSide"/>
+        <method id="2" name="setLeftTop">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="3" name="getSide" return="real"/>
+        <method id="4" name="setSide">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.Rectangle" id="rectangle" super="filledfigure">  
+        <property id="width" type="real" getter="getWidth" setter="setWidth"/>
+        <property id="height" type="real" getter="getHeight" setter="setHeight"/>
+        <property id="left" type="real" getter="getLeft" setter="setLeft"/>
+        <property id="top" type="real" getter="getTop" setter="setTop"/>
+        <property id="right" type="real" getter="getRight" setter="setRight"/>
+        <property id="bottom" type="real" getter="getBottom" setter="setBottom"/>
+        <method id="7" name="getWidth" return="real"/>
+        <method id="8" name="setWidth">
+            <parameter type="real"/>
+        </method>
+        <method id="9" name="setCorners">
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="10" name="getHeight" return="real"/>
+        <method id="11" name="setHeight">
+            <parameter type="real"/>
+        </method>
+        <method id="12" name="getLeft" return="real"/>
+        <method id="13" name="setLeftTop">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="14" name="setLeft">
+            <parameter type="real"/>
+        </method>
+        <method id="15" name="getTop" return="real"/>
+        <method id="16" name="setTop">
+            <parameter type="real"/>
+        </method>
+        <method id="17" name="getRight" return="real"/>
+        <method id="18" name="setRight">
+            <parameter type="real"/>
+        </method>
+        <method id="19" name="setRightBottom">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="20" name="getBottom" return="real"/>
+        <method id="21" name="setBottom">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.LineFigure" id="linefigure" super="figure">
+        <property id="borderstyle" type="linestyle" getter="getLineStyle" setter="setLineStyle"/>
+        <property id="bordercolor" type="color" getter="getLineColor" setter="setLineColor"/>
+        <property id="borderwidth" type="real" getter="getLineWidth" setter="setLineWidth"/>
+        <method id="4" name="getLineStyle" return="linestyle"/>
+        <method id="5" name="setLineStyle">
+            <parameter type="linestyle"/>
+        </method>
+        <method id="6" name="getLineColor" return="color"/>
+        <method id="7" name="setLineColor">
+            <parameter type="color"/>
+        </method>
+        <method id="8" name="getLineWidth" return="real"/>
+        <method id="9" name="setLineWidth">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <class class="de.lathanda.eos.geo.TextField" id="textfield" super="rectangle">
+        <property id="horizontal" type="alignment" getter="getAlignmentHorizontal" setter="setAlignmentHorizontal"/>
+        <property id="vertical" type="alignment" getter="getAlignmentVertical" setter="setAlignmentVertical"/>
+        <property id="hideborder" type="boolean" getter="getHideBorder" setter="setHideBorder"/>
+        <property id="autoadjust" type="boolean" getter="getAutoAdjust" setter="setAutoAdjust"/>
+        <property id="fontname" type="string" getter="getFont" setter="setFont"/>
+        <property id="fontcolor" type="color" getter="getTextColor" setter="setTextColor"/>
+        <property id="fontsize" type="integer" getter="getTextSize" setter="setTextSize"/>
+        <property id="text" type="string" view="getText"/>
+        <method id="8" name="getAlignmentHorizontal" return="alignment"/>
+        <method id="9" name="setAlignmentHorizontal">
+            <parameter type="alignment"/>
+        </method>
+        <method id="10" name="getAlignmentVertical" return="alignment"/>
+        <method id="11" name="setAlignmentVertical">
+            <parameter type="alignment"/>
+        </method>
+        <method id="12" name="getHideBorder" return="boolean"/>
+        <method id="13" name="setHideBorder">
+            <parameter type="boolean"/>
+        </method>
+        <method id="14" name="getAutoAdjust" return="boolean"/>
+        <method id="15" name="setAutoAdjust">
+            <parameter type="boolean"/>
+        </method>
+        <method id="16" name="getFont" return="string"/>
+        <method id="17" name="setFont">
+            <parameter type="string"/>
+        </method>
+        <method id="18" name="getTextColor" return="color"/>
+        <method id="19" name="setTextColor">
+            <parameter type="color"/>
+        </method>
+        <method id="20" name="getTextSize" return="integer"/>
+        <method id="21" name="setTextSize">
+            <parameter type="integer"/>
+        </method>
+        <method id="22" name="appendLine">
+            <parameter type="string"/>
+        </method>
+        <method id="23" name="deleteLine"/>
+    </class>
+    <class class="de.lathanda.eos.geo.Plotter" id="plotter" super="figure">
+        <property id="isplotting" type="boolean" view="isPlotting"/>
+        <property id="pencolor" type="color" view="getPenColor"/>
+        <property id="penangle" type="real" getter="getAngle" setter="setAngle"/>
+        <property id="penvisible" type="boolean" getter="getPenVisible" setter="setPenVisible"/>
+        <property id="penx" type="real" getter="getPenX" setter="setPenX"/>
+        <property id="peny" type="real" getter="getPenY" setter="setPenY"/>
+        <method id="5" name="clearAll"/>
+        <method id="6" name="getLineColor" return="color"/>
+        <method id="7" name="setLineColor">
+            <parameter type="color"/>
+        </method>
+        <method id="8" name="setFillStyle">
+            <parameter type="fillstyle"/>
+        </method>
+        <method id="9" name="setFillColor">
+            <parameter type="color"/>
+        </method>
+        <method id="10" name="getAngle" return="real"/>
+        <method id="11" name="setAngle">
+            <parameter type="real"/>
+        </method>
+        <method id="12" name="setLineStyle">
+            <parameter type="linestyle"/>
+        </method>
+        <method id="13" name="setLineWidth">
+            <parameter type="real"/>
+        </method>
+        <method id="14" name="turnLeft">
+            <parameter type="real"/>
+        </method>
+        <method id="15" name="turnRight">
+            <parameter type="real"/>
+        </method>
+        <method id="16" name="movePenTo">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="17" name="startPlotting"/>
+        <method id="18" name="stopPlotting"/>
+        <method id="19" name="getPenVisible" return="boolean"/>
+        <method id="20" name="setPenVisible">
+            <parameter type="boolean"/>
+        </method>
+        <method id="21" name="getPenX" return="real"/>
+        <method id="22" name="setPenX">
+            <parameter type="real"/>
+        </method>
+        <method id="23" name="getPenY" return="real"/>
+        <method id="24" name="setPenY">
+            <parameter type="real"/>
+        </method>
+        <method id="25" name="moveForward">
+            <parameter type="real"/>
+        </method>
+        <method id="26" name="setCenter">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </method>
+        <method id="27" name="moveBackward">
+            <parameter type="real"/>
+        </method>
+    </class>
+    <module class="de.lathanda.eos.base.SystemFunctions" id="function">
+        <function id="1" name="round" return="integer">
+            <parameter type="real"/>
+        </function>
+        <function id="2" name="floor" return="integer">
+            <parameter type="real"/>
+        </function>
+        <function id="3" name="random" return="integer">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+        </function>
+        <function id="4" name="abs" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="5" name="sqrt" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="6" name="sin" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="7" name="cos" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="8" name="tan" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="9" name="arctan" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="10" name="arcsin" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="11" name="arccos" return="real">
+            <parameter type="real"/>
+        </function>
+        <function id="12" name="phi" return="real">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </function>
+        <function id="13" name="r" return="real">
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </function>  
+        <function id="14" name="colorFromRGBI" return="color">
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+            <parameter type="integer"/>
+        </function>
+        <function id="15" name="colorFromRGBD" return="color">
+            <parameter type="real"/>
+            <parameter type="real"/>
+            <parameter type="real"/>
+        </function>
+    </module>
+</types>

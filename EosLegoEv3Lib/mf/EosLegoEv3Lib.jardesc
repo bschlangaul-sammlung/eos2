@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="Distribution/EosLegoEv3Lib.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/EosLegoEv3Lib/mf/EosLegoEv3Lib.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/EosLegoEv3Lib/mf/EosLegoEv3Lib.mf" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <folder path="/EosLegoEv3Lib/mf"/>
+        <javaElement handleIdentifier="=EosLegoEv3Lib/src=/optional=/true=/=/maven.pomderived=/true=/"/>
+        <file path="/EosLegoEv3Lib/.classpath"/>
+        <file path="/EosLegoEv3Lib/.project"/>
+        <folder path="/EosLegoEv3Lib/doc"/>
+    </selectedElements>
+</jardesc>

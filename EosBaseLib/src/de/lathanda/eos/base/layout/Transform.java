@@ -7,6 +7,8 @@ import de.lathanda.eos.base.math.Vector;
  * \brief Geometrische Transformation.
  * 
  * Speichert Transformationen von geometrischen Objekten.
+ * 
+ * Hinweis: Transformationsobjekte sind unveränderlich. Alle Methoden liefern eine neue Transformation zur&uuml;ck!
  *
  * @author Peter (Lathanda) Schneider
  */
@@ -117,9 +119,11 @@ public class Transform {
 	public Transform transformBack(Transform child) {
 		Transform result = child.rotate(-angle).scale(1 / scale);
 		if (mirrorx) {
-			result.mirrorX();
+			result = result.mirrorX();
 		}
-		return new Transform(result.v.substract(v).rotate(-angle).multiply(1 / scale), result.angle, result.mirrorx,
+		return new Transform(result.v.substract(v).rotate(-angle).multiply(1 / scale),
+				result.angle, 
+				result.mirrorx,
 				result.scale);
 	}
 

@@ -3,10 +3,7 @@ package de.lathanda.eos.geo;
 import de.lathanda.eos.base.layout.Transform;
 import de.lathanda.eos.base.math.Point;
 
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.Picture;
-import de.lathanda.eos.base.Readout;
 import de.lathanda.eos.base.layout.BalancePoint;
 import de.lathanda.eos.base.layout.BoundingBox;
 
@@ -15,7 +12,7 @@ import de.lathanda.eos.base.layout.BoundingBox;
  *
  * @author Peter (Lathanda) Schneider
  */
-public abstract class Figure implements Cloneable, Readout {
+public abstract class Figure implements Cloneable {
 	private boolean visible;
 	protected FigureGroup group;
 	protected Transform transform;
@@ -312,17 +309,15 @@ public abstract class Figure implements Cloneable, Readout {
 		move(0, bottom - b.getBottom());
 		fireLayoutChanged();
 	}
-
-	@Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-		attributes.add(new Attribut("visible", visible));
-		attributes.add(new Attribut("x", transform.getdx()));
-		attributes.add(new Attribut("y", transform.getdy()));
+	public String getAngleText() {
 		double angle = transform.getAngle() / Math.PI * 180 % 360d;
 		if (angle < 0) {
 			angle += 360d;
 		}
-		attributes.add(new Attribut("angle", Math.round(angle)));
-		attributes.add(new Attribut("mirrored", transform.getMirrorX()));
+		return Integer.toString((int)Math.round(angle));
 	}
+	public boolean getMirrored() {
+		return transform.getMirrorX();
+	}
+
 }

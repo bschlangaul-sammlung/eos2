@@ -1,0 +1,2061 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<lang id="eos2">
+    <text lang = "de" parser="eos2.german">
+        <label>Standard EOS2</label>
+        <system>
+            <label id="true">WAHR</label>
+            <label id="false">FALSCH</label>
+            <label id="1x">Ergebnis</label>
+            <label id="1f">fenster</label>
+            <label id="1rt">Schleifenzähler</label>
+            <label id="1null">leer</label>
+            <label id="1count">{0} Elemente</label>    
+        </system>       
+		<global id="base"> 	
+    		<variable id="1"  scan="gestrichelt"/>
+    		<variable id="2"  scan="durchgezogen"/>
+	    	<variable id="3"  scan="gepunktelt"/>
+    		<variable id="4"  scan="gestrichpunktelt"/>
+    		<variable id="5"  scan="unsichtbar"/>    	
+	    	<variable id="6"  scan="ausgemalt"/>
+    		<variable id="7"  scan="schraffiert"/>
+    		<variable id="8"  scan="kariert"/>
+	    	<variable id="9"  scan="durchsichtig"/>
+    		<variable id="10" scan="zentriert"/>
+    		<variable id="11" scan="linksbündig"/>
+	    	<variable id="12" scan="rechtsbündig"/>
+    		<variable id="13" scan="obenbündig"/>
+    		<variable id="14" scan="untenbündig"/>
+	    	<variable id="15" scan="gelb"/>
+    		<variable id="16" scan="schwarz"/>
+    		<variable id="17" scan="weiß"/>
+    		<variable id="19" scan="blau"/>
+    		<variable id="20" scan="grün"/>
+	    	<variable id="21" scan="rot"/>
+    		<variable id="22" scan="grau"/>
+    		<variable id="23" scan="cyan"/>
+	    	<variable id="24" scan="magenta"/>
+    		<variable id="25" scan="orange"/>
+    		<variable id="26" scan="ping"/>
+	    	<variable id="27" scan="dunkelgrau"/>
+    		<variable id="28" scan="hellgrau"/>
+    		<variable id="29" scan="braun"/>
+    		<variable id="31" scan="hellblau"/>
+    		<variable id="32" scan="hellgrün"/>
+		</global>
+        <templates>
+            <template id="A" >
+                <label>Endlosschleife</label>
+                <content>
+                    wiederhole immer<br/>
+                    <indent/><select/><br/>
+                    *wiederhole<br/>
+                </content>
+            </template>
+            <template id="B" >
+                <label>Zählschleife</label>
+                <content>
+                    wiederhole <select>anzahl</select> mal<br/>
+                    <indent/><br/>
+                    *wiederhole<br/>
+                </content>
+            </template>    
+            <template id="C" >
+                <label>bedingte Schleife</label>
+                <content>
+                    wiederhole solange <select>Bedingung</select><br/>
+                    <indent/><br/>
+                    *wiederhole<br/>
+                </content>
+            </template>    
+            <template id="D" >
+                <label>bedingte Anweisung</label>
+                <content>
+                    wenn <select>Bedingung</select> dann<br/>
+                    <indent/><br/>
+                    *wenn<br/>
+                </content>
+            </template>    
+            <template id="E" >
+                <label>alternative Anweisungen</label>
+                <content>
+                    wenn <select>Bedingung</select> dann<br/>
+                    <indent/><br/>
+                    sonst<br/>
+                    <indent/><br/>
+                    *wenn<br/>        
+                </content>
+            </template>    
+            <template id="F" >
+                <label>Schleife mit Endbedingung</label>
+                <content>
+                    wiederhole<br/>
+                    <indent/><br/>
+                    *wiederhole solange <select>Bedingung</select><br/>
+                </content>
+            </template>    
+            <template id="G" >
+                <label>Runden</label>
+                <content>
+                    runden(<select>Zahl</select>)
+                </content>
+            </template>    
+            <template id="H" >
+                <label>Abrunden</label>
+                <content>
+                    abrunden(<select>Zahl</select>)
+                </content>
+            </template>    
+            <template id="I" >
+                <label>Betrag</label>
+                <content>
+                    betrag(<select>Zahl</select>)
+                </content>
+            </template>    
+            <template id="J" >
+                <label>Wurzel</label>
+                <content>
+                    wurzel(<select>Zahl</select>)
+                </content>
+            </template>    
+            <template id="K" >
+                <label>Sinus</label>
+                <content>
+                    sin(<select>Winkel</select>)
+                </content>
+            </template>    
+            <template id="L" >
+                <label>Kosinus</label>
+                <content>
+                    cos(<select>Winkel</select>)
+                </content>
+            </template>    
+            <template id="M" >
+                <label>Tangens</label>
+                <content>
+                    tan(<select>Winkel</select>)
+                </content>
+            </template>    
+            <template id="N" >
+                <label>Umkehrsinus</label>
+                <content>
+                    arcsin(<select>Winkel</select>)
+                </content>
+            </template>    
+            <template id="O" >
+                <label>Umkehrkosinus</label>
+                <content>
+                    arccos(<select>Winkel</select>)
+                </content>
+            </template>    
+            <template id="P" >
+                <label>Umkehrtangens</label>
+                <content>
+                    arctan(<select>Winkel</select>)
+                </content>
+            </template>    
+            <template id="Q" >
+                <label>Polarkoordinate Winkel</label>
+                <content>
+                    phi(<select>x</select>,y)
+                </content>
+            </template>    
+            <template id="R" >
+                <label>Polarkoordinate Abstand</label>
+                <content>
+                    r(<select>x</select>,y)
+                </content>
+            </template>    
+            <template id="S" >
+                <label></label>
+                <content>
+                    zufall(<select>von</select>, bis)
+                </content>
+            </template>    
+        </templates>
+        <class id="alignment" scan="ausrichtung" show="false">
+            <label>Ausrichtung</label>
+            <tooltip>Die Ausrichtung eines Textes.</tooltip>
+            <description>
+                <p>Die Ausrichtung gibt an wie Text innerhalb eines Rechtecks platziert wird.
+                Es gibt folgende vordefinierte Werte:</p>
+                <p><ul>
+                    <li>zentriert</li>
+                        <p>Der Text steht in der Mitte.</p>
+                    <li>linksbündig</li>
+                        <p>Der Text steht am linken Rand.</p>
+                    <li>rechtsbündig</li>
+                        <p>Der Text steht am rechten Rand.</p>
+                    <li>obenbündig</li>
+                        <p>Der Text steht am oberen Rand.</p>
+                    <li>untenbündig</li>
+                        <p>Der Text steht am unteren Rand.</p>
+                </ul></p>            
+            </description>
+            <example file="de/lathanda/eos/examples/example2.eos"/>
+        </class>        
+        <class id="linestyle" scan="linienart,randart" show="false">
+            <label>Linienart</label>     
+            <tooltip>Die Art wie eine Linie gezeichnet wird.</tooltip>
+            <description>
+                <p>Die Randart gibt an wie der Rand einer Figur gezeichnet wird. Es gibt folgende vordefinierte Werte:</p>    
+                <ul>
+                    <li>gestrichelt</li>
+                    <li>durchgezogen</li>
+                    <li>gepunktelt</li>
+                    <li>gestrichpunktelt</li>
+                    <li>unsichtbar</li>
+                </ul>
+            </description>
+            <example file="de/lathanda/eos/examples/example17.eos"/>            
+        </class>    
+        <class id="fillstyle" scan="füllart" show="false">
+            <label>Füllart</label>     
+            <tooltip>Die Art wie eine Fläche ausgefüllt wird.</tooltip>
+            <description>
+                <p>Die Füllart gibt an, wie eine Figur ausgemalt wird. Es gibt folgende vordefinierte Werte:</p>
+                <ul>
+                    <li>ausgemalt</li> <p>Die Fläche ist ausgemalt.</p>
+                    <li>schraffiert</li> <p>Die Fläche ist schraffiert.</p>
+                    <li>kariert</li> <p>Der Fläche ist kariert.</p>
+                    <li>durchsichtig</li> <p>Die Fläche wird nicht ausgemalt.</p>
+                </ul>
+                <h2>Verwendung</h2>
+                    <p>Die Füllart wird für folgende Methoden und Attribute benötigt.</p>        
+                    <ul>
+                        <li>GefüllteFigur.füllartsetzen(art:Füllart)</li>
+                        <li>GefüllteFigur.füllartlesen():Füllart</li>
+                        <li>GefüllteFigur.füllart:Füllart</li>
+                    </ul>        
+            </description>
+            <example file="de/lathanda/eos/examples/example13.eos"/>            
+        </class>  
+        <class id="boolean" scan="boolean" show="true">
+            <label>Boolean</label>
+            <tooltip>Ein Wahrheitswert. Wahr oder falsch.</tooltip>
+            <description>
+                <p>
+                    Eine Bedingung kann nur wahr oder falsch sein. Der entsprechende Datentyp ist Wahrheitswert.
+                    Meist wird ein Wahrheitswert durch Vergleiche erzeugt oder ist das Ergebnis einer Methode.
+                    Will man ein Attribut wie <i>sichtbar</i> setzen, so verwendet man die Konstanten <b>wahr</b> oder <b>falsch</b>.
+                </p>
+            </description>
+            <example file="de/lathanda/eos/examples/example3.eos"/>
+        </class>    
+        <class id="integer" scan="integer" show="true">
+            <label>Integer</label>  
+            <tooltip>Eine Ganze Zahl.</tooltip>
+            <description>
+                <p>
+                    Der Datentyp Integer entspricht ungefähr den ganzen Zahlen aus der Mathematik. Es gibt eigentlich nur einen Unterschied.
+                    Eine ganze Zahl kann beliebig groß werden, hingegen hat ein Integer seinen maximalen Wert bei etwa 2 Milliarden.
+                </p>
+                <p>
+                    Der Begriff Integer kommt aus dem lateinischen und bedeutet "unversehrt", "unverletzt". Integerzahlen sind somit unversehrt also ganz.
+                    Der Begriff Integerzahl (numerus integer) wird abgekürzt zu <b>integer</b>. Viele Sprachen gehen hier sogar einen Schritt weiter und kürzen
+                    mit <b>int</b> ab. 
+                </p>        
+            </description>
+        </class>
+        <class id="real" scan="real" show="true">
+            <label>Real</label>     
+            <tooltip>Eine Kommazahl. zB 6.17 (Punkt statt Komma!)</tooltip>
+            <description>
+                <p>
+                    Der Datentyp Real entspricht ungefähr den reelen Zahlen aus der Mathematik. Es gibt jedoch einen entscheidenden Unterschied.
+                    Ein Real wird nach etwa 17 Ziffern gerundet, wodurch Ergebnisse nie exakt sind. Der maximale Wert ist hingegen so groß,
+                    daß er nie ein Rolle spielen wird (Eine Zahl mit 308 Stellen).
+                </p>
+                <p>Der Begriff Real kommt von der Programmiersprache Pascal, in anderen Programmiersprachen hat sich eher der Begriff <b>double</b> etabliert.</p>  
+                <h2>Schreibweise</h2>
+                    <p>
+                        Beim Programmieren muss man bei Kommazahlen in nahezu allen Programmiersprachen die englische Notation verwenden.
+                        Also einen Punkt statt dem Komma. Der Buchstabe "E" steht für "mal 10 hoch"
+                    </p>
+                    <p>
+                        3.1415<br/>
+                        1.235E2 = 123.5<br/>
+                    </p>         
+            </description>
+            <example file="de/lathanda/eos/examples/example22.eos"/>                                
+        </class>    
+        <class id="string" scan="string, zeichenkette" show="true">
+            <label>Zeichenkette</label>     
+            <tooltip>Ein Text. z.B. 'Hallo'.</tooltip>
+            <description>
+                <p>
+                    Zeichenketten dienen dazu Texte abzuspeichern. Der Begriff drückt aus, daß ein Text
+                    eine Ketten von aneinandergereiten Zeichen ist.
+                </p>
+                <h2>Schreibweise</h2>
+                    <p>Alle Zeichenketten müssen begrenzt werden. In EOS kann dies entweder durch "Text" oder 'Text' geschehen.</p>
+                    <p>
+                        "Ich bin eine Zeichenkette"<br/>
+                        'Ich auch'<br/>
+                    </p>          
+            </description>
+            <example file="de/lathanda/eos/examples/example23.eos"/>                                        
+        </class>
+        <class id="scaling" scan="skalierung" show="false">
+            <label>Skalierungsmodus</label>
+            <tooltip>Skalierungsmodus</tooltip>
+        </class>
+        <class id="figurelist" scan="figurenliste" show="false">
+            <label>Figurenliste</label>
+            <tooltip>Eine Figurenlist</tooltip>
+        </class>  
+        <class id="point" sane="Punkt" show="false">
+            <tooltip>Ein Punkt.</tooltip>
+            <label>Punkt</label>
+        </class>    
+        <class id="color" scan="farbe" show="true">
+            <label>Farbe</label> 
+            <tooltip>Eine Farbe</tooltip>
+            <description>
+                <p>Es gibt folgende vordefinierte Werte:</p>    
+                <p>
+                    gelb, rot, grün, blau, weiß, schwarz, braun, hellblau, hellgrün, grau, hellgrau
+                </p>
+                <p>
+                    Alternativ kann eine Farbe auch als HTML-Code angegeben werden. #RRGGBB oder #RRGGBBAA.
+                    Hier steht R für rot, B für blau, G für grün und A für Transparenz.
+                    Alle Werte reichen von 00 bis FF.
+                </p>
+                <h2>Konstanten</h2>
+                    <p>gelb, rot, grün, blau, weiß, schwarz, braun, hellblau, hellgrün, grau, hellgrau</p>         
+            </description>
+            <example file="de/lathanda/eos/examples/example11.eos"/>
+            <method id="1" scan="alphalesen">
+                <label>alphaLesen</label>
+                <tooltip>Gibt den Transparentwert der Farbe zurück.</tooltip>
+            </method>
+            <method id="2" scan="blaulesen">
+                <label>blauLesen</label>
+                <tooltip>Gibt den Blauwert der Farbe zurück.</tooltip>
+            </method>
+            <method id="3" scan="dunkler">
+                <label>dunkler</label>
+                <tooltip>Erzeugt eine etwas dunklere Farbe</tooltip>
+            </method>
+            <method id="4" scan="grünlesen">
+                <label>grünLesen</label>
+                <tooltip>Gibt den Grünwert der Farbe zurück.</tooltip>
+            </method>
+            <method id="5" scan="heller">
+                <label>heller</label>
+                <tooltip>Erzeugt eine etwas hellere Farbe</tooltip>
+            </method>
+            <method id="6" scan="rotlesen" >
+                <label>rotLesen</label>
+                <tooltip>Gibt den Rotwert der Farbe zurück.</tooltip>
+            </method>
+            <method id="7" scan="rotsetzen">
+                <label>rotSetzen</label>
+                <parameter name="rot"/>
+                <tooltip>Setzt die rot-Komponente der Farbe.</tooltip>
+            </method>
+            <method id="8" scan="grünsetzen">
+                <label>grünSetzen</label>
+                <parameter name="grün"/>
+                <tooltip>Setzt die grün-Komponente der Farbe.</tooltip>
+            </method>
+            <method id="9" scan="blausetzen">
+                <label>blauSetzen</label>
+                <parameter name="blau"/>
+                <tooltip>Setzt die blau-Komponente der Farbe.</tooltip>
+            </method>
+            <method id="10" scan="transparenzsetzen">
+                <label>transparenzSetzen</label>
+                <parameter name="alpha"/>
+                <tooltip>Setzt die Transparenz der Farbe.</tooltip>
+            </method>        
+        </class>              
+        <class id="triangle" scan="dreieck" show="true">
+            <label>Dreieck</label>
+            <tooltip>Ein Dreieck.</tooltip>
+            <example file="de/lathanda/eos/examples/example8.eos"/>
+            <property id="a" scan="a">
+                <label>a</label>
+                <tooltip>Ecke des Dreiecks.</tooltip>
+            </property>
+            <property id="b" scan="b">
+                <label>b</label>
+                <tooltip>Ecke des Dreiecks.</tooltip>
+            </property>
+            <property id="c" scan="c">
+                <label>c</label>
+                <tooltip>Ecke des Dreiecks.</tooltip>
+            </property>        
+            <method id="1" scan="eckensetzen">
+                <label>eckenSetzen</label>
+                <parameter name="x1"/>
+                <parameter name="y1"/>
+                <parameter name="x2"/>
+                <parameter name="y2"/>
+                <parameter name="x3"/>
+                <parameter name="y3"/>
+                <tooltip>Setzt alle drei Ecken des Dreiecks A(x1, y1), B(x2, y2), C(x3, y3).</tooltip>
+            </method>
+            <method id="2" scan="spiegelex">
+                <label>spiegeleX</label>
+                <tooltip>Spiegelt das Dreieck an der x-Achse.</tooltip>
+            </method>        
+            <method id="3" scan="spiegeley">
+                <label>spiegeleY</label>
+                <tooltip>Spiegelt das Dreieck an der y-Achse.</tooltip>
+            </method>
+        </class>
+        <class id="ellipse" scan="ellipse" show="true">
+            <label>Ellipse</label>
+            <tooltip>Eine Ellipse</tooltip>
+            <example file="de/lathanda/eos/examples/example10.eos"/>            
+            <property id="centerx" scan="mittex">        
+                <label>mitteX</label>
+                <tooltip>Die x-Koordinate des Mittelpunktes.</tooltip>
+            </property>
+            <property id="centery" scan="mittey">
+                <label>mitteY</label>
+                <tooltip>Die y-Koordinate des Mittelpunktes.</tooltip>
+            </property>
+            <property id="radiusx" scan="radiusx">
+                <label>radiusX</label>
+                <tooltip>Der waagerechte Radius der Ellipse.</tooltip>
+            </property>
+            <property id="radiusy" scan="radiusy">
+                <label>radiusY</label>
+                <tooltip>Der vertikale Radius der Ellipse.</tooltip>
+            </property>
+            <method id="5" scan="mittelpunktsetzen">
+                <label>mitelpunktSetzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip>Setzt den Mittelpunkt.</tooltip>
+            </method>
+            <method id="6" scan="mittexlesen">
+                <label>mitteXLesen</label>
+                <tooltip>Gibt die x-Koordinate des Mittelpunktes zurück.</tooltip>
+            </method>        
+            <method id="7" scan="mittexsetzen">
+                <label>mitteXSetzen</label>
+                <parameter name="x"/>
+                <tooltip>Setzt die x-Koordinate des Mittelpunktes.</tooltip>
+            </method>
+            <method id="8" scan="mitteylesen">
+                <label>mitteYLesen</label>
+                <tooltip>Gibt die y-Koordinate des Mittelpunktes zurück.</tooltip>
+            </method>
+            <method id="9" scan="mitteysetzen">
+                <label>mitteYSetzen</label>
+                <parameter name="y"/>
+                <tooltip>Setzt die y-Koordinate des Mittelpunktes.</tooltip>
+            </method>
+            <method id="10" scan="radiusxlesen">
+                <label> radiusXLesen</label>
+                <tooltip>Gibt den waagerechten Radius zurück.</tooltip>
+            </method>
+            <method id="11" scan="radiusxsetzen">
+                <label>radiusXSetzen</label>
+                <parameter name="x"/>
+                <tooltip>Setzt den waagerechten Radius.</tooltip>
+            </method>
+            <method id="12" scan="radiusylesen">
+                <label>radiusYLesen</label>
+                <tooltip>Gibt den vertikalen Radius zurück.</tooltip>
+            </method>
+            <method id="13" scan="radiusysetzen">
+                <label>radiusYSetzen</label>
+                <parameter name="y"/>
+                <tooltip>Setzt den vertikalen Radius.</tooltip>
+            </method>
+        </class>
+        <class id="window" scan="fenster" show="true">
+            <label>Fenster</label>
+            <tooltip>Ein Fenster zur Darstellung von Figuren</tooltip>
+            <description>
+                <p>
+                    Das Fenster dient dazu Figuren anzuzeigen. Wenn man kein Fenster definiert, wird         
+                    sobald man die erste Figur erzeugt, automatisch auch ein Fenster mit dem Bezeichner <b>fenster</b> erstellt und die Figur hinzugefügt.
+                    Explizit selbst ein Fenster zu erzeugen, ist nur dann notwendig, wenn man die Methoden des Fensters aufrufen will.
+                    Dann muss man jedoch alle Figuren manuell dem Fenster hinzufügen.
+                </p>
+                <p>
+                    Die Maße aller Abstände sind in mm. Hierbei wird dem Betriebssystem vertraut.
+                    Liefert dieses einen falsch dpi (dots per inch) Wert, so stimmen die Abstände leider nicht.
+                    In der Regel stimmen die Werte ±10%.
+                </p>        
+            </description> 
+            <example file="de/lathanda/eos/examples/example12.eos"/>            
+            <property id="gridvisible" scan="gittersichtbar">
+                <label>gitterSichtbar</label>
+                <tooltip>Ist das Koordinatengitter sichtbar?</tooltip>
+            </property>        
+            <property id="width" scan="breite">
+                <label>breite</label>
+                <tooltip>Breite des Fensters.</tooltip>
+            </property>
+            <property id="gridcolor" scan="gitterfarbe">
+                <label>gitterfarbe</label>
+                <tooltip>Die Farbe des Koordinatensystems.</tooltip>
+            </property>
+            <property id="backcolor" scan="hintergrundfarbe">
+                <label>hintergrundfarbe</label>
+                <tooltip>Die Hintergrundfarbe des Fensters.</tooltip>
+            </property>
+            <property id="height" scan="höhe">
+                <label>höhe</label>
+                <tooltip>Höhe des Fensters.</tooltip>
+            </property>
+            <property id="left" scan="links">
+                <tooltip>links</tooltip>
+                <label>Linker Abstand des Fensters zum Bildschirmrand.</label>
+            </property>
+            <property id="name" scan="name">
+                <label>name</label>
+                <tooltip>Titel des Fensters.</tooltip>
+            </property>
+            <property id="top" scan="oben">
+                <label>oben</label>
+                <tooltip>Oberer Abstand des Fensters zum Bildschirmrand.</tooltip>
+            </property>
+            <property id="gridwidth" scan="strichabstand">
+                <label>strichAbstand</label>
+                <tooltip>Gitterabstand des Koordinatensystems.</tooltip>
+            </property>
+            <method id="9" scan="breitelesen">
+                <label>breiteLesen</label>
+                <tooltip>Gibt die Breite des Fensters zurück.</tooltip>
+            </method>
+            <method id="10" scan="breitesetzen">
+                <label>breiteSetzen</label>
+                <parameter name="breite"/>            
+                <tooltip>Setzt die Breite des Fensters.</tooltip>
+            </method>
+            <method id="11" scan="gitteraus">
+                <label>gitterAus</label>
+                <tooltip>Macht das Koordinatensystem unsichtbar.</tooltip>
+            </method>
+            <method id="12" scan="gitterein">
+                <label>gitterEin</label>
+                <tooltip>Macht das Koordinatensystem sichtbar.</tooltip>
+            </method>
+            <method id="13" scan="gitterfarbelesen">
+                <label>gitterFarbeLesen</label>
+                <tooltip>Gibt die Farbe des Koordinatensystems zurück.</tooltip>
+            </method>
+            <method id="14" scan="gitterfarbesetzen">
+                <label>gitterFarbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Farbe des Koordiantengitters.</tooltip>
+            </method>
+            <method id="15" scan="hintergrundfarbelesen">
+                <label>hintergrundFarbeLesen</label>
+                <tooltip>Gibt die Farbe des Hintergrunds zurück.</tooltip>
+            </method>
+            <method id="16" scan="hintergrundfarbesetzen">
+                <label>hintergrundFarbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Farbe des Hintergrunds.</tooltip>
+            </method>
+            <method id="17" scan="höhelesen">
+                <label>höheLesen</label>
+                <tooltip>Gibt die Höhe des Fensters zurück.</tooltip>
+            </method>
+            <method id="18" scan="höhesetzen">
+                <label>höheSetzen</label>
+                <parameter name="höhe"/>
+                <tooltip>Setzt die Höhe des Fensters.</tooltip>
+            </method>
+            <method id="19" scan="linkslesen">
+                <label>linksLesen</label>
+                <tooltip>Gibt den Abstand des Fenster vom linken Bildschirmrand zurück.</tooltip>
+            </method>
+            <method id="20" scan="linkssetzen">
+                <label>linksSetzen</label>
+                <parameter name="links"/>
+                <tooltip>Setzt den linken Abstand zum Bildschirmrand.</tooltip>
+            </method>
+            <method id="21" scan="mausgedrücktlesen">
+                <label>mausGedrücktLesen</label>
+                <tooltip>Ist die linke Maustaste gerade gedrückt?</tooltip>
+            </method>
+            <method id="22" scan="mausklicklesen">
+                <label>mausKlickLesen</label>
+                <tooltip>Prüft ob seit dem letzten Aufruf dieser Methode die linke Maustaste gedrückt wurde.</tooltip>
+            </method>
+            <method id="23" scan="mausxlesen">
+                <label>mausXLesen</label>
+                <tooltip>x-Koordinate der Maus lesen.</tooltip>
+            </method>
+            <method id="24" scan="mausylesen">
+                <label>mausYLesen</label>
+                <tooltip>y-Koordinate der Maus lesen.</tooltip>
+            </method>
+            <method id="25" scan="mittesetzen">
+                <label>mitteSetzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>            
+                <tooltip>Setzt die Mitte des Koordinatensystems.</tooltip>
+            </method>
+            <method id="26" scan="namelesen">
+                <label>nameLesen</label>
+                <tooltip>Gibt den Titel des Fensters zurück.</tooltip>
+            </method>
+            <method id="27" scan="namesetzen">
+                <label>nameSetzen</label>
+                <parameter name="name"/>            
+                <tooltip>Setzt den Titel des Fensters.</tooltip>
+            </method>
+            <method id="28" scan="obenlesen">
+                <label>obenLesen</label>
+                <tooltip>Gibt den Abstand des Fenster vom oberen Bildschirmrand zurück.</tooltip>
+            </method>
+            <method id="29" scan="obensetzen">
+                <label>obenSetzen</label>
+                <parameter name="oben"/>            
+                <tooltip>Setzt den oberen Abstand zum Bildschirmrand.</tooltip>
+            </method>
+            <method id="30" scan="strichabstandlesen">
+                <label>strichAbstandLesen</label>
+                <tooltip>>Gibt den Gitterabstand des Koordinatensystems zurück.</tooltip>
+            </method>
+            <method id="31" scan="strichabstandsetzen">
+                <label>strichAbstandSetzen</label>
+                <parameter name="abstand"/>            
+                <tooltip>Setzt den Gitterabstand des Koordinatensystems.</tooltip>
+            </method>
+            <method id="32" scan="verschiebe">
+                <label>verschiebe</label>
+                <parameter name="dx"/>
+                <parameter name="dy"/>            
+                <tooltip>Verschiebt das Fenster.</tooltip>
+            </method>
+            <method id="33" scan="zeichne">
+                <label>zeichne</label>
+                <parameter name="figur"/>            
+                <tooltip>Setzt eine Figur in ein Fenster.</tooltip>
+            </method>
+            <method id="33" scan="hinzufügen">
+                <label>hinzufügen</label>
+                <parameter name="figur"/>
+                <tooltip>Setzt eine Figur in ein Fenster.</tooltip>
+            </method>
+            <method id="34" scan="zoomsetzen">
+                <label>zoomSetzen</label>
+                <parameter name="zoom"/>
+                <tooltip>Setzt die Vergrößerung.</tooltip>
+            </method>
+        </class>
+        <class id="figure" scan="figur" show="true">
+            <label>Figur</label>
+            <tooltip>Eine allgemeine Figur.</tooltip>
+            <description>
+                Die Figur ist die Grundklasse aller Geometrieklassen. 
+                Das heisst jede Geometrieklasse kann alle Methoden und Attribute der Figur nutzen. 
+                Ein Kreis und ein Rechteck sind beides Figuren, daher kann man beide verschieben und strecken.         
+            </description>
+            <example file="de/lathanda/eos/examples/example4.eos"/>
+            <property id="visible" scan="sichtbar">
+                <label>sichtbar</label>
+                <tooltip>sichtbar:Wahrheitswert<br/>Ist die Figur sichtbar?</tooltip>
+                <description>
+                    Steuert ob die Figur im Fenster angezeigt wird.
+                </description>            
+            </property>
+            <property id="x" scan="x">
+                <label>x</label>
+                <tooltip>x:Zahl<br/>Die x-Koordinate der Figur (Mittelpunkt)</tooltip>
+                <description>
+                    Die x-Koordinate des Mittelpunkts der Figur.
+                </description>            
+            </property>
+            <property id="y" scan="r">
+                <label>y</label>
+                <tooltip>Die y-Koordinate der Figur (Mittelpunkt)</tooltip>
+                <description>
+                    Die y-Koordinate des Mittelpunkts der Figur.
+                </description>            
+            </property>
+            <property id="angle" scan="winkel">
+                <label>winkel</label>
+                <tooltip>Winkel um den die Figur gedreht wurde.</tooltip>
+                <description>
+                    Der Winkel um den die Figur gedreht wurde.
+                </description>            
+            </property>
+            <property id="mirrored" scan="gespiegelt">
+                <label>gespiegelt</label>
+                <tooltip>Ist die Figur gespiegelt?</tooltip>
+                <description>
+                    Steuert, ob die Figur gespiegelt ist. Spiegeln betrifft auch Beschriftungen.
+                </description>            
+            </property>        
+            <method id="4" scan="drehen">
+                <label>drehen</label>
+                <parameter name="winkel"/>
+                <tooltip>Dreht die Figur gegen den Uhrzeigersinn.</tooltip>
+                <description>
+                    Dreht die Figur um den Mittelpunkt gegen den Uhrzeigersinn um <b>winkel</b> Grad.
+                </description>        
+            </method>
+            <method id="5" scan="drehenum">
+                <label>drehenUm</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <parameter name="winkel"/>
+                <tooltip>Dreht die Figur um den Punkt (x,y) gegen den Uhrzeigersinn.</tooltip>
+                <description>
+                    Dreht die Figur um den Punkt (<b>x</b>,<b>y</b>) gegen den Uhrzeigersinn um <b>winkel</b> Grad.
+                </description>        
+            </method>
+            <method id="6" scan="sichtbarlesen">
+                <label>sichtbarLesen</label> 
+                <tooltip>Liefert, ob die Figur sichtbar ist.</tooltip>
+                <description>
+                    Gibt den Wert des Attibutes <b>sichtbar</b> zurück.
+                </description>        
+            </method>
+            <method id="7" scan="sichtbarsetzen">
+                <label>sichtbarSetzen</label>
+                <parameter name="sichtbar"/>
+                <tooltip>Setzt die Sichtbarkeit einer Figur.</tooltip>
+                <description>
+                    Setzt den Wert des Attibutes <b>sichtbar</b>.
+                </description>        
+            </method>
+            <method id="8" scan="strecken">
+                <label>strecken</label>
+                <parameter name="faktor"/>
+                <tooltip>Streckt die Figur.</tooltip>
+                <description>
+                    Streckt die Figur mit dem Mittelpunkt als Streckungszentrum um den <b>faktor</b>.
+                </description>        
+            </method>
+            <method id="9" scan="streckenan">
+                <label>streckenAn</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <parameter name="faktor"/>
+                <tooltip>Streckt die Figur am Zentrum (x,y).</tooltip>
+                <description>
+                    Streckt die Figur am Streckungszentrum (<b>x</b>,<b>y</b>) um den <b>faktor</b>.
+                </description>          
+            </method>
+            <method id="10" scan="verschieben">
+                <label>verschieben</label>
+                <parameter name="dx"/>
+                <parameter name="dy"/>
+                <tooltip>Verschiebt die Figur.</tooltip>
+                <description>
+                    Verschiebt die Figur um <b>dx</b> in x-Richtung und <b>dy</b> in y-Richtung.
+                </description>        
+            </method>
+            <method id="11" scan="verschiebennach">
+                <label>verschiebenNach</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip>Verschiebt die Figur (Mittelpunkt) auf die Position.</tooltip>
+                <description>
+                    Verschiebt die Figur zur Position (<b>x</b>,<b>y</b>).         
+                </description>        
+            </method>
+            <method id="12" scan="xlesen">
+                <label>xLesen</label>
+                <tooltip>Liefert die x-Koordinate des Figur (Mittelpunkt).</tooltip>
+                <description>
+                    Gibt den Wert des Attibutes <b>x</b> zurück.
+                </description>        
+            </method>
+            <method id="13" scan="xsetzen">
+                <label>xSetzen</label>
+                <parameter name="x"/>            
+                <tooltip>Setzt die x-Koordinate der Figur (Mittelpunkt).</tooltip>
+                <description>
+                    Setzt den Wert des <b>x</b> sichtbar.
+                </description>        
+            </method>
+            <method id="14" scan="ylesen">
+                <label>yLesen</label>
+                <tooltip>Liefert die y-Koordinate des Figur (Mittelpunkt).</tooltip>
+                <description>
+                    Gibt den Wert des Attibutes <b>y</b> zurück.
+                </description>        
+            </method>
+            <method id="15" scan="ysetzen">
+                <label>ySetzen</label>
+                <parameter name="y"/>
+                <tooltip>Setzt die y-Koordinate der Figur (Mittelpunkt).</tooltip>
+                <description>
+                    Setzt den Wert des <b>y</b> sichtbar.
+                </description>        
+            </method>
+        </class>
+        <class id="filledfigure" scan="gefülltefigur" show="false">
+            <label>GefüllteFigur</label>     
+            <tooltip>Irgendeine ausgefüllte Figur.</tooltip>
+            <description>
+                Die GefüllteFigur ist die Grundklasse aller Figuren mit Fläche.
+            </description>        
+            <example file="de/lathanda/eos/examples/example15.eos"/>
+            <property id="fillstyle" scan="füllart">
+                <label>füllart</label>
+                <tooltip>Füllart der Figur.</tooltip>        
+            </property>
+            <property id="fillcolor" scan="füllfarbe">
+                <label>füllfarbe</label>
+                <tooltip>Füllfarbe der Figur.</tooltip>        
+            </property>
+            <method id="3" scan="füllartlesen">
+                <label>füllartLesen</label>
+                <tooltip>Liefert die Füllart der Figur.</tooltip>
+            </method>
+            <method id="4" scan="füllartsetzen">
+                <label>füllartSetzen</label>
+                <parameter name="art"/>
+                <tooltip>Setzt die Art wie die Figur gefüllt wird.</tooltip>
+            </method>
+            <method id="5" scan="füllfarbelesen">
+                <label>füllfarbeLesen</label>
+                <tooltip>Liefert die Farbe mit der die Figur gefüllt wird.</tooltip>
+            </method>
+            <method id="6" scan="füllfarbesetzen">
+                <label>füllfarbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Farbe mit der die Figur gefüllt wird.</tooltip>
+            </method>
+        </class>
+        <class id="grafic" scan="grafik" show="true">
+            <label>Grafik</label>     
+            <tooltip>Ein Bild als Figur.</tooltip>
+            <description>
+                Ein Grafik-Objekt ist ein Rechteck, welches zusätzlich mit einem Bild befüllt wird.
+                Wenn das Rechteck nicht dasselbe Verhältnis wie das Bild hat, muss man festlegen,
+                welchen Kompromiss man eingehen will. Entweder wird das Bild verzerrt, abgeschnitten 
+                oder nicht vollständig dargestellt. Jeder kennt dieses Problem von 4:3 Bildern auf einem
+                16:9 Fernseher.        
+            </description>
+            <example file="de/lathanda/eos/examples/example16.eos"/>        
+            <property id="mode">
+                <label>skalierung</label>
+                <tooltip>Legt fest wie das Rechteck mit dem Bild gefüllt wird.</tooltip>
+            </property>
+            <property id="image">
+                <label>bild</label>
+                <tooltip>Name des Bilddatei.</tooltip>
+            </property>        
+            <method id="1" scan="bildabschneiden">
+                <label>bildAbschneiden</label>
+                <tooltip>Das Bild wird über das Rechteck gelegt. Wobei Teile des Bildes nicht genutzt werden.</tooltip>
+            </method>
+            <method id="2" scan="bildeinpassen">
+                <label>bildEinpassen</label>
+                <tooltip>Das Bild wird so groß wie möglich bis es den Rand erreicht. Das Rechteck wird nicht vollständig bedeckt.</tooltip>
+            </method>
+            <method id="3" scan="bildstrecken">
+                <label>bildStrecken</label>
+                <tooltip>Das Bild wird auf das Rechteck gestreckt. Das Bild wird verzerrt.</tooltip>
+            </method>
+            <method id="4" scan="ladebild">
+                <label>ladeBild</label>
+                <parameter name="dateiname"/>
+                <tooltip>Lädt das Hintergrundbild.</tooltip>
+            </method>
+        </class>
+        <class id="group" scan="gruppe" show="true">
+            <label>Gruppe</label>     
+            <tooltip>Eine Gruppe von mehreren Figuren.</tooltip>
+            <description>
+                <p>
+                    Gruppen dienen dazu mehrere Figuren zusammenzufassen und als ein Objekt zu behandeln.
+                    Man kann zum Beispiel mit mehreren Kreisen und Rechtecken ein Auto bauen und dies zu einer Gruppe auto zusammenfassen.
+                    Wodurch man alle Teile des Autos gemeinsam bewegen kann.
+                </p>
+                <p>
+                    <b>Hinweis:</b> Es ist zwar möglich Figuren, die zu einer Gruppe hinzugefügt wurden, nachträglich zu verändern,
+                    jedoch wird der Effekt eventuell nicht dem entsprechen, was man erwartet. Eine Figur ohne Gruppe
+                    bewegt sich relativ zum Fenster. Eine Figur innerhalb einer Gruppe bewegt sich relativ zu seiner Gruppe.
+                </p>
+            </description>
+            <example file="de/lathanda/eos/examples/example17.eos"/>        
+            <property id="autocenter">
+                <label>zentrieren</label>
+                <tooltip>Verschiebt die Gruppe ihr Zentrum automatisch zum Schwerpunkt?</tooltip>
+            </property>
+            <property id="members">
+                <label>teile</label>
+                <tooltip>Anzahl der Figuren innerhalb der Gruppe.</tooltip>
+            </property>  
+            <method id="1" scan="füllartsetzen">
+                <label>füllartSetzen</label>
+                <parameter name="art"/>
+                <tooltip>Setzt die Füllart aller Figuren in der Gruppe.</tooltip>
+            </method>
+            <method id="2" scan="füllfarbesetzen">
+                <label>füllfarbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Füllfarbe aller Figuren in der Gruppe.</tooltip>
+            </method>
+            <method id="3" scan="schlucke">
+                <label>schlucke</label>
+                <parameter name="figur"/>
+                <tooltip>Fügt eine Figur in die Gruppe hinzu.</tooltip>
+            </method>
+            <method id="3" scan="hinzufügen">
+                <label>hinzufügen</label>
+                <parameter name="figur"/>
+                <tooltip>Fügt eine Figur in die Gruppe hinzu.</tooltip>
+            </method>
+            <method id="4" scan="kopiere">
+                <label>kopiere</label>
+                <parameter name="figur"/>
+                <tooltip>Erzeugt eine Kopie der Figur und f\u00fcgt die Kopie der Gruppe hinzu.</tooltip>
+            </method>
+            <method id="5" scan="randartsetzen">
+                <label>randartSetzen</label>
+                <parameter name="art"/>
+                <tooltip>Setzt die Randart aller Figuren in der Gruppe.</tooltip>
+            </method>
+            <method id="6" scan="randfarbesetzen">
+                <label>randfarbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Randfarbe aller Figuren in der Gruppe.</tooltip>
+            </method>
+            <method id="7" scan="randstärkesetzen">
+                <label>randstärkeSetzen</label>
+                <parameter name="stärke"/>
+                <tooltip>Setzt die Stärke des Rands aller Figuren in der Gruppe.</tooltip>
+            </method>
+            <method id="8" scan="spieglex">
+                <label>spiegleX</label>
+                <tooltip></tooltip>
+            </method>
+            <method id="9" scan="spiegley">
+                <label>spiegleY</label>
+                <tooltip>Spiegelt die Gruppe an der y-Achse.</tooltip>
+            </method>
+            <method id="10" scan="zentrumsetzen">
+                <label>zentrumSetzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip>Setzt den Mittelpunkt der Gruppe auf einen neuen Wert ohne die Figur zu verschieben. Dieser Wert ersetzt den Schwerpunkt.</tooltip>
+            </method>
+        </class> 
+        <class id="circle" scan="kreis" show="true">
+            <label>Kreis</label>         
+            <tooltip>Ein Kreis.</tooltip>
+            <example file="de/lathanda/eos/examples/example19.eos"/>        
+            <property id="centerx" scan="mittex">
+                <label>mitteX</label>
+                <tooltip>x-Koordinate des Mittelpunkts des Kreises.</tooltip>
+            </property>
+            <property id="centery" scan="mittey">
+                <label>mitteY</label>
+                <tooltip>y-Koordinate des Mittelpunkts des Kreises.</tooltip>
+            </property>
+            <property id="radius" scan="radius">
+                <label>radius</label>
+                <tooltip>Radius des Kreises.</tooltip>
+            </property>
+            <method id="4" scan="mittelpunktsetzen">
+                <label>mittelpunktSetzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip>Setzt den Mittelpunkt des Kreises.</tooltip>
+            </method>
+            <method id="5" scan="mittexlesen">
+                <label>mitteXLesen</label>
+                <tooltip>Liefert die x-Koordinate des Mittelpunktes.</tooltip>
+            </method>
+            <method id="6" scan="mittexsetzen">
+                <label>mitteXSetzen</label>
+                <parameter name="x"/>
+                <tooltip>Setzt die x-Koordinate des Mittelpunktes.</tooltip>
+            </method>
+            <method id="7" scan="mitteylesen">
+                <label>mitteYLesen</label>
+                <tooltip>Liefert die y-Koordinate des Mittelpunktes.</tooltip>
+            </method>
+            <method id="8" scan="mitteysetzen">
+                <label>mitteYSetzen</label>
+                <parameter name="y"/>
+                <tooltip>Setzt die y-Koordinate des Mittelpunktes.</tooltip>
+            </method>
+            <method id="9" scan="radiuslesen">
+                <label>radiusLesen</label>
+                <tooltip>Liefert den Radius des Kreises.</tooltip>
+            </method>
+            <method id="10" scan="radiussetzen">
+                <label>radiusSetzen</label>
+                <parameter name="radius"/>
+                <tooltip>Setzt den Radius.</tooltip>
+            </method>
+        </class>
+        <class id="line" scna="linie" show="true">
+            <label>Linie</label>         
+            <tooltip>Eine Linie</tooltip>
+            <example file="de/lathanda/eos/examples/example20.eos"/>                
+            <property id="linecolor" scan="farbe">
+                <label>linienfarbe</label>
+                <tooltip>Farbe der Linie.</tooltip>
+            </property>
+            <property id="linestyle" scan="linienart">
+                <label>linienart</label>
+                <tooltip>Art der Linie.</tooltip>
+            </property>
+            <property id="linewidth" scan="linienstärke">
+                <label>linienstärke</label>
+                <tooltip>Stärke der Linie.</tooltip>
+            </property>
+            <property id="length">
+                <label>länge</label>
+                <tooltip>Länge der Strecke.</tooltip>
+            </property>        
+            <property id="x1" scan="x1">
+                <label>x1</label>
+                <tooltip>x-Koordinate des ersten Punktes.</tooltip>
+            </property>
+            <property id="x2" scan="x2">
+                <label>x2</label>
+                <tooltip>x-Koordinate des zweiten Punktes.</tooltip>
+            </property>
+            <property id="y1" scan="y1">
+                <label>y1</label>
+                <tooltip>y-Koordinate des ersten Punktes.</tooltip>
+            </property>
+            <property id="y2" scan="y2">
+                <label>y2</label>
+                <tooltip>y-Koordinate des zweiten Punktes.</tooltip>
+            </property>
+            <method id="8" scan="endpunktesetzen">
+                <label>endpunkteSetzen</label>
+                <parameter name="x1"/>
+                <parameter name="y1"/>
+                <parameter name="x2"/>
+                <parameter name="y2"/>
+                <tooltip>Setzt Anfang und Ende der Linie.</tooltip>
+            </method>
+            <method id="9" scan="farbelesen">
+                <label>farbeLesen</label>
+                <tooltip>Liefert die Farbe der Linie.</tooltip>
+            </method>
+            <method id="10" scan="farbesetzen">
+                <label>farbeSetzen</label>
+                <parameter name="farbe"/>
+                <tooltip>Setzt die Farbe der Linie.</tooltip>
+            </method>
+            <method id="11" scan="linienartlesen">
+                <label>linienartLesen</label>
+                <tooltip>Liefert die Art der Linie.</tooltip>
+            </method>
+            <method id="12" scan="linienartsetzen">
+                <label>linienartSetzen</label>
+                <parameter name="art"/>            
+                <tooltip>Setzt die Art der Linie.</tooltip>
+            </method>
+            <method id="13" scan="linienstärkelesen">
+                <label>linienstärkeLesen</label>
+                <tooltip>Liefert die Stärke der Linie.</tooltip>
+            </method>
+            <method id="14" scan="linienstärkesetzen">
+                <label>linienstärkeSetzen</label>
+                <parameter name="stärke"/>            
+                <tooltip>Setzt die Stärke der Linie.</tooltip>
+            </method>
+            <method id="15" scan="punkt1setzen">
+                <label>punkt1Setzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip>Setzt den ersten Punkt.</tooltip>
+            </method>
+            <method id="16" scan="punkt2setzen">
+                <label>punkt2Setzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip>Setzt den zweiten Punkt.</tooltip>
+            </method>
+            <method id="17" scan="x1lesen">
+                <label>x1Lesen</label>
+                <tooltip>Liefert die x-Koordinate des ersten Punktes.</tooltip>
+            </method>
+            <method id="18" scan="x1setzen">
+                <label>x1Setzen</label>
+                <parameter name="x"/>
+                <tooltip>Setzt die x-Koordinate des ersten Punktes.</tooltip>
+            </method>
+            <method id="19" scan="x2lesen">
+                <label>x2Lesen</label>
+                <tooltip>Liefert die x-Koordinate des zweiten Punktes.</tooltip>
+            </method>
+            <method id="20" scan="x2setzen">
+                <label>x2Setzen</label>
+                <parameter name="x"/>
+                <tooltip>Setzt die x-Koordinate des zweiten Punktes.</tooltip>
+            </method>
+            <method id="21" scan="y1lesen">
+                <label>y1Lesen</label>
+                <tooltip>Liefert die y-Koordinate des ersten Punktes.</tooltip>
+            </method>
+            <method id="22" scan="y1setzen">
+                <label>y1Setzen</label>
+                <parameter name="y"/>
+                <tooltip>Setzt die y-Koordinate des ersten Punktes.</tooltip>
+            </method>
+            <method id="23" scan="y2lesen">
+                <label>y2Lesen</label>
+                <tooltip>Liefert die y-Koordinate des zweiten Punktes.</tooltip>
+            </method>
+            <method id="24" scan="y2setzen">
+                <label>y2Setzen</label>
+                <parameter name="y"/>
+                <tooltip>Setzt die y-Koordinate des zweiten Punktes.</tooltip>
+            </method>
+        </class>
+        <class id="square" scan="quadrat" show="true">
+            <label>Quadrat</label>     
+            <tooltip>Ein Quadrat</tooltip>
+            <example file="de/lathanda/eos/examples/example21.eos"/>                        
+            <property id="side" scan="seitenlänge">
+                <label>seitenlänge</label>
+                <tooltip>Seitenlänge des Quadrats.</tooltip>
+            </property>
+            <method id="2" scan="linksobensetzen">
+                <label>linksObenSetzen</label>
+                <parameter name="x"/>
+                <parameter name="y"/>
+                <tooltip></tooltip>
+            </method>
+            <method id="3" scan="seitenlängelesen">
+                <label>seitenlängeLesen</label>
+                <tooltip>Liefert die Seitenlänge.</tooltip>
+            </method>
+            <method id="4" scan="seitenlängesetzen">
+                <label>seitenlängeSetzen</label>
+                <parameter name="länge"/>
+                <tooltip>Setzt die Seitenlänge.</tooltip>
+            </method>
+        </class>
+        <class id="rectangle" scan="rechteck" show="true">
+            <label>Rechteck</label>           
+            <tooltip>Ein Rechteck</tooltip>
+            <example file="de/lathanda/eos/examples/example24.eos"/>        
+            <property id="width" scan="breite">
+                <label>breite</label>
+                <tooltip>Breite des Rechtecks.</tooltip>
+            </property>
+            <property id="height" scan="höhe">
+                <label>höhe</label>
+                <tooltip>Höhe des Rechtecks.</tooltip>
+            </property>
+            <property id="left" scan="links">
+                <label>links</label>
+                <tooltip>Linker Rand des Rechtecks.</tooltip>
+            </property>
+            <property id="top" scan="oben">
+                <label>oben</label>
+                <tooltip>Oberer Rand des Rechtecks.</tooltip>
+            </property>
+            <property id="right" scan="rechts">
+                <label>rechts</label>
+                <tooltip>Rechter Rand des Rechtecks.</tooltip>
+            </property>
+            <property id="bottom" scan="unten">
+                <label>unten</label>
+                <tooltip>Unterer Rand des Rechtecks.</tooltip>
+            </property>
+            <method id="7" scan="breitelesen">
+                <label>breiteLesen</label>
+                <tooltip>Liefert die Breite.</tooltip>
+            </method>
+            <method id="8" scan="breitesetzen">
+                <label>breiteSetzen</label>
+                <parameter name="breite"/>            
+                <tooltip>Setzt die Breite.</tooltip>
+            </method>
+            <method id="9" scan="eckensetzen">
+                <label>eckenSetzen</label>
+                <parameter name="links"/>            
+                <parameter name="oben"/>            
+                <parameter name="rechts"/>            
+                <parameter name="unten"/>            
+                <tooltip>Legt alle Ränder fest.</tooltip>
+            </method>
+            <method id="10" scan="höhelesen">
+                <label>höheLesen</label>
+                <tooltip>Liefert die Höhe.</tooltip>
+            </method>
+            <method id="11" scan="höhesetzen">
+                <label>höheSetzen</label>
+                <parameter name="höhe"/>
+                <tooltip>Setzt die Höhe.</tooltip>
+            </method>
+            <method id="12" scan="linkslesen">
+                <label>linksLesen</label>
+                <tooltip>Liefert den linken Rand.</tooltip>
+            </method>
+            <method id="13" scan="linksobensetzen">
+                <label>linksObenSetzen</label>
+                <parameter name="links"/>            
+                <parameter name="oben"/>            
+                <tooltip>Setzt die linke obere Ecke.</tooltip>
+            </method>
+            <method id="14" scan="linkssetzen">
+                <label>linksSetzen</label>
+                <parameter name="links"/>            
+                <tooltip>Setzt den linken Rand.</tooltip>
+            </method>
+            <method id="15" scan="obenlesen">
+                <label>obenLesen</label>
+                <tooltip>Liefert den oberen Rand.</tooltip>
+            </method>
+            <method id="16" scan="obensetzen">
+                <label>obenSetzen</label>
+                <parameter name="oben"/>            
+                <tooltip>Setzt den oberen Rand.</tooltip>
+            </method>
+            <method id="17" scan="rechtslesen">
+                <label>rechtsLesen</label>
+                <tooltip>Liefert den rechten Rand.</tooltip>
+            </method>
+            <method id="18" scan="rechtssetzen">
+                <label>rechtsSetzen</label>
+                <parameter name="rechts"/>            
+                <tooltip>Setzt den rechten Rand.</tooltip>
+            </method>
+            <method id="19" scan="rechtsuntensetzen">
+                <label></label>
+                <parameter name="rechts"/>            
+                <parameter name="unten"/>            
+                <tooltip>Setzt die rechte untere Ecke.</tooltip>
+            </method>
+            <method id="20" scan="untenlesen">
+                <label>untenLesen</label>
+                <tooltip>Liefert den unteren Rand.</tooltip>
+            </method>
+            <method id="21" scan="untensetzen">
+                <label>untenSetzen</label>
+                <parameter name="unten"/>            
+                <tooltip>Setzt den unteren Rand.</tooltip>
+            </method>
+        </class>
+        <class id="linefigure" scan="strichfigur" show="false">    
+            <label>Strichfigur</label>     
+            <tooltip>Eine Figur mit Umrandung.</tooltip>
+            <property id="borderstyle" scan="randart">
+                <label>randart</label>
+                <tooltip>Art des Randes.</tooltip>
+            </property>
+            <property id="bordercolor" scan="randfarbe">
+                <label>randfarbe</label>
+                <tooltip>Farbe des Randes.</tooltip>
+            </property>
+            <property id="borderwidth" scan="randstärke">
+                <label>randstärke</label>
+                <tooltip>Stärke des Randes.</tooltip>
+            </property>
+            <method id="4" scan="randartlesen">
+                <label></label>
+                <tooltip></tooltip>
+            </method>
+            <method id="5" scan="randartsetzen">
+                <label>randartSetzen</label>
+                <parameter name="art"/>            
+                <tooltip>Setzt die Art des Randes.</tooltip>
+            </method>
+            <method id="6" scan="randfarbelesen">
+                <label>randfarbeLesen</label>
+                <tooltip>Liefert die Farbe des Randes.</tooltip>
+            </method>
+            <method id="7" scan="randfarbesetzen">
+                <label>randfarbeSetzen</label>
+                <parameter name="farbe"/>            
+                <tooltip>Setzt die Farbe des Randes.</tooltip>
+            </method>
+            <method id="8" scan="randstärkelesen">
+                <label>randstärkeLesen</label>
+                <tooltip>Liefert die Stärke des Randes.</tooltip>
+            </method>
+            <method id="9" scan="randstärkesetzen">
+                <label>randstärkeSetzen</label>
+                <parameter name="stärke"/>            
+                <tooltip>Setzt die Stärke des Randes.</tooltip>
+            </method>
+        </class>  
+        <class id="textfield" scan="textfeld" show="true">
+            <label>Textfeld</label>     
+            <tooltip>Ein beschriftbares Rechteck.</tooltip>
+            <example file="de/lathanda/eos/examples/example25.eos"/>                
+            <property id="horizontal" scan="ausrichtunghorizontal">
+                <label>ausrichtungHorizontal</label>
+                <tooltip>Horizontale Ausrichtung des Textes.</tooltip>
+            </property>
+            <property id="vertical" scan="ausrichtungvertikal">
+                <label>ausrichtungVertikal</label>
+                <tooltip>Vertikale Ausrichtung des Textes.</tooltip>
+            </property>
+            <property id="hideborder" scan="durchsichtig">
+                <label>durchsichtig</label>
+                <tooltip>Ist das Textfeld durchsichtig?</tooltip>
+            </property>
+            <property id="autoadjust" scan="größeautomatischanpassen">
+                <label>größeAutomatischAnpassen</label>
+                <tooltip>Automatische Anpassung des Rechtecks an den Text.</tooltip>
+            </property>
+            <property id="fontname" scan="schriftart">
+                <label>schriftart</label>
+                <tooltip>Schriftart.</tooltip>
+            </property>
+            <property id="fontcolor" scan="schriftfarbe">
+                <label>schriftfarbe</label>
+                <tooltip>Farbe der Schrift.</tooltip>
+            </property>
+            <property id="fontsize" scan="schriftgröße">
+                <label>schriftgröße</label>
+                <tooltip>Größe der Schrift.</tooltip>
+            </property>
+            <property id="text">
+                <label>text</label>
+                <tooltip>Text.</tooltip>
+            </property>
+            <method id="8" scan="ausrichtunghorizontallesen">
+                <label>ausrichtungHorizontalLesen</label>
+                <tooltip>Liefert die horizontale Ausrichtung.</tooltip>
+            </method>
+            <method id="9" scan="ausrichtunghorizontalsetzen">
+                <label>ausrichtungHorizontalSetzen</label>
+                <parameter name="ausrichtung"/>            
+                <tooltip>Legt die horizontale Ausrichtung fest.</tooltip>
+            </method>
+            <method id="10" scan="ausrichtungvertikallesen">
+                <label>ausrichtungVertikalLesen</label>
+                <tooltip>Liefert die vertikale Ausrichtung.</tooltip>
+            </method>
+            <method id="11" scan="ausrichtungvertikalsetzen">
+                <label>ausrichtungVertikalSetzen</label>
+                <parameter name="ausrichtung"/>            
+                <tooltip>Legt die vertikale Ausrichtung fest.</tooltip>
+            </method>
+            <method id="12" scan="durchsichtiglesen">
+                <label>durchsichtigLesen</label>
+                <tooltip>Liefert ob das Textfeld durchsichtig ist.</tooltip>
+            </method>
+            <method id="13" scan="durchsichtigsetzen">
+                <label>durchsichtigSetzen</label>
+                <parameter name="durchsichtig"/>                        
+                <tooltip>Legt fest, ob das Rechteck gezeichnet werden soll oder nur der Text.</tooltip>
+            </method>
+            <method id="14" scan="größeautomatischanpassenlesen">
+                <label>größeAutomatischAnpassenLesen</label>
+                <tooltip>Liefert, ob die Größe des Rechtecks automatisch an den Text angepasst wird.</tooltip>
+            </method>
+            <method id="15" scan="größeautomatischanpassensetzen">
+                <label>größeAutomatischAnpassenSetzen</label>
+                <parameter name="auto"/>                        
+                <tooltip>Legt fest ob das Rechteck automatisch an den Text angepasst wird.</tooltip>
+            </method>
+            <method id="16" scan="schriftartlesen">
+                <label>schriftartLesen</label>
+                <tooltip>Liefert die Schriftart.</tooltip>
+            </method>
+            <method id="17" scan="schriftartsetzen">
+                <label>schriftfarbeSetzen</label>
+                <parameter name="art"/>            
+                <tooltip>Legt die Schriftart fest.</tooltip>
+            </method>
+            <method id="18" scan="schriftfarbelesen">
+                <label>schriftfarbeLesen</label>
+                <tooltip>Liefert die Farbe der Schrift.</tooltip>
+            </method>
+            <method id="19" scan="schriftfarbesetzen">
+                <label>schriftfarbeSetzen</label>
+                <parameter name="farbe"/>            
+                <tooltip>Legt die Farbe der Schrift fest.</tooltip>
+            </method>
+            <method id="20" scan="schriftgrößelesen">
+                <label>schriftgrößeLesen</label>
+                <tooltip>Liefert die Größe der Schrift.</tooltip>
+            </method>
+            <method id="21" scan="schriftgrößesetzen">
+                <label>schriftgrößeSetzen</label>
+                <parameter name="größe"/>            
+                <tooltip>Legt die Schriftgröße fest.</tooltip>
+            </method>
+            <method id="22" scan="zeilehinzufügen">
+                <label>zeileHinzufügen</label>
+                <parameter name="zeile"/>            
+                <tooltip>Ergänzt eine neue Zeile im Text.</tooltip>
+            </method>
+            <method id="23" scan="zeilelöschen">
+                <label>zeileLöschen</label>
+                <tooltip>Löscht die letzte Zeile des Textes.</tooltip>
+            </method>
+        </class> 
+        <class id="plotter" scan="turtle" show="true">
+            <label>Turtle</label>
+            <tooltip>Ein steuerbarer Zeichenstift.</tooltip>
+            <description>
+                <p>
+                    Eine Turtle (Schildkröte) kann mit verschiedenen Befehlen manövriert werden.
+                    Bei jeder Bewegung hinterlässt sie eine Spur.
+                    Dies erlaubt es zu Zeichnen.
+                </p>
+                <p>
+                    Die Turtle zeichnet im Grunde Polygone. Immer wenn man die Zeicheneigenschaften ändert wird ein neues Polygon begonnen.
+                    Dies ist wichtig, wenn man die Füllart umstellt. Während man ein ausgemaltes Polygon zeichnet,
+                    darf man die Zeicheneigenschaften nur ändern, wenn die Teilfläche fertig ist.
+                </p>        
+            </description>     
+            <example file="de/lathanda/eos/examples/example26.eos"/>                
+            <property id="isplotting">
+                <label>stiftunten</label>
+                <tooltip>Wird gerade gezeichnet?</tooltip>
+            </property>    
+            <property id="pencolor">
+                <label>stiftfarbe</label>
+                <tooltip>Zeichenfarbe. </tooltip>
+            </property>
+            <property id="penangle" scan="kurs">
+                <label>zeichenrichtung</label>
+                <tooltip>Bewegungsrichtung des Stiftes in Grad.</tooltip>
+            </property>
+            <property id="penvisible" scan="turtlesichtbar">
+                <label>stiftSichtbar</label>
+                <tooltip>Ist der Stift sichtbar?</tooltip>
+            </property>
+            <property id="penx" scan="turtlex">
+                <label>turtleX</label>
+                <tooltip>x-Koordinate des Stiftes.</tooltip>
+            </property>
+            <property id="peny" scan="turtley">
+                <label>turtleY</label>
+                <tooltip>y-Koordinate des Stiftes.</tooltip>
+            </property>
+            <method id="5" scan="alleslöschen">
+                <label>allesLöschen</label>
+                <tooltip>Löscht alles gezeichneten Elemente und beginnt eine neue Zeichnung.</tooltip>
+            </method>
+            <method id="6" scan="farbelesen">
+                <label>farbeLesen</label>
+                <tooltip></tooltip>
+            </method>
+            <method id="7" scan="farbesetzen">
+                <label>farbeSetzen</label>
+                <parameter name="farbe"/>            
+                <tooltip></tooltip>
+            </method>
+            <method id="8" scan="füllartsetzen">
+                <label>füllartSetzen</label>
+                <parameter name="art"/>            
+                <tooltip>Setzt die Art wie das aktuelle Polygon gefüllt wird.</tooltip>
+            </method>
+            <method id="9" scan="füllfarbesetzen">
+                <label>füllfarbeSetzen</label>
+                <parameter name="farbe"/>            
+                <tooltip>Setzt die Farbe mit der die Figur gefüllt wird.</tooltip>
+            </method>
+            <method id="10" scan="kurslesen">
+                <label>kursLesen</label>
+                <tooltip>Liefert den Winkel der Richtung in die sich der Stift bewegt.</tooltip>
+            </method>
+            <method id="11" scan="kurssetzen">
+                <label>kursSetzen</label>
+                <parameter name="winkel"/>            
+                <tooltip>Legt die Bwegungsrichtung des Stiftes fest.</tooltip>
+            </method>
+            <method id="12" scan="linienartsetzen">
+                <label>linienArtSetzen</label>
+                <parameter name="art"/>                        
+                <tooltip>Setzt die Art der Linie.</tooltip>
+            </method>
+            <method id="13" scan="linienstärkesetzen">
+                <label>linienStärkeSetzen</label>
+                <parameter name="stärke"/>            
+                <tooltip>Setzt die Stärke der zu zeichnenden Linie.</tooltip>
+            </method>
+            <method id="14" scan="linksdrehen">
+                <label>linksDrehen</label>
+                <parameter name="winkel"/>                        
+                <tooltip>Dreht den Stift nach links.</tooltip>
+            </method>
+            <method id="14" scan="links">
+                <label>links</label>
+                <parameter name="winkel"/>                        
+                <tooltip>Dreht den Stift nach links.</tooltip>
+            </method>
+            <method id="15" scan="rechtsdrehen">
+                <label>rechtsDrehen</label>
+                <parameter name="winkel"/>                        
+                <tooltip>Dreht den Stift nach rechts.</tooltip>
+            </method>
+            <method id="15" scan="rechts">
+                <label>rechts</label>
+                <parameter name="winkel"/>                        
+                <tooltip>Dreht den Stift nach rechts.</tooltip>
+            </method>
+            <method id="16" scan="setzeturtlexy">
+                <label>setzeTurtleXY</label>
+                <parameter name="x"/>                        
+                <parameter name="y"/>                        
+                <tooltip>Bewegt den Stift zur Position.</tooltip>
+            </method>
+            <method id="17" scan="stiftab">
+                <label>stiftAb</label>
+                <tooltip>Startet einen Zeichenvorgang.</tooltip>
+            </method>
+            <method id="18" scan="stiftauf">
+                <label>stiftAuf</label>
+                <tooltip>Beendet einen Zeichenvorgang.</tooltip>
+            </method>
+            <method id="19" scan="turtlesichtbarlesen">
+                <label>turtleSichtbarLesen</label>
+                <tooltip>Liefert ob der Stift angezeigt wird.</tooltip>
+            </method>
+            <method id="20" scan="turtlesichtbarsetzen">
+                <label>turtleSichtbarSetzen</label>
+                <parameter name="sichtbar"/>                                    
+                <tooltip>Legt fest ob der Stift angezeigt wird.</tooltip>
+            </method>
+            <method id="21" scan="turtlexlesen">
+                <label>turtleXLesen</label>
+                <tooltip>Liefert die x-Koordinate des Stiftes.</tooltip>
+            </method>
+            <method id="22" scan="turtlexsetzen">
+                <label>turtleXSetzen</label>
+                <parameter name="x"/>                        
+                <tooltip>Setzt die x-Koordinate des Stiftes.</tooltip>
+            </method>
+            <method id="23" scan="turtleylesen">
+                <label>turtleYLesen</label>
+                <tooltip>Liefert die y-Koordinate des Stiftes.</tooltip>
+            </method>
+            <method id="24" scan="turtleysetzen">
+                <label>turtleYSetzen</label>
+                <parameter name="y"/>                        
+                <tooltip>Setzt die y-Koordinate des Stiftes.</tooltip>
+            </method>
+            <method id="25" scan="vor">
+                <label>vor</label>
+                <parameter name="abstand"/>                                    
+                <tooltip>Bewegt den Stift vorwärts.</tooltip>
+            </method>
+            <method id="26" scan="zentrumsetzen">
+                <label>zentrumSetzen</label>
+                <parameter name="x"/>                        
+                <parameter name="y"/>                        
+                <tooltip>Setzt den Mittelpunkt der Gruppe auf einen neuen Wert ohne die Figur zu verschieben. Dieser Wert ersetzt den Schwerpunkt.</tooltip>
+            </method>
+            <method id="27" scan="zurück">
+                <label>zurück</label>
+                <parameter name="abstand"/>                        
+                <tooltip>Bewegt den Stift rückwärts.</tooltip>
+            </method>
+        </class>
+        <module id="function">
+            <label>Funktionen</label>
+            <tooltip>Sammlung mathematischer Funktionen.</tooltip>
+            <description>
+                <p>EOS kennt eine Menge vordefinierter mathematischer Funktionen, welche man an jeder Stelle verwenden kann, an der eine Zahl erlaubt wäre.</p>        
+            </description>
+            <function id="1" scan="runden">
+                <label>runden</label>
+                <parameter name="x"/>
+                <tooltip>Rundet eine Zahl. </tooltip>                                            
+            </function>
+            <function id="2" scan="abrunden">
+                <label>abrunden</label>
+                <parameter name="x"/>
+                <tooltip>Schneidet alle Nachkommastellen ab.</tooltip>                                            
+            </function>
+            <function id="3" scan="zufall">
+                <label>zufall</label>
+                <parameter name="von"/>                                            
+                <parameter name="bis"/>                                            
+                <tooltip>Liefert eine zufällige Zahl zwischen den beiden Argumenten einschließlich dieser.</tooltip>                                            
+            </function>
+            <function id="4" scan="betrag">
+                <label>betrag</label>
+                <parameter name="x"/>                                            
+                <tooltip>Ermittelt den Betrag.</tooltip>                                            
+            </function>
+            <function id="5" scan="wurzel">
+                <label>wurzel</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet die Quadratwurzel.</tooltip>                                            
+            </function>
+            <function id="6" scan="sin">
+                <label>sin</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet den Sinus des Winkels im Gradmaß.</tooltip>                                            
+            </function>
+            <function id="7" scan="cos">
+                <label>cos</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet den Cosinus des Winkels im Gradmaß.</tooltip>                                            
+            </function>
+            <function id="8" scan="tan">
+                <label>tan</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet den Tangens des Winkels im Gradmaß.</tooltip>                                            
+            </function>
+            <function id="9" scan="arctan">
+                <label>arctan</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet den Umkehrtangens im Gradmaß.</tooltip>                                            
+            </function>
+            <function id="10" scan="arcsin">
+                <label>arcsin</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet den Umkehrsinus im Gradmaß.</tooltip>                                            
+            </function>
+            <function id="11" scan="arccos">
+                <label>arccos</label>
+                <parameter name="x"/>                                            
+                <tooltip>Berechnet den Umkehrcosinus im Gradmaß.</tooltip>                                            
+            </function>
+            <function id="12" scan="phi">
+                <label>phi</label>
+                <parameter name="x"/>                                            
+                <parameter name="y"/>                                            
+                <tooltip>Berechnet den Winkel zur x-Achse.</tooltip>                                            
+            </function>
+            <function id="13" scan="r">
+                <label>r</label>
+                <parameter name="x"/>                                            
+                <parameter name="y"/>                                            
+                <tooltip>Berechnet den Abstand vom Ursprung zur Koordinate.</tooltip>                                            
+            </function>  
+            <function id="14" scan="rgb">
+                <label>rgb</label>
+                <parameter name="r"/>                                            
+                <parameter name="g"/>                                            
+                <parameter name="b"/>                                                    
+                <tooltip>Erzeugt eine neue Farbe mit den entsprechenden Farbanteilen (von 0 nichts bis 255 Maximum).</tooltip>                                            
+            </function>  
+        </module>       
+        <help id="eos">
+            <label>EOS</label>
+        </help>
+        <help id="language" parent="eos">
+            <label>Sprache</label>
+        </help>
+        <help id="procedures" parent="language">
+            <label>Anweisungen</label>
+            <description>
+                <p>Eine eigene Anweisung ist eine Anweisungssequenz, welche man mehrfach aufrufen kann.         
+                Man spart sich auf diese Weise wiederkehrende Sequenzen immer wieder tippen zu müssen.         
+                EOS kennt Methoden und Anweisungen. Methoden können auf alle definierten Objekte zugreifen.          
+                Anweisungen können ausschliesslich Parameter verwenden.
+                Als Konsequenz steht einer Anweisung das automatisch erzeugte Fenster nicht zu Verfügung. 
+                Figuren die dort erzeugt werden, müssen manuell einem Fenster oder Gruppe hinzugeügt werden.
+                Ansonsten bleiben Sie unsichtbar.</p>
+                <p>Mehrere Anweisungen müssen sich zumindest im Namen oder in ihrer Anzahl der Parameter unterscheiden.</p>        
+                <h2>Schreibweise</h2>        
+                <h3>Anweisung ohne Parameter</h3>        
+                    <p><b>anweisung</b> Name<br/>
+                      Sequence<br/>
+                    <b>*anweisung</b></p>        
+                <h3>Anweisung mit Parameter</h3>        
+                    <p><b>anweisung</b> Name( Parameter )<br/>        
+                      Sequence<br/>        
+                    <b>*anweisung</b></p>        
+                    <h3>Anweisung mit Parameter und Ergebnis</h3>
+                    <p><b>anweisung</b> Name( Parameter ):Typ<br/>        
+                      Sequence<br/>
+                      ergebnis = ...<br/>        
+                    <b>*anweisung</b></p>                 
+                <h3>Parameter</h3>Parameter schreibt man in der Form<br/>
+                    <p>Name : Typ, Name : Typ , ... , Name : Typ</p>        
+                    Hat man mehrere Parameter die den selben Typ haben, kann man folgende abkürzende Schreibweise verwenden.         
+                    <p>Name, Name, ... , Name : Typ</p>        
+                <h3>Verwenden</h3>        
+                    Um eine Anweisung oder Methode aufzurufen schreibt man         
+                    <p>Name( Argumente )</p>
+            </description>
+            <example file="de/lathanda/eos/examples/example5.eos"/>
+        </help>  
+        <help id="expressions" parent="language">
+            <label>Ausdrücke</label>
+            <description>
+                <p>Immer wenn beim Programmieren von einem Ausdruck gesprochen wird ist gemeint, dass hier ein Wert in irgendeiner Form benötigt wird.   Dies sind sehr oft schlichte Konstanten, also Zahlen, Zeichenketten, Farben, Wahrheitswerte, ... .   Beim Programmieren kann aber an jeder Stelle an der ein Wert erwartet wird auch ein Term stehen, der diesen erst berechnet.   Dh. Ausdrücke können sowohl Werte wie auch Terme (Berechnungsvorschriften) sein.</p>	     
+                <p>In diesen Termen können verschiedene Rechenarten verwendet werden, sowie 	Vergleiche und Funktionen.</p>
+                <h2>Rechenarten</h2>
+                    Die standard Rechenarten berechnen aus zwei Zahlen eine neue. 	     
+                    <ul>
+                        <li><b>*</b> Multiplizieren</li>	       
+                        <li><b>/</b> Dividieren</li>
+                        <li><b>+</b> Addieren</li>	       
+                        <li><b>-</b> Subtrahieren</li>	     
+                    </ul>
+                <h2>Vergleiche</h2>
+                    Die Vergleiche prüfen eine Beziehung zwischen zwei Zahlen.
+                    Das Ergebnis ist ein Wahrheitswert. Also <b>wahr</b> oder <b>falsch</b>. 	     
+                    <ul>
+                        <li><b>&gt;</b> Größer als Vergleich.</li>
+                        <li><b>&lt;</b> Kleiner als Vergleich.</li>
+                        <li><b>&gt;=</b> Größer gleich Vergleich.</li>
+                        <li><b>&lt;=</b> Kleiner gleich Vergleich.</li>
+                        <li><b>&lt;&gt;</b> Test auf Ungleichheit</li>
+                        <li><b>=</b> Test auf Gleichheit</li>
+                    </ul>
+               <h2>Logische Operationen</h2>
+                    Die logischen Operationen verknüpfen ein oder zwei Wahrheitswerte.
+                    Das Ergebnis ist wiederum ein Wahrheitswert. Auf diese Weise können komplexe
+                    logische Ausdrücke aufgebaut werden.        
+                    <ul>
+                        <li><b>und</b> liefert wahr, wenn beide wahr sind.</li>
+                        <li><b>oder</b> liefert wahr, wenn mindestens einer der beiden wahr ist.</li>
+                        <li><b>nicht</b> dreht die Aussage um. Also aus wahr wird falsch und aus falsch wird wahr.</li>       
+                   </ul>
+               <h2>Klammern</h2>
+                   <p>Jeder Ausdruck kann in runde Klammern gesetzt werden, um die Berechnung eindeutig zu machen.
+                   Im Zweifel sollte man Klammern verwenden, da die Reihenfolge beim Programieren nicht so einfach ist,
+                   wie das Punkt vor Strich in der Mathematik.</p>
+                   <p><b>Hinweis:</b> eckige oder geschweifte Klammern haben eine völlig andere Bedeutung.</p>
+           </description>
+            <example file="de/lathanda/eos/examples/example6.eos"/>
+        </help>  
+        <help id="classes" parent="language">
+            <label>Klassen</label>
+            <description>
+            <p>
+                Man kann seine eigenen Klassen definieren. Dies erlaubt es eigene Datenstrukturen zu verwenden,
+                was es erlaubt eine Gruppe von Variablen gemeinsam zu erzeugen. Zusätzlich kann man eigene Methoden definieren.
+                Es ist ebenso möglich bestehende Klassen zu erweitern.
+            </p>
+            <h2>Schreibweise</h2>
+            <h3>Einfache Klasse</h3>
+                <p>
+                    <b>klasse</b> Name<br/>        
+                    <indent/>Attribute<br/>
+                    <indent/>Methoden<br/>
+                    <b>*klasse</b>
+                </p>        
+            <h3>Klasse mit Vererbung</h3>
+                <p>
+                    <b>klasse</b> Name <b>erweitert</b> Name<br/>         
+                    <indent/>Attribute<br/>
+                    <indent/>Methoden<br/>
+                    <b>*klasse</b>
+                </p>        
+            </description>
+        </help>
+        <help id="conditional_expression" parent="language">
+            <label>Bedingte Anweisung</label>
+            <description>
+                <p>
+                    Bedingte Anweisungen dienen dazu Befehle nur unter bestimmten Bedingungen 
+                    auszuführen oder zwischen zwei Alternativen zu wählen.
+                </p>
+                <h2>Schreibweise</h2>
+                    <h3>Bedingte Anweisung</h3>
+                        <p>
+                            <b>wenn</b> Bedingung <b>dann</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wenn</b>
+                        </p>        
+                    <h3>Alternative Anweisung</h3>
+                        <p>
+                            <b>wenn</b> Bedingung <b>dann</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>sonst</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wenn</b>
+                        </p>
+            </description>
+            <example file="de/lathanda/eos/examples/example1.eos"/>
+        </help>    
+        <help id="declaration" parent="language">
+            <label>Deklaration</label>
+            <description>
+                <p>
+                    Eine Deklaration dient dazu eine Variable zu definieren. In EOS wird implizit automatisch auch ein Objekt erzeugt
+                    und in dieser Variable gespeichert. Diese Regel hat die Ausnahme, dass die Klassen Figur, StrichFigur und GefüllteFigur
+                    nur Sammelbegriffe für andere Klassen sind. Hat eine Variable oder Parameter den Typ Figur, kann sie zwar
+                    jedes Figur Objekt aufnehmen, ist anfänglich jedoch leer.
+                    Greift man auf so eine Variable zu, bevor man ein anderes Objekt zugewiesen hat, gibt es einen Fehler.
+                </p>
+                <p>
+                    Enthält das gesamte Programm keine Variable der Klasse Fenster, aber mindestens eine Figur, wird automatisch ein Fenster Objekt <b>fenster</b> erzeugt.
+                    Jedes neue Objekt wird automatisch diesem Fenster hinzugefügt.
+                </p>
+                <h2>Schreibweise</h2>
+                    <p>Name:Klasse</p>
+                    <p>Erzeugt eine Variable mit diesem Namen, welche ein Objekt der Klasse enthält.</p>
+                    <p>Name_1, Name_2, ..., Name_n:Klasse</p>                                  
+                    <p>Erzeugt mehrere Variablen der selben Klasse auf einmal.</p>
+            </description>
+            <example file="de/lathanda/eos/examples/example7.eos"/>
+        </help>
+        <help id="include" parent="language">
+            <label>Einfügen</label>
+            <description>
+                <p>
+                    Der Befehl Einfügen erlaubt es andere EOS-Programme zu verwenden ohne sie abzuschreiben.
+                    Der Befehl kopiert quasi den kompletten Inhalt des angegebenen Programms in das eigene.
+                </p>        
+                <p>Hierbei gibt es jedoch folgende Einschränkungen:</p>        
+                <ol>        
+                    <li>
+                        Der Einfügen Befehl funktioniert erst mit relativen Pfaden, wenn das eigene Programm geöffnet oder gespeichert wurde.          
+                        Wurde das Programm direkt im Editor geschrieben, ohne auf der Festplatte zu existieren, kann der Rechner leider nicht wissen, wo er suchen soll.
+                    </li>        
+                    <li>
+                        Das eingefügte Programm muss für sich selber genommen syntaktisch (Syntax = Schreibweise) korrekt sein. Das bedeutet alle Wortpaare wie
+                        zB. wiederhole *wiederhole müssen abgeschlossen sein. Variablenverweise müssen lediglich im Gesamtprogramm korrekt sein.
+                    </li>        
+                </ol>
+            <h2>Schreibweise</h2>        
+                <p>
+                    <b>einfügen</b><br/>
+                    <indent/>Dateinamen<br/>
+                    <b>*einfügen</b>
+                </p>        
+            </description>
+            <example file="de/lathanda/eos/examples/example8.eos"/>
+        </help>
+        <help id="with" parent="language">
+            <label>Für</label>
+            <description>
+                <p>
+                    Der Für-Bereich erlaubt es sich Schreibarbeit zu sparen. Will man viele Methoden auf ein und dasselbe Objekt aufrufen,
+                    kann man dieses Objekt mit <b>für</b> angeben. Innerhalb des Bereiches darf man dann alle Methoden aufrufen ohne das Objekt angeben zu müssen.
+                </p>
+                <h2>Schreibweise</h2>
+                    <p>
+                        <b>für</b> Variable<br/>
+                        <indent/>Anweisungssequenz<br/>
+                        <b>*für</b>
+                    </p>
+            </description>
+            <example file="de/lathanda/eos/examples/example14.eos"/>
+        </help>
+        <help id="comment" parent="language">
+            <label>Kommentare</label>
+            <description>
+                <p>Kommentare sind Texte die zwar in einem Programm stehen, die der Rechner aber vollständig (mit sehr wenigen Ausnahmen) ignoriert.</p>
+                <p>
+                    Sie dienen dazu ein Programm mit Erläuterungen und Bemerkungen zu versehen.
+                    Diese sind notwendig, um Programme verstehen zu können. Einen Kommentar sollte man immer dann
+                    schreiben, wenn aus dem Quellcode nicht eindeutig hervorgeht, was er tut oder es Informationen gibt die
+                    an dieser Stelle nicht ersichtlich sind.
+                </p>
+                <p>
+                    Die Kommentare helfen einerseits anderen Programme schneller und besser zu verstehen. Andererseits vergisst man auch seine eigenen
+                    Programme teilweise recht schnell und ist froh, wenn man es aufgeschrieben hat.
+                </p>
+                <h2>Schreibweise</h2>
+                    <h3>Zeilen Kommentar</h3>
+                        <p><b>//</b> Der ganze Rest der Zeile ist eine Kommentar egal was darin steht.</p>
+                        Zeilen Kommentare eignen sich insbesondere, um hinter einem Befehl einen Kommentar zu ergänzen.
+                    <h3>Bereichs Kommentar</h3>
+                        <p><b>/*</b> Texte zwischen /* und */ sind ein Kommentar <b>*/</b></p> oder alternativ
+                        <p><b>{</b> Texte zwischen geschweiften Klammern sind ein Kommentar <b>}</b></p>
+                        Bereichskommentare dürfen auch innerhalb von Zeilen stehen. Überall wo ein
+                        Leerzeichen sein kann, kann auch ein Bereichkommentar stehen.
+            </description>
+            <example file="de/lathanda/eos/examples/example18.eos"/>
+        </help>
+        <help id="usermethods" parent="language">
+            <label>Eigenen Methoden</label>
+            <description>
+                <p>
+                    Eine eigene Methode ist eine Anweisungssequenz, welche man immer wieder aufrufen kann.
+                    Man spart sich auf diese Weise wiederkehrende Sequenzen immer wieder tippen zu müssen.
+                    EOS kennt Methoden und Anweisungen. Methoden können auf alle definierten Objekte zugreifen.
+                    Anweisungen können ausschliesslich Parameter verwenden.
+                </p>
+                <p>
+                    Mehrere Methoden müssen sich zumindest im Namen oder in ihrer Anzahl der Parameter unterscheiden.
+                </p>         
+                <h2>Schreibweise</h2>
+                    <h3>Methode ohne Parameter</h3>
+                        <p>
+                            <b>methode</b> Name<br/>
+                            <indent/>Sequenz<br/>
+                            <b>*methode</b>
+                        </p>
+                    <h3>Methode mit Parameter</h3>
+                        <p>
+                            <b>methode</b> Name( Parameter )<br/>
+                            <indent/>Sequenz<br/>
+                            <b>*methode</b>
+                        </p>
+                    <h3>Methode mit Parameter und Ergebnis</h3>
+                        <p>
+                            <b>methode</b> Name( Parameter ):Typ<br/>
+                            <indent/>Sequenz<br/>
+                            <indent/>ergebnis = ...<br/>
+                            <b>*methode</b>
+                        </p>
+                    <h3>Parameter</h3>
+                        Parameter schreibt man in der Form <br/>
+                        <p>Name : Typ, Name : Typ , ... , Name : Typ</p>
+                        Hat man mehrere Parameter die den selben Typ haben, kann man folgende abkürzende Schreibweise verwenden.
+                        <p>Name, Name, ... , Name : Typ</p>
+                    <h3>Verwenden</h3>
+                        Um eine Anweisung oder Methode aufzurufen schreibt man
+                        <p>Name( Argumente )</p>        
+            </description>
+            <example file="de/lathanda/eos/examples/example28.eos"/>
+        </help>
+        <help id="program" parent="language">
+            <label>Hauptprogramm</label>
+            <description>
+                <p>
+                    Der Befehl Programm dient dazu das Hauptprogramm optisch von Anweisungen und Methoden zu trennen.
+                    Wird ein Befehl ausserhalb gefunden wird dieser automatisch dem Hauptprogramm zugeschrieben.
+                    Der Program-Befehl ist damit rein optional.
+                </p>
+                <h2>Schreibweise</h2>
+                    <p>
+                        <b>programm</b><br/>
+                        <indent/>Anweisungssequenz<br/>
+                        <b>*programm</b>
+                    </p>
+            </description>
+            <example file="de/lathanda/eos/examples/example29.eos"/>
+        </help>    
+        <help id="variables" parent="language">
+            <label>Variablen</label>
+            <description>
+                <p>
+                    Variablen sind die Grundlage der Programmierung. Sie enthalten die Objekte mit denen man interagiert.
+                    Man kann auch Variablen definieren die Zahlen und andere Werte enthalten.
+                </p>
+                <h2>Schreibweise</h2>
+                    name:Typ
+                <h2>Methoden aufrufen</h2>
+                    <p>Um eine Methode aufzurufen bzw. eine Nachricht an das Objekt zu schicken schreibt man.</p>
+                    <p>name.methode(Argumente)</p>
+                <h2>Attribute lesen</h2>
+                    <p>Um auf Attribute lesend zuzugreifen schreibt man.</p>
+                    <p>name.variable</p>
+                <h2>Attribute schreiben</h2>
+                    <p>Um Attibute zu verändern schreibt man. </p>
+                    <p>name.variable := Wert</p>
+                    <p>oder</p>
+                    <p>name.variable = Wert</p>
+            </description>
+            <example file="de/lathanda/eos/examples/example30.eos"/>
+        </help>    
+        <help id="repeat" parent="language">
+            <label>Wiederholungen</label>
+            <description>
+                <p>
+                    Wiederholungen dienen dazu eine Anweisungssequenz mehrfach auszuführen.
+                    Dies ist jedoch etwas mehr als ein Weg Copy &amp; Paste zu vermeiden, denn die Wiederholungen können auch über
+                    Bedingungen gesteuert werden. Etwa solange wiederholen bis der Rand erreicht wurde.
+                </p>
+                <p>Schleife ist der umgangssprachliche Begriff für eine Wiederholung.</p>
+                <h2>Schreibweise</h2>
+                    <h3>Endlosschleife</h3>
+                        <p>
+                            <b>wiederhole immer</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wiederhole</b>
+                        </p>
+                    <h3>Zählschleife</h3>
+                        <p>
+                            <b>wiederhole</b> Anzahl <b>mal</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wiederhole</b>
+                        </p>
+                    <h3>Bedingte Schleife</h3>
+                        <p>
+                            <b>wiederhole</b> <b>solange</b> Bedingung<br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wiederhole</b>
+                        </p>
+                        <p>Alternative Schreibweise</p>
+                        <p>
+                            <b>solange</b> Bedingung <b>tue</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>*solange</b>
+                        </p>
+                    <h3>Bedingte Schleife, welche mindestens einmal durchlaufen wird</h3>
+                        <p>
+                            <b>wiederhole</b><br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wiederhole solange</b> Bedingung
+                        </p>
+                    <h3>Bedingte Schleife mit inverser Bedingung</h3>
+                        <p>
+                            <b>wiederhole</b> <b>bis</b> Bedingung<br/>
+                            <indent/>Sequenz<br/>
+                            <b>*wiederhole</b>
+                        </p>        
+            </description>
+            <example file="de/lathanda/eos/examples/example31.eos"/>
+        </help>    
+        <help id="info" parent="eos">
+            <label>Informationen</label>
+        </help>    
+        <help id="author" parent="info">
+            <label>Programmierer</label>
+            <description>
+                <h2>EOS - Original Version</h2>
+                    <ul>
+                        <li><a href="http://www.pabst-software.de/">Martin Pabst</a></li>
+                    </ul>
+                <h2>EOS 2 - Java Version</h2>
+                    <ul>
+                        <li><a href="https://www.lathanda.de/">Peter Schneider</a></li>
+                    </ul>
+            </description>
+        </help>        
+        <help id="resources" parent="info">>
+            <label>Ressourcen</label>        
+            <description>
+                <h2>Bilder</h2>        
+                    <ul>        
+                        <li><a href="http://publicdomainvectors.org">Public Domain Vectors</a></li> 
+                    </ul>             
+                <h2>Icons</h2>        
+                    <ul>        
+                        <li><a href="http://www.incors.com/info">INCORS GmbH</a></li>        
+                        <li><a href="https://www.lathanda.de/">Peter Schneider</a></li>        
+                    </ul>        
+                <h2>Texte</h2>        
+                    <ul>        
+                        <li><a href="https://www.lathanda.de/">Peter Schneider</a></li>        
+                    </ul>     
+            </description>
+        </help>
+        <help id="copyright" parent="info">
+            <label>Copyright Hinweise</label>
+            <description>
+                <h2>Quellcode</h2>
+                    Ein großer Teil des Quellcodes steht unter <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a>.
+                    Der von <a href="https://javacc.java.net/">JavaCC</a> generierte Code ist PD.
+                <h2>Bilder</h2>
+                    Die Bilder von <a href="http://publicdomainvectors.org">Public Domain Vectors</a> sind PD.
+                <h2>Icons</h2>
+                    Die Icons stammen aus der G-Collection der Firma <a href="http://www.incors.com/info">INCORS GmbH</a>. Hierbei handelt es sich um geschütztes Material.
+                    Sie dürfen Screenshots frei nutzen. Wenn Sie diese Icons für eigene Projekte verwenden wollen,
+                    benötigen Sie eine eigene Lizenz. Diese ist jedoch sehr günstig. Incors war so freundlich der Veröffentlichung im Git Repository zuzustimmen.
+                    Die Icons dürfen jedoch nur in diesem Projekt verwendet werden.         
+            </description>
+        </help>
+        <help id="software" parent="info">
+            <label>Software</label>
+            <description>
+                <h2>Blender</h2>
+                    <p><a href="https://www.blender.org/">https://www.blender.org/</a></p>
+                    <p>Programm zum Erstellen von 3D Modellen.</p>
+                <h2>Gimp</h2>
+                    <p><a href="https://www.gimp.org/">http://www.gimp.org/</a></p>
+                    <p>Zeichenprogramm.</p>
+                <h2>Inkscape</h2> 
+                    <p><a href="https://inkscape.org/de/">https://inkscape.org/de/</a></p>
+                    <p>Vektorzeichenprogramm.</p>
+                <h2>Doxygen</h2>
+                    <p><a href="https://www.doxygen.nl/index.html">http://www.stack.nl/~dimitri/doxygen/</a></p>
+                    <p>Softwaredokumentation.</p>
+                <h2>Eclipse</h2>
+                    <p><a href="https://www.eclipse.org/">http://www.eclipse.org/</a></p>
+                    <p>Java Programmierumgebung</p>
+                <h2>JDK</h2>
+                    <p><a href="https://adoptopenjdk.net/">AdoptJDK</a></p>
+                    <p>Java Entwicklungswerkzeuge</p>
+            </description>
+        </help>
+    </text>
+</lang>

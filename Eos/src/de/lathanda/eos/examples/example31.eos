@@ -1,0 +1,19 @@
+k:Kreis
+wiederhole 5 mal
+  k.drehen(1)
+*wiederhole
+wiederhole solange k.x < 5
+  k.drehen(-1)
+*wiederhole
+wiederhole
+  k.drehen(1)    
+*wiederhole solange k.y > 10
+solange k.x < 5 tue
+  k.drehen(1)
+*solange
+wiederhole immer 
+  k.drehen(2)
+*wiederhole
+wiederhole bis k.x < 15
+  k.drehen(3)
+*wiederhole

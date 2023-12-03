@@ -1,7 +1,6 @@
 package ewire;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Vector;
 import de.lathanda.eos.game.Game;
@@ -26,9 +25,9 @@ public class Paddle extends Sprite {
 	@Override
 	public void render(Picture g) {
 		if (burn) {
-			g.setFillColor(Color.ORANGE);
+			g.setFillColor(MutableColor.ORANGE);
 		} else {
-			g.setFillColor(Color.LIGHT_GRAY);
+			g.setFillColor(MutableColor.LIGHT_GRAY);
 		}
 		g.drawShape(shape);
 	}

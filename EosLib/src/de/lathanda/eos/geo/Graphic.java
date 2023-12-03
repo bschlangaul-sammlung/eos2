@@ -1,6 +1,4 @@
 package de.lathanda.eos.geo;
-import java.util.LinkedList;
-
 import de.lathanda.eos.base.FillStyle;
 /**
  * Rechteck mit Bild als Füllung.
@@ -59,10 +57,10 @@ public class Graphic extends Rectangle {
     	this.mode = Scaling.FIT;
     	fireDataChanged();
     }
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	super.getAttributes(attributes);
-        attributes.add(new Attribut("mode", mode));
-        attributes.add(new Attribut("image", filename));
-	}     
+    public Scaling getMode() {
+    	return mode;
+    }
+    public String getImage() {
+    	return filename;
+    }
 }

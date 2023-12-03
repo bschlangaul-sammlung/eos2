@@ -1,7 +1,6 @@
 package pachinko;
 
-import java.awt.Color;
-
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.math.Vector;
@@ -24,7 +23,7 @@ public class Rand extends Sprite {
 
 	@Override
 	public void render(Picture p) {
-		p.setLineColor(Color.BLACK);
+		p.setLineColor(MutableColor.BLACK);
 		p.drawLine(x1, y1, x2, y2);
 	}
 

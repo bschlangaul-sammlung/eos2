@@ -1,6 +1,6 @@
 package de.lathanda.eos.game.geom;
 
-import de.lathanda.eos.util.Interval;
+import de.lathanda.eos.base.util.Interval;
 
 /**
  * \brief BoundingBox

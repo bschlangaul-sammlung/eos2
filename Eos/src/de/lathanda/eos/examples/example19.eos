@@ -1,0 +1,5 @@
+k:Kreis
+k.mitteX = 5
+k.mitteY = 4
+k.radiusSetzen(10)
+k.mittelpunktSetzen(20,20)

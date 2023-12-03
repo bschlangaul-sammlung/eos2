@@ -1,12 +1,12 @@
 package de.lathanda.eos.geo;
 
 import de.lathanda.eos.base.FillStyle;
+import de.lathanda.eos.base.MutableColor;
 import de.lathanda.eos.base.Picture;
 import de.lathanda.eos.base.layout.BalancePoint;
 import de.lathanda.eos.base.layout.BoundingBox;
 import de.lathanda.eos.base.math.Point;
 import de.lathanda.eos.base.layout.Transform;
-import java.awt.Color;
 import java.util.LinkedList;
 
 /**
@@ -26,8 +26,8 @@ public class Pen extends FilledFigure {
 	}
 
 	public Pen() {
-		line.setColor(Color.BLACK);
-		fill.setColor(new Color(255,0,0,128));
+		line.setColor(MutableColor.BLACK);
+		fill.setColor(new MutableColor(255,0,0,128));
 		fill.setFillStyle(FillStyle.FILLED);
 	}
 
@@ -61,9 +61,4 @@ public class Pen extends FilledFigure {
 		Transform t = base.transform(own);
 		return new BoundingBox(t.getdx(), t.getdx(), t.getdy(), t.getdy());
 	}
-    @Override
-	public void getAttributes(LinkedList<Attribut> attributes) {
-    	//helper for Plotter, internal informations are secret
-    	//plotter will read fields external
-	} 	
 }

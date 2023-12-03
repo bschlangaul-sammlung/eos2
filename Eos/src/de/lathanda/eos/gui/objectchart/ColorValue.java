@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import de.lathanda.eos.gui.diagram.Unit;
 import de.lathanda.eos.gui.diagram.Drawing;
+
 /**
  * Zeichnet die Farbe.
  *
@@ -12,7 +13,7 @@ import de.lathanda.eos.gui.diagram.Drawing;
  */
 public class ColorValue extends Unit {
 	private Color color;
-	
+
 	public ColorValue(Color color) {
 		super();
 		this.color = color;

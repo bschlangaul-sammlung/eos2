@@ -1,0 +1,4 @@
+auge:Ellipse
+auge.radiusX = 10
+auge.radiusY = 20
+auge.mittelpunktSetzen(-10, 20) 

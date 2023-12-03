@@ -1,7 +1,7 @@
 package eos;
 
 import de.lathanda.eos.geo.Window;
-import java.awt.Color;
+
 /**
  * @author Peter Schneider
  * 
@@ -18,17 +18,17 @@ public class Fenster {
         window = new Window();
         Figur.setAutoWindow(false);
     }
-    public void gitterfarbeSetzen(Color color) {
-         window.setGridColor(color); 
+    public void gitterfarbeSetzen(Farbe farbe) {
+         window.setGridColor(farbe.getColor()); 
     }
-    public Color gitterfarbeLesen() {
-        return window.getGridColor();
+    public Farbe gitterfarbeLesen() {
+        return new Farbe(window.getGridColor());
     }
-    public void hintergrundfarbeSetzen(Color color) {
-        window.setBackgroundColor(color);
+    public void hintergrundfarbeSetzen(Farbe farbe) {
+        window.setBackgroundColor(farbe.getColor());
     }
-    public Color hintergrundfarbeLesen() {
-        return window.getBackgroundColor();
+    public Farbe hintergrundfarbeLesen() {
+        return new Farbe(window.getBackgroundColor());
     }
     public void hoeheSetzen(double hoehe) {
         window.setHeight(hoehe);
